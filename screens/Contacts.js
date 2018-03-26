@@ -1,12 +1,12 @@
 import React from 'react';
 import { Text, View, Image } from 'react-native';
 
-class Home extends React.Component {
+class Contacts extends React.Component {
     static navigationOptions = {
         tabBarLabel: '',
         tabBarIcon: ({ tintColor }) => (
             <Image
-                source={require('./../img/icons/home.png')}
+                source={require('./../img/icons/contacts.png')}
                 style={{ width: 45, height: 45 }}
             />
         ),
@@ -21,4 +21,4 @@ class Home extends React.Component {
     }
 }
 
-export default Home;
+export default Contacts;
