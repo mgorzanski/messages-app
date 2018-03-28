@@ -1,19 +1,19 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { TabNavigator } from 'react-navigation';
-import Home from './screens/Home';
+import Home from './screens/Home/index';
 import Contacts from './screens/Contacts';
 import Settings from './screens/Settings';
 
-class App extends React.Component {
-  render() {
-    return (
-      <View>
-        <Home />
-      </View>
-    );
-  }
-}
+// class App extends React.Component {
+//   render() {
+//     return (
+//       <View>
+//         <Home />
+//       </View>
+//     );
+//   }
+// }
 
 export default TabNavigator(
   {
