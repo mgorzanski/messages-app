@@ -1,34 +1,41 @@
 import React from 'react';
-import { View, Text, Image, Dimensions } from 'react-native';
+import { View, Text, Image, StyleSheet } from 'react-native';
 import { Font } from 'expo';
+import * as globalStyles from './../../styles/globalStyles';
 
-class Header extends React.Component {
-    componentDidMount() {
-        Font.loadAsync({
+export default class Header extends React.Component {
+    state = {
+        fontLoaded: false,
+    }
+
+    async componentDidMount() {
+        await Font.loadAsync({
             'RobotoMono-Regular': require('./../../fonts/RobotoMono-Regular.ttf')
         });
+
+        this.setState({ fontLoaded: true });
     }
 
     render() {
-        const width = Dimensions.get('window').width;
-        const height = Dimensions.get('window').height;
         return (
             <View
-                style={{ display:'flex', flexDirection: 'row', backgroundColor: '#1e1e1e', paddingTop:49, alignItems: 'center' }}
+                style={styles.header}
             >
-                <View style={{ width: '12%', height: 47, marginLeft: 10 }}>
+                <View style={styles.searchIcon}>
                     <Image
                         source={require('./../../img/icons/search.png')}
-                        style={{ width: 27, height: 27 }}
+                        style={styles.icon}
                     />
                 </View>
-                <View style={{ width: '76%', height: 47, marginLeft: -10 }}>
-                    <Text style={{ textAlign: 'center', color: '#fff' }}>Messages</Text>
+                <View style={styles.headerTitle}>
+                    { this.state.fontLoaded ? (
+                        <Text style={styles.headerTitleText}>MESSAGES</Text>
+                    ) : null }
                 </View>
-                <View style={{ width: '12%', height: 47 }}>
+                <View style={styles.addIcon}>
                     <Image
                         source={require('./../../img/icons/add.png')}
-                        style={{ width: 27, height: 27 }}
+                        style={styles.icon}
                     />
                 </View>
             </View>
@@ -36,4 +43,36 @@ class Header extends React.Component {
     }
 }
 
-export default Header;
+const styles = StyleSheet.create({
+    header: {
+        display:'flex',
+        flexDirection: 'row',
+        backgroundColor: globalStyles.$headerBackgroundColor,
+        paddingTop: 41,
+        alignItems: 'center'
+    },
+    searchIcon: {
+        width: '12%',
+        height: 47,
+        marginLeft: 15
+    },
+    headerTitle: {
+        width: '76%',
+        height: 47,
+        marginLeft: -10
+    },
+    headerTitleText: {
+        textAlign: 'center',
+        color: globalStyles.$white,
+        fontFamily: 'RobotoMono-Regular',
+        fontSize: 22,
+    },
+    addIcon: {
+        width: '12%',
+        height: 47
+    },
+    icon: {
+        width: 27,
+        height: 27
+    }
+});

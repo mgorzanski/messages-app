@@ -5,16 +5,6 @@ import Home from './screens/Home/index';
 import Contacts from './screens/Contacts';
 import Settings from './screens/Settings';
 
-// class App extends React.Component {
-//   render() {
-//     return (
-//       <View>
-//         <Home />
-//       </View>
-//     );
-//   }
-// }
-
 export default TabNavigator(
   {
       Home: { screen: Home },
