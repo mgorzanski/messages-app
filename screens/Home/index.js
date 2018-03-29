@@ -1,6 +1,7 @@
 import React from 'react';
 import { Text, View, Image, StyleSheet } from 'react-native';
 import Header from './Header';
+import UserPanel from './UserPanel';
 import * as globalStyles from './../../styles/globalStyles';
 
 export default class Home extends React.Component {
@@ -19,7 +20,7 @@ export default class Home extends React.Component {
         return (
             <View style={styles.home}>
                 <Header />
-                <Text>Home!</Text>
+                <UserPanel />
             </View>
         );
     }
