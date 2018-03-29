@@ -1,7 +1,7 @@
 import { TabNavigator } from 'react-navigation';
 import Home from './screens/Home/index';
 import Contacts from './screens/Contacts';
-import Settings from './screens/Settings';
+import Settings from './screens/Settings/index';
 
 export default TabNavigator(
   {
