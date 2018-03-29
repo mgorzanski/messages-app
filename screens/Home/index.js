@@ -1,14 +1,15 @@
 import React from 'react';
 import { Text, View, Image, StyleSheet } from 'react-native';
 import Header from './Header';
+import * as globalStyles from './../../styles/globalStyles';
 
-class Home extends React.Component {
+export default class Home extends React.Component {
     static navigationOptions = {
         tabBarLabel: '',
         tabBarIcon: () => (
             <Image
                 source={require('./../../img/icons/home.png')}
-                style={{ width: 45, height: 45 }}
+                style={styles.tabBarIcon}
             />
         ),
     };
@@ -16,7 +17,7 @@ class Home extends React.Component {
     render() {
 
         return (
-            <View style={{ backgroundColor: '#494949' }}>
+            <View style={styles.home}>
                 <Header />
                 <Text>Home!</Text>
             </View>
@@ -24,4 +25,13 @@ class Home extends React.Component {
     }
 }
 
-export default Home;
+const styles = StyleSheet.create({
+    tabBarIcon: {
+        width: 45,
+        height: 45
+    },
+    home: {
+        backgroundColor: globalStyles.$appBackgroundColor,
+        height: '100%'
+    }
+});
