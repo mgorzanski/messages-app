@@ -6,12 +6,12 @@ export default class Messages extends React.Component {
     render() {
         return (
             <ScrollView>
-                <Message userName="LoremIpsum" message="Testowa wiadomość..." date="11.03.2018 13:39" />
-                <Message userName="LoremIpsum" message="Testowa wiadomość..." date="11.03.2018 13:39" />
-                <Message userName="LoremIpsum" message="Testowa wiadomość..." date="11.03.2018 13:39" />
-                <Message userName="LoremIpsum" message="Testowa wiadomość..." date="11.03.2018 13:39" />
-                <Message userName="LoremIpsum" message="Testowa wiadomość..." date="11.03.2018 13:39" />
-                <Message userName="LoremIpsum" message="Testowa wiadomość..." date="11.03.2018 13:39" />
+                <Message userName="Lorem Ipsum" message="Testowa wiadomość..." date="11.03.2018 13:39" />
+                <Message userName="Lorem Ipsum" message="Testowa wiadomość..." date="11.03.2018 13:39" />
+                <Message userName="Lorem Ipsum" message="Testowa wiadomość..." date="11.03.2018 13:39" />
+                <Message userName="Lorem Ipsum" message="Testowa wiadomość..." date="11.03.2018 13:39" />
+                <Message userName="Lorem Ipsum" message="Testowa wiadomość..." date="11.03.2018 13:39" />
+                <Message userName="Lorem Ipsum" message="Testowa wiadomość..." date="11.03.2018 13:39" />
             </ScrollView>
         );
     }
