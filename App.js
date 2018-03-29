@@ -33,6 +33,8 @@ export default TabNavigator(
       inactiveBackgroundColor: '#1e1e1e',
       activeBackgroundColor: '#2d2d2d',
     },
-    tabBarPosition: 'bottom'
+    tabBarPosition: 'bottom',
+    swipeEnabled: false,
+    animationEnabled: false
   }
 );
