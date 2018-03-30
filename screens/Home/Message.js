@@ -26,9 +26,19 @@ export default class Message extends React.Component {
                     <React.Fragment>
                         <View style={styles.user}>
                             <Text style={styles.userName}>{this.props.userName}</Text>
-                            <Text style={styles.messageText}>{this.props.message}</Text>
+                            {/*
+                                If this.props.message was passed, render the text. Otherwise don't render anything here (null).
+                            */}
+                            { this.props.message ? (
+                                <Text style={styles.messageText}>{this.props.message}</Text>
+                            ) : null}
                         </View>
-                        <Text style={styles.date}>{this.props.date}</Text>
+                        {/*
+                            If this.props.date was passed, render the text. Otherwise don't render anything here (null).
+                        */}
+                        { this.props.date ? (
+                            <Text style={styles.date}>{this.props.date}</Text>
+                        ) : null}
                     </React.Fragment>
                 ) : null }
             </View>

@@ -1,0 +1,188 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<RCTScrollView>
+  <View>
+    <View
+      style={
+        Object {
+          "backgroundColor": "#2d2d2d",
+          "borderBottomColor": "#efefef",
+          "borderBottomWidth": 0.25,
+          "borderStyle": "solid",
+          "display": "flex",
+          "flexDirection": "row",
+          "height": 75,
+          "justifyContent": "space-between",
+        }
+      }
+    >
+      <Image
+        source={
+          Object {
+            "process": [Function],
+          }
+        }
+        style={
+          Object {
+            "height": 53,
+            "marginLeft": 13,
+            "marginTop": 10,
+            "width": 53,
+          }
+        }
+      />
+    </View>
+    <View
+      style={
+        Object {
+          "backgroundColor": "#2d2d2d",
+          "borderBottomColor": "#efefef",
+          "borderBottomWidth": 0.25,
+          "borderStyle": "solid",
+          "display": "flex",
+          "flexDirection": "row",
+          "height": 75,
+          "justifyContent": "space-between",
+        }
+      }
+    >
+      <Image
+        source={
+          Object {
+            "process": [Function],
+          }
+        }
+        style={
+          Object {
+            "height": 53,
+            "marginLeft": 13,
+            "marginTop": 10,
+            "width": 53,
+          }
+        }
+      />
+    </View>
+    <View
+      style={
+        Object {
+          "backgroundColor": "#2d2d2d",
+          "borderBottomColor": "#efefef",
+          "borderBottomWidth": 0.25,
+          "borderStyle": "solid",
+          "display": "flex",
+          "flexDirection": "row",
+          "height": 75,
+          "justifyContent": "space-between",
+        }
+      }
+    >
+      <Image
+        source={
+          Object {
+            "process": [Function],
+          }
+        }
+        style={
+          Object {
+            "height": 53,
+            "marginLeft": 13,
+            "marginTop": 10,
+            "width": 53,
+          }
+        }
+      />
+    </View>
+    <View
+      style={
+        Object {
+          "backgroundColor": "#2d2d2d",
+          "borderBottomColor": "#efefef",
+          "borderBottomWidth": 0.25,
+          "borderStyle": "solid",
+          "display": "flex",
+          "flexDirection": "row",
+          "height": 75,
+          "justifyContent": "space-between",
+        }
+      }
+    >
+      <Image
+        source={
+          Object {
+            "process": [Function],
+          }
+        }
+        style={
+          Object {
+            "height": 53,
+            "marginLeft": 13,
+            "marginTop": 10,
+            "width": 53,
+          }
+        }
+      />
+    </View>
+    <View
+      style={
+        Object {
+          "backgroundColor": "#2d2d2d",
+          "borderBottomColor": "#efefef",
+          "borderBottomWidth": 0.25,
+          "borderStyle": "solid",
+          "display": "flex",
+          "flexDirection": "row",
+          "height": 75,
+          "justifyContent": "space-between",
+        }
+      }
+    >
+      <Image
+        source={
+          Object {
+            "process": [Function],
+          }
+        }
+        style={
+          Object {
+            "height": 53,
+            "marginLeft": 13,
+            "marginTop": 10,
+            "width": 53,
+          }
+        }
+      />
+    </View>
+    <View
+      style={
+        Object {
+          "backgroundColor": "#2d2d2d",
+          "borderBottomColor": "#efefef",
+          "borderBottomWidth": 0.25,
+          "borderStyle": "solid",
+          "display": "flex",
+          "flexDirection": "row",
+          "height": 75,
+          "justifyContent": "space-between",
+        }
+      }
+    >
+      <Image
+        source={
+          Object {
+            "process": [Function],
+          }
+        }
+        style={
+          Object {
+            "height": 53,
+            "marginLeft": 13,
+            "marginTop": 10,
+            "width": 53,
+          }
+        }
+      />
+    </View>
+  </View>
+</RCTScrollView>
+`;
