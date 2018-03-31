@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { Font } from 'expo';
 
 const styles = StyleSheet.create({
-    settings: {
+    contacts: {
         backgroundColor: globalStyles.$appBackgroundColor,
         height: '100%'
     },
@@ -57,7 +57,7 @@ export default class ContactsList extends React.Component {
 
     render() {
         return (
-            <ScrollView style={styles.settings}>
+            <ScrollView style={styles.contacts}>
                 <View style={styles.container}>
                     <SectionList
                         sections={[
