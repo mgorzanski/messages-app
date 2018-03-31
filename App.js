@@ -1,9 +1,9 @@
 import { TabNavigator } from 'react-navigation';
-import Home from './screens/Home/index';
+import Home from './screens/Home';
 import Contacts from './screens/Contacts';
-import Settings from './screens/Settings/index';
+import Settings from './screens/Settings';
 
-export default TabNavigator(
+const App =  TabNavigator(
   {
       Home: { screen: Home },
       Contacts: { screen: Contacts },
@@ -38,3 +38,5 @@ export default TabNavigator(
     animationEnabled: false
   }
 );
+
+export default App;
