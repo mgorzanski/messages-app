@@ -1,9 +1,12 @@
 import { TabNavigator } from 'react-navigation';
 import Home from './screens/Home';
 import Contacts from './screens/Contacts';
-import Settings from './screens/Settings';
+import Settings from './screens/Settings/index';
+import Login from './screens/Login/index';
 
-const App =  TabNavigator(
+const userLogged = true;
+
+const Layout = TabNavigator(
   {
       Home: { screen: Home },
       Contacts: { screen: Contacts },
@@ -39,4 +42,5 @@ const App =  TabNavigator(
   }
 );
 
+const App = userLogged ? Layout : Login;
 export default App;

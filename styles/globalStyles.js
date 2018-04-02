@@ -7,6 +7,10 @@ export const $borderColor = '#efefef';
 export const $sectionHeaderBackgroundColor = $messageThreadItemBackgroundColor;
 export const $sectionHeaderFontColor = '#2e6cd1';
 export const $buttonBackgroundColor = $sectionHeaderBackgroundColor;
+export const $loginHeadingColor = '#5a5a5a';
+export const $loginLabelColor = $loginHeadingColor;
+export const $buttonBorderColor = $loginLabelColor;
+export const $buttonFontColor = $buttonBorderColor;
 
 export const headerStyle = {
     backgroundColor: $headerBackgroundColor,
