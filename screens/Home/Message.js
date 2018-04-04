@@ -2,45 +2,29 @@ import React from 'react';
 import { Text, View, Image, StyleSheet } from 'react-native';
 import * as globalStyles from './../../styles/globalStyles';
 import PropTypes from 'prop-types';
-import { Font } from 'expo';
 
 export default class Message extends React.Component {
-    state = {
-        fontLoaded: false,
-    }
-
-    async componentDidMount() {
-        await Font.loadAsync({
-            'Walkway Bold': require('./../../fonts/Walkway-Bold.ttf'),
-            'Arial': require('./../../fonts/arial.ttf')
-        });
-
-        this.setState({ fontLoaded: true });
-    }
-
     render() {
         return (
             <View style={styles.message}>
                 <Image style={styles.userImage} source={require('./../../img/icons/user2.png')} />
-                { this.state.fontLoaded ? (
-                    <React.Fragment>
-                        <View style={styles.user}>
-                            <Text style={styles.userName}>{this.props.userName}</Text>
-                            {/*
-                                If this.props.message was passed, render the text. Otherwise don't render anything here (null).
-                            */}
-                            { this.props.message ? (
-                                <Text style={styles.messageText}>{this.props.message}</Text>
-                            ) : null}
-                        </View>
+                <React.Fragment>
+                    <View style={styles.user}>
+                        <Text style={styles.userName}>{this.props.userName}</Text>
                         {/*
-                            If this.props.date was passed, render the text. Otherwise don't render anything here (null).
+                            If this.props.message was passed, render the text. Otherwise don't render anything here (null).
                         */}
-                        { this.props.date ? (
-                            <Text style={styles.date}>{this.props.date}</Text>
+                        { this.props.message ? (
+                            <Text style={styles.messageText}>{this.props.message}</Text>
                         ) : null}
-                    </React.Fragment>
-                ) : null }
+                    </View>
+                    {/*
+                        If this.props.date was passed, render the text. Otherwise don't render anything here (null).
+                    */}
+                    { this.props.date ? (
+                        <Text style={styles.date}>{this.props.date}</Text>
+                    ) : null}
+                </React.Fragment>
             </View>
         );
     }

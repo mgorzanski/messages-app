@@ -2,7 +2,6 @@ import React from 'react';
 import { View, Image, StyleSheet, SectionList, Text, ScrollView, TouchableHighlight } from 'react-native';
 import * as globalStyles from './../../styles/globalStyles';
 import PropTypes from 'prop-types';
-import { Font } from 'expo';
 
 const styles = StyleSheet.create({
     contacts: {
@@ -31,12 +30,6 @@ const styles = StyleSheet.create({
 });
 
 export default class ContactsList extends React.Component {
-    componentDidMount() {
-        Font.loadAsync({
-            'RobotoMono-Regular': require('./../../fonts/RobotoMono-Regular.ttf')
-        });
-    }
-
     static navigationOptions = ({ navigation }) => ({
         title: "CONTACTS",
         headerStyle: globalStyles.headerStyle,

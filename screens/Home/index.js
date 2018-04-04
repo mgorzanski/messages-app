@@ -1,22 +1,9 @@
 import React from 'react';
 import { Image, StyleSheet } from 'react-native';
 import { StackNavigator } from 'react-navigation';
-import { Font } from 'expo';
 import MessagesList from './MessagesList';
 
 export default class Home extends React.Component {
-    state = {
-        fontLoaded: false,
-    }
-
-    async componentDidMount() {
-        await Font.loadAsync({
-            'RobotoMono-Regular': require('./../../fonts/RobotoMono-Regular.ttf')
-        });
-
-        this.setState({ fontLoaded: true });
-    }
-
     static navigationOptions = {
         tabBarLabel: '',
         tabBarIcon: () => (
@@ -28,11 +15,7 @@ export default class Home extends React.Component {
     };
 
     render() {
-        if (this.state.fontLoaded) {
-            return (<StackNav />);
-        } else {
-            return (null);
-        }
+        return (<StackNav />);
     }
 }
 

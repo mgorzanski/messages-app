@@ -1,46 +1,68 @@
+import React from 'react';
 import { TabNavigator } from 'react-navigation';
 import Home from './screens/Home';
 import Contacts from './screens/Contacts';
-import Settings from './screens/Settings/index';
-import Login from './screens/Login/index';
+import Settings from './screens/Settings';
+import Login from './screens/Login';
+import { loadFonts } from './utils/loadFonts';
 
-const userLogged = true;
+export default class App extends React.Component {
+    state = {
+        fontsLoaded: false
+    };
 
-const Layout = TabNavigator(
-  {
-      Home: { screen: Home },
-      Contacts: { screen: Contacts },
-      Settings: { screen: Settings },
-  },
-  {
-    tabBarOptions: {
-      showIcon: true,
-      showLabel: false,
-      style: {
-        height: 65,
-        backgroundColor: '#1e1e1e'
-      },
-      tabStyle: {
-        height:60,
-        margin:0,
-        padding:0,
-      },
-      indicatorStyle: {
-        display: 'none'
-      },
-      iconStyle: {
-        width: 65,
-        height: 65,
-        marginTop: 5
-      },
-      inactiveBackgroundColor: '#1e1e1e',
-      activeBackgroundColor: '#2d2d2d',
-    },
-    tabBarPosition: 'bottom',
-    swipeEnabled: false,
-    animationEnabled: false
-  }
-);
+    componentWillMount() {
+        loadFonts(() => {
+          this.setState({ fontsLoaded: true });
+        });
+    }
 
-const App = userLogged ? Layout : Login;
-export default App;
+    render() {
+        const userLogged = true;
+        const Layout = TabNavigator(
+          {
+              Home: { screen: Home },
+              Contacts: { screen: Contacts },
+              Settings: { screen: Settings },
+          },
+          {
+            tabBarOptions: {
+              showIcon: true,
+              showLabel: false,
+              style: {
+                height: 65,
+                backgroundColor: '#1e1e1e'
+              },
+              tabStyle: {
+                height:60,
+                margin:0,
+                padding:0,
+              },
+              indicatorStyle: {
+                display: 'none'
+              },
+              iconStyle: {
+                width: 65,
+                height: 65,
+                marginTop: 5
+              },
+              inactiveBackgroundColor: '#1e1e1e',
+              activeBackgroundColor: '#2d2d2d',
+            },
+            tabBarPosition: 'bottom',
+            swipeEnabled: false,
+            animationEnabled: false
+          }
+        );
+
+        if (this.state.fontsLoaded) {
+            if (userLogged) {
+                return (<Layout />);
+            } else {
+                return (<Login />);
+            }
+        } else {
+            return (null);
+        }
+    }
+}

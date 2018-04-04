@@ -1,6 +1,5 @@
 import React from 'react';
-import { View, Text, TextInput, Button, StyleSheet, TouchableHighlight } from 'react-native';
-import { Font } from 'expo';
+import { View, Text, TextInput, StyleSheet, TouchableHighlight } from 'react-native';
 import * as globalStyles from './../../styles/globalStyles';
 
 const styles = StyleSheet.create({
@@ -53,52 +52,37 @@ const styles = StyleSheet.create({
 });
 
 export default class Login extends React.Component {
-    state = {
-        fontLoaded: false,
-    }
-
-    async componentDidMount() {
-        await Font.loadAsync({
-            'RammetoOne-Regular': require('./../../fonts/RammettoOne-Regular.ttf'),
-            'MuktaMahee-Regular': require('./../../fonts/MuktaMahee-Regular.ttf'),
-        });
-
-        this.setState({ fontLoaded: true });
-    }
-
     render() {
         return (
             <View style={styles.login}>
-                { this.state.fontLoaded ? (
-                    <React.Fragment>
-                        <Text style={styles.title}>Messages</Text>
-                        <Text style={styles.heading}>Sign in</Text>
-                        <View>
-                            <Text style={styles.label}>E-mail</Text>
-                            <TextInput
-                                underlineColorAndroid="#b8b8b8"
-                                selectionColor="#b8b8b8"
-                            />
-                            <Text style={styles.label}>Password</Text>
-                            <TextInput
-                                underlineColorAndroid="#b8b8b8"
-                                selectionColor="#b8b8b8"
-                            />
-                        </View>
-                        <View style={styles.buttonsRow}>
-                            <TouchableHighlight
-                                style={styles.button}
-                            >
-                                <Text style={styles.buttonText}>Sign in</Text>
-                            </TouchableHighlight>
-                            <TouchableHighlight
-                                style={styles.button}
-                            >
-                                <Text style={styles.buttonText}>Sign up</Text>
-                            </TouchableHighlight>
-                        </View>
-                    </React.Fragment>
-                ) : null }
+                <React.Fragment>
+                    <Text style={styles.title}>Messages</Text>
+                    <Text style={styles.heading}>Sign in</Text>
+                    <View>
+                        <Text style={styles.label}>E-mail</Text>
+                        <TextInput
+                            underlineColorAndroid="#b8b8b8"
+                            selectionColor="#b8b8b8"
+                        />
+                        <Text style={styles.label}>Password</Text>
+                        <TextInput
+                            underlineColorAndroid="#b8b8b8"
+                            selectionColor="#b8b8b8"
+                        />
+                    </View>
+                    <View style={styles.buttonsRow}>
+                        <TouchableHighlight
+                            style={styles.button}
+                        >
+                            <Text style={styles.buttonText}>Sign in</Text>
+                        </TouchableHighlight>
+                        <TouchableHighlight
+                            style={styles.button}
+                        >
+                            <Text style={styles.buttonText}>Sign up</Text>
+                        </TouchableHighlight>
+                    </View>
+                </React.Fragment>
             </View>
         );
     }

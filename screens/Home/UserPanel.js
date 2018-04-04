@@ -1,27 +1,12 @@
 import React from 'react';
 import { Text, Image, View, StyleSheet } from 'react-native';
 import * as globalStyles from './../../styles/globalStyles';
-import { Font } from 'expo';
 
 export default class UserPanel extends React.Component {
-    state = {
-        fontLoaded: false,
-    }
-
-    async componentDidMount() {
-        await Font.loadAsync({
-            'BebasNeue': require('./../../fonts/BebasNeue.otf')
-        });
-
-        this.setState({ fontLoaded: true });
-    }
-
     render() {
         return (
             <View style={styles.panel}>
-                { this.state.fontLoaded ? (
-                    <Text style={styles.userName}>MATEUSZ GÓRZAŃSKI</Text>
-                ) : null }
+                <Text style={styles.userName}>MATEUSZ GÓRZAŃSKI</Text>
                 <Image source={require('./../../img/icons/arrow.png')} style={styles.shortcut} />
             </View>
         );

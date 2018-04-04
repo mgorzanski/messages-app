@@ -1,6 +1,5 @@
 import React from 'react';
 import { Text, View, Button, ScrollView, StyleSheet, TextInput } from 'react-native';
-import { Font } from 'expo';
 import * as globalStyles from './../../styles/globalStyles';
 
 const styles = StyleSheet.create({
@@ -22,12 +21,6 @@ const styles = StyleSheet.create({
 });
 
 export default class AddContact extends React.Component {
-    componentDidMount() {
-        Font.loadAsync({
-            'RobotoMono-Regular': require('./../../fonts/RobotoMono-Regular.ttf')
-        });
-    }
-
     static navigationOptions = () => ({
         title: "ADD CONTACT",
         headerStyle: globalStyles.headerStyle,
