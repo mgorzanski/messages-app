@@ -43,7 +43,7 @@ export default class ContactsList extends React.Component {
         headerTitleStyle: globalStyles.headerTitleStyle,
         headerLeft: (<View></View>),
         headerRight: (
-            <View style={globalStyles.iconSpacing}>
+            <View style={globalStyles.iconSpacingRight}>
                 <TouchableHighlight onPress={() =>
                     navigation.navigate('AddContact')
                 }>

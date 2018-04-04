@@ -26,8 +26,12 @@ export const headerTitleStyle = {
     flex: 1
 }
 
-export const iconSpacing = {
+export const iconSpacingRight = {
     paddingRight: 15
+}
+
+export const iconSpacingLeft = {
+    paddingLeft: 15
 }
 
 export const icon = {

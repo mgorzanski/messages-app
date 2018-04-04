@@ -1,11 +1,22 @@
 import React from 'react';
-import { View, Image, StyleSheet } from 'react-native';
-import Header from './Header';
-import UserPanel from './UserPanel';
-import Messages from './Messages';
-import * as globalStyles from './../../styles/globalStyles';
+import { Image, StyleSheet } from 'react-native';
+import { StackNavigator } from 'react-navigation';
+import { Font } from 'expo';
+import MessagesList from './MessagesList';
 
 export default class Home extends React.Component {
+    state = {
+        fontLoaded: false,
+    }
+
+    async componentDidMount() {
+        await Font.loadAsync({
+            'RobotoMono-Regular': require('./../../fonts/RobotoMono-Regular.ttf')
+        });
+
+        this.setState({ fontLoaded: true });
+    }
+
     static navigationOptions = {
         tabBarLabel: '',
         tabBarIcon: () => (
@@ -17,14 +28,11 @@ export default class Home extends React.Component {
     };
 
     render() {
-
-        return (
-            <View style={styles.home}>
-                <Header />
-                <UserPanel />
-                <Messages />
-            </View>
-        );
+        if (this.state.fontLoaded) {
+            return (<StackNav />);
+        } else {
+            return (null);
+        }
     }
 }
 
@@ -32,9 +40,9 @@ const styles = StyleSheet.create({
     tabBarIcon: {
         width: 45,
         height: 45
-    },
-    home: {
-        backgroundColor: globalStyles.$appBackgroundColor,
-        height: '100%'
     }
+});
+
+const StackNav = StackNavigator({
+    MessagesList: { screen: MessagesList }
 });
