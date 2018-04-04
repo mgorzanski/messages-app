@@ -31,5 +31,10 @@
     "react-native": "0.52.0",
     "react-navigation": "^1.5.8",
     "react-redux": "^5.0.7"
+  },
+  "rnpm": {
+    "assets": [
+      "./fonts/"
+    ]
   }
 }

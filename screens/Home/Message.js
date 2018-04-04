@@ -54,18 +54,18 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between'
     },
     userName: {
-        fontFamily: 'Walkway Bold',
+        fontFamily: 'Walkway-Bold',
         fontSize: 30,
         color: globalStyles.$white,
     },
     messageText: {
-        fontFamily: 'Arial',
+        fontFamily: 'arial',
         color: globalStyles.$white,
         fontSize: 11,
         marginTop: 3
     },
     date: {
-        fontFamily: 'Arial',
+        fontFamily: 'arial',
         color: globalStyles.$white,
         fontSize: 10,
         marginRight:15,

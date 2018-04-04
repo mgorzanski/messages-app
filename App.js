@@ -4,19 +4,8 @@ import Home from './screens/Home';
 import Contacts from './screens/Contacts';
 import Settings from './screens/Settings';
 import Login from './screens/Login';
-import { loadFonts } from './utils/loadFonts';
 
 export default class App extends React.Component {
-    state = {
-        fontsLoaded: false
-    };
-
-    componentWillMount() {
-        loadFonts(() => {
-          this.setState({ fontsLoaded: true });
-        });
-    }
-
     render() {
         const userLogged = true;
         const Layout = TabNavigator(
@@ -55,14 +44,10 @@ export default class App extends React.Component {
           }
         );
 
-        if (this.state.fontsLoaded) {
-            if (userLogged) {
-                return (<Layout />);
-            } else {
-                return (<Login />);
-            }
+        if (userLogged) {
+            return (<Layout />);
         } else {
-            return (null);
+            return (<Login />);
         }
     }
 }
