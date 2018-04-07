@@ -30,4 +30,8 @@ const styles = StyleSheet.create({
 const StackNav = StackNavigator({
     ContactsList: { screen: ContactsList },
     AddContact: { screen: AddContact }
+}, {
+    cardStyle: {
+        opacity: 1
+    }
 });

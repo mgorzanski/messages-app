@@ -28,4 +28,8 @@ const styles = StyleSheet.create({
 
 const StackNav = StackNavigator({
     MessagesList: { screen: MessagesList }
+}, {
+    cardStyle: {
+        opacity: 1
+    }
 });

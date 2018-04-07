@@ -16,6 +16,7 @@ export default class App extends React.Component {
               Settings: { screen: Settings },
           },
           {
+            ...TabNavigator.Presets.AndroidTopTabs,
             tabBarOptions: {
               showIcon: true,
               showLabel: false,
@@ -29,15 +30,17 @@ export default class App extends React.Component {
                 padding:0,
               },
               indicatorStyle: {
-                display: 'none'
+                backgroundColor: '#2d2d2d',
+                height: 65,
+                position: 'absolute',
+                top: '50%',
+                marginTop: -33
               },
               iconStyle: {
                 width: 65,
                 height: 65,
                 marginTop: 5
               },
-              inactiveBackgroundColor: '#1e1e1e',
-              activeBackgroundColor: '#2d2d2d',
             },
             tabBarPosition: 'bottom',
             swipeEnabled: false,
