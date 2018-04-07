@@ -1,4 +1,5 @@
 import React from 'react';
+import { StatusBar } from 'react-native';
 import { TabNavigator } from 'react-navigation';
 import Home from './screens/Home';
 import Contacts from './screens/Contacts';
@@ -45,7 +46,15 @@ export default class App extends React.Component {
         );
 
         if (userLogged) {
-            return (<Layout />);
+            return (
+                <React.Fragment>
+                    <StatusBar
+                        backgroundColor="#1e1e1e"
+                        barStyle="light-content"
+                    />
+                    <Layout />
+                </React.Fragment>
+            );
         } else {
             return (<Login />);
         }
