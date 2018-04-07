@@ -1,6 +1,7 @@
 import React from 'react';
-import { View, StyleSheet, SectionList, Text, ScrollView } from 'react-native';
+import { View, StyleSheet, SectionList, Text, ScrollView, TouchableHighlight } from 'react-native';
 import * as globalStyles from './../../styles/globalStyles';
+import PropTypes from 'prop-types';
 
 export default class SettingsList extends React.Component {
     static navigationOptions = () => ({
@@ -18,11 +19,17 @@ export default class SettingsList extends React.Component {
                 <View style={styles.container}>
                     <SectionList
                         sections={[
-                            {title: 'My account', data: ['My profile', 'Logout']},
-                            {title: 'Settings', data: ['Notifications settings']},
-                            {title: 'About app', data: ['Informations']}
+                            {title: 'My account', data: [{title: 'My profile', screen: 'Profile'}, {title: 'Logout', screen: ''}]},
+                            {title: 'Settings', data: [{title: 'Notifications settings', screen: ''}]},
+                            {title: 'About app', data: [{title: 'Informations', screen: ''}]}
                         ]}
-                        renderItem={({item}) => <Text style={styles.item}>{item}</Text>}
+                        renderItem={({item}) => (
+                            <TouchableHighlight onPress={() => 
+                                this.props.navigation.navigate(item.screen)
+                            } underlayColor="#414141">
+                                <Text style={styles.item}>{item.title}</Text>
+                            </TouchableHighlight>
+                        )}
                         renderSectionHeader={({section}) => <Text style={styles.sectionHeader}>{section.title}</Text>}
                         keyExtractor={(item, index) => index}
                     />
@@ -61,3 +68,7 @@ const styles = StyleSheet.create({
         color: globalStyles.$white
     }
 });
+
+SettingsList.propTypes = {
+    navigation: PropTypes.object.isRequired
+};

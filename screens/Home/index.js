@@ -2,6 +2,7 @@ import React from 'react';
 import { Image, StyleSheet } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import MessagesList from './MessagesList';
+import Profile from './../Profile';
 
 export default class Home extends React.Component {
     static navigationOptions = {
@@ -27,7 +28,8 @@ const styles = StyleSheet.create({
 });
 
 const StackNav = StackNavigator({
-    MessagesList: { screen: MessagesList }
+    MessagesList: { screen: MessagesList },
+    Profile: { screen: Profile }
 }, {
     cardStyle: {
         opacity: 1

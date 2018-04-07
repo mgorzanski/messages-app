@@ -3,6 +3,7 @@ import { ScrollView, StyleSheet, View, TouchableHighlight, Image } from 'react-n
 import Message from './Message';
 import UserPanel from './UserPanel';
 import * as globalStyles from './../../styles/globalStyles';
+import PropTypes from 'prop-types';
 
 export default class MessagesList extends React.Component {
     static navigationOptions = ({ navigation }) => ({
@@ -37,7 +38,11 @@ export default class MessagesList extends React.Component {
     render() {
         return (
             <View style={styles.home}>
-                <UserPanel />
+                <TouchableHighlight onPress={() => 
+                    this.props.navigation.navigate('Profile')
+                }>
+                    <UserPanel />
+                </TouchableHighlight>
                 <ScrollView>
                     <Message userName="Lorem Ipsum" message="Testowa wiadomość..." date="11.03.2018 13:39" />
                     <Message userName="Lorem Ipsum" message="Testowa wiadomość..." date="11.03.2018 13:39" />
@@ -57,3 +62,7 @@ const styles = StyleSheet.create({
         height: '100%'
     }
 });
+
+MessagesList.propTypes = {
+    navigation: PropTypes.object.isRequired
+};

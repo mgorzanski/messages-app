@@ -2,6 +2,7 @@ import React from 'react';
 import { Image, StyleSheet } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import SettingsList from './SettingsList';
+import Profile from './../Profile';
 
 export default class Settings extends React.Component {
     static navigationOptions = {
@@ -27,5 +28,6 @@ const styles = StyleSheet.create({
 });
 
 const StackNav = StackNavigator({
-    SettingsList: { screen: SettingsList }
+    SettingsList: { screen: SettingsList },
+    Profile: { screen: Profile }
 });
