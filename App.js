@@ -1,9 +1,10 @@
 import React from 'react';
 import { StatusBar } from 'react-native';
 import { TabNavigator } from 'react-navigation';
-import Home from './screens/Home';
+import Messages from './screens/Messages';
 import Contacts from './screens/Contacts';
-import Settings from './screens/Settings';
+import Menu from './screens/Menu';
+import Groups from './screens/Groups';
 import Login from './screens/Login';
 
 export default class App extends React.Component {
@@ -11,9 +12,10 @@ export default class App extends React.Component {
         const userLogged = true;
         const Layout = TabNavigator(
           {
-              Home: { screen: Home },
+              Messages: { screen: Messages },
               Contacts: { screen: Contacts },
-              Settings: { screen: Settings },
+              Groups: { screen: Groups },
+              More: { screen: Menu }
           },
           {
             tabBarOptions: {

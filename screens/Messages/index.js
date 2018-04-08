@@ -1,16 +1,16 @@
 import React from 'react';
 import { Image } from 'react-native';
 import { StackNavigator } from 'react-navigation';
-import SettingsList from './SettingsList';
+import MessagesList from './MessagesList';
 import Profile from './../Profile';
 import * as globalStyles from './../../styles/globalStyles';
 
-export default class Settings extends React.Component {
+export default class Messages extends React.Component {
     static navigationOptions = {
         tabBarLabel: '',
         tabBarIcon: () => (
             <Image
-                source={require('./../../img/icons/settings.png')}
+                source={require('./../../img/icons/messages.png')}
                 style={globalStyles.tabBarIcon}
             />
         ),
@@ -22,6 +22,10 @@ export default class Settings extends React.Component {
 }
 
 const StackNav = StackNavigator({
-    SettingsList: { screen: SettingsList },
+    MessagesList: { screen: MessagesList },
     Profile: { screen: Profile }
+}, {
+    cardStyle: {
+        opacity: 1
+    }
 });

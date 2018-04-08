@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 export default class SettingsList extends React.Component {
     static navigationOptions = () => ({
-        title: "SETTINGS",
+        title: "MORE",
         headerStyle: globalStyles.headerStyle,
         headerTitleStyle: globalStyles.headerTitleStyle,
         headerLeft: (<View></View>),
