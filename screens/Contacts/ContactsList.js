@@ -3,6 +3,7 @@ import { View, Image, StyleSheet, SectionList, Text, ScrollView, TouchableHighli
 import { Badge, Text as TextBase } from 'native-base';
 import * as globalStyles from './../../styles/globalStyles';
 import PropTypes from 'prop-types';
+import Icon from './../../utilities/Icon';
 
 const styles = StyleSheet.create({
     contacts: {
@@ -45,6 +46,22 @@ const styles = StyleSheet.create({
     },
     invitationsViewBadge: {
         alignSelf: 'center'
+    },
+    invitationView: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center'
+    },
+    invitationViewIcon: {
+        fontSize: 23,
+        color: globalStyles.$white,
+        marginRight: 13,
+        marginLeft: 3
+    },
+    invitationViewIcons: {
+        display: 'flex',
+        flexDirection: 'row'
     }
 });
 
@@ -76,10 +93,11 @@ export default class ContactsList extends React.Component {
                             {title: 'Invitations', data: ['Test User', 'Someone Else']}
                         ]}
                         renderItem={({item}) => (
-                            <View>
+                            <View style={styles.invitationView}>
                                 <Text style={styles.item}>{item}</Text>
-                                <View>
-                                    
+                                <View style={styles.invitationViewIcons}>
+                                    <Icon family="MaterialIcons" name="check" style={styles.invitationViewIcon} />
+                                    <Icon family="FontAwesome" name="remove" style={styles.invitationViewIcon} />
                                 </View>
                             </View>
                         )}
