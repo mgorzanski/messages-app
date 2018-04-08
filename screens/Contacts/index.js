@@ -1,8 +1,9 @@
 import React from 'react';
-import { Image, StyleSheet } from 'react-native';
+import { Image } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import ContactsList from './ContactsList';
 import AddContact from './AddContact';
+import * as globalStyles from './../../styles/globalStyles';
 
 export default class Contacts extends React.Component {
     static navigationOptions = {
@@ -10,7 +11,7 @@ export default class Contacts extends React.Component {
         tabBarIcon: () => (
             <Image
                 source={require('./../../img/icons/contacts.png')}
-                style={styles.tabBarIcon}
+                style={globalStyles.tabBarIcon}
             />
         ),
     };
@@ -19,13 +20,6 @@ export default class Contacts extends React.Component {
         return (<StackNav />);
     }
 }
-
-const styles = StyleSheet.create({
-    tabBarIcon: {
-        width: 45,
-        height: 45
-    }
-});
 
 const StackNav = StackNavigator({
     ContactsList: { screen: ContactsList },

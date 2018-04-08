@@ -38,3 +38,8 @@ export const icon = {
     width: 27,
     height: 27
 }
+
+export const tabBarIcon = {
+    width: 35,
+    height: 35
+}

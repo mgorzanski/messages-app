@@ -22,9 +22,9 @@ const styles = StyleSheet.create({
         color: globalStyles.$white
     },
     item: {
-        padding: 10,
+        padding: 15,
         fontSize: 18,
-        height: 44,
+        height: 55,
         color: globalStyles.$white
     }
 });

@@ -1,8 +1,9 @@
 import React from 'react';
-import { Image, StyleSheet } from 'react-native';
+import { Image } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import MessagesList from './MessagesList';
 import Profile from './../Profile';
+import * as globalStyles from './../../styles/globalStyles';
 
 export default class Home extends React.Component {
     static navigationOptions = {
@@ -10,7 +11,7 @@ export default class Home extends React.Component {
         tabBarIcon: () => (
             <Image
                 source={require('./../../img/icons/home.png')}
-                style={styles.tabBarIcon}
+                style={globalStyles.tabBarIcon}
             />
         ),
     };
@@ -19,13 +20,6 @@ export default class Home extends React.Component {
         return (<StackNav />);
     }
 }
-
-const styles = StyleSheet.create({
-    tabBarIcon: {
-        width: 45,
-        height: 45
-    }
-});
 
 const StackNav = StackNavigator({
     MessagesList: { screen: MessagesList },

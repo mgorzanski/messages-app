@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, StyleSheet, Image, Text, View } from 'react-native';
+import { ScrollView, Text, View } from 'react-native';
 import * as globalStyles from './../../styles/globalStyles';
 
 export default class Profile extends React.Component {
