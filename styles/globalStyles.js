@@ -43,3 +43,11 @@ export const tabBarIcon = {
     width: 35,
     height: 35
 }
+
+export const tabBarBadge = {
+    position:'absolute',
+    marginTop:-2,
+    marginLeft:30,
+    width:23,
+    height:23
+}

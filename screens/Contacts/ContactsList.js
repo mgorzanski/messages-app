@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Image, StyleSheet, SectionList, Text, ScrollView, TouchableHighlight } from 'react-native';
+import { Badge, Text as TextBase } from 'native-base';
 import * as globalStyles from './../../styles/globalStyles';
 import PropTypes from 'prop-types';
 
@@ -21,11 +22,29 @@ const styles = StyleSheet.create({
         backgroundColor: globalStyles.$sectionHeaderBackgroundColor,
         color: globalStyles.$white
     },
+    sectionInvitationsHeader: {
+        paddingTop: 20,
+        paddingLeft: 10,
+        paddingRight: 10,
+        paddingBottom: 20,
+        fontSize: 14,
+        fontWeight: 'bold',
+        backgroundColor: globalStyles.$sectionHeaderBackgroundColor,
+        color: globalStyles.$white
+    },
     item: {
         padding: 15,
         fontSize: 18,
         height: 55,
         color: globalStyles.$white
+    },
+    invitationsView: {
+        backgroundColor: globalStyles.$sectionHeaderBackgroundColor,
+        display: 'flex',
+        flexDirection: 'row'
+    },
+    invitationsViewBadge: {
+        alignSelf: 'center'
     }
 });
 
@@ -52,6 +71,28 @@ export default class ContactsList extends React.Component {
         return (
             <ScrollView style={styles.contacts}>
                 <View style={styles.container}>
+                    <SectionList
+                        sections={[
+                            {title: 'Invitations', data: ['Test User', 'Someone Else']}
+                        ]}
+                        renderItem={({item}) => (
+                            <View>
+                                <Text style={styles.item}>{item}</Text>
+                                <View>
+                                    
+                                </View>
+                            </View>
+                        )}
+                        renderSectionHeader={({section}) => (
+                            <View style={styles.invitationsView}>
+                                <Text style={styles.sectionInvitationsHeader}>{section.title}</Text>
+                                <Badge style={styles.invitationsViewBadge}>
+                                    <TextBase>2</TextBase>
+                                </Badge>
+                            </View>
+                        )}
+                        keyExtractor={(item, index) => index}
+                    />
                     <SectionList
                         sections={[
                             {title: 'D', data: ['Devin']},

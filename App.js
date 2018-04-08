@@ -44,8 +44,8 @@ export default class App extends React.Component {
                 marginTop: -33
               },
               iconStyle: {
-                width: 35,
-                height: 35,
+                width: 80,
+                height: 80,
                 marginTop: -21
               },
             },
