@@ -3,7 +3,7 @@ import { View, Image, StyleSheet, SectionList, Text, ScrollView, TouchableHighli
 import { Badge, Text as TextBase } from 'native-base';
 import * as globalStyles from './../../styles/globalStyles';
 import PropTypes from 'prop-types';
-import Icon from './../../utilities/Icon';
+import Icon from './../../utils/Icon';
 
 const styles = StyleSheet.create({
     contacts: {
