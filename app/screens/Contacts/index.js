@@ -5,6 +5,7 @@ import ContactsList from './ContactsList';
 import AddContact from './AddContact';
 import * as globalStyles from './../../styles/globalStyles';
 import { Badge, Text } from 'native-base';
+import getSlideFromRightTransition from 'react-navigation-slide-from-right-transition';
 
 export default class Contacts extends React.Component {
     static navigationOptions = {
@@ -33,5 +34,6 @@ const StackNav = StackNavigator({
 }, {
     cardStyle: {
         opacity: 1
-    }
+    },
+    transitionConfig: getSlideFromRightTransition
 });

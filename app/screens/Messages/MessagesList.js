@@ -44,7 +44,11 @@ export default class MessagesList extends React.Component {
                     <UserPanel />
                 </TouchableHighlight>
                 <ScrollView>
-                    <Message userName="Lorem Ipsum" message="Testowa wiadomość..." date="11.03.2018 13:39" />
+                    <TouchableHighlight onPress={() =>
+                        this.props.navigation.navigate('MessageThread')    
+                    }>
+                        <Message userName="Lorem Ipsum" message="Testowa wiadomość..." date="11.03.2018 13:39" />
+                    </TouchableHighlight>
                     <Message userName="Lorem Ipsum" message="Testowa wiadomość..." date="11.03.2018 13:39" />
                     <Message userName="Lorem Ipsum" message="Testowa wiadomość..." date="11.03.2018 13:39" />
                     <Message userName="Lorem Ipsum" message="Testowa wiadomość..." date="11.03.2018 13:39" />
