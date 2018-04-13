@@ -1,16 +1,17 @@
 import React from 'react';
-import { Container, Content, Text } from 'native-base';
+import { Container, Content } from 'native-base';
+import { ScrollView } from 'react-native';
 import { StyleSheet } from 'react-native';
-import { NavigationActions } from 'react-navigation';
+import SingleMessage from './SingleMessage';
 import * as globalStyles from './../../styles/globalStyles';
 import Icon from './../../utils/Icon';
 
 const styles = StyleSheet.create({
-    contacts: {
+    container: {
         backgroundColor: globalStyles.$appBackgroundColor,
         height: '100%'
     },
-    container: {
+    thread: {
         flex: 1,
         margin: 10
     }
@@ -28,10 +29,16 @@ export default class MessageThread extends React.Component {
 
     render() {
         return (
-            <Container>
-                <Content>
-                    <Text>Test</Text>
-                </Content>
+            <Container style={styles.container}>
+                <ScrollView>
+                    <Content style={styles.thread}>
+                        <SingleMessage text="Testowa wiadomość" author="a" />
+                        <SingleMessage text="..." author="me" />
+                        <SingleMessage text="abcd" author="a" />
+                        <SingleMessage text="Testowa wiadomość" author="me" />
+                        <SingleMessage text="Testowa wiadomość" author="me" />
+                    </Content>
+                </ScrollView>
             </Container>
         );
     }

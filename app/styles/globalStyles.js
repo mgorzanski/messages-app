@@ -11,6 +11,8 @@ export const $loginHeadingColor = '#5a5a5a';
 export const $loginLabelColor = $loginHeadingColor;
 export const $buttonBorderColor = $loginLabelColor;
 export const $buttonFontColor = $buttonBorderColor;
+export const $otherMessageTextBackground = '#3a3a3a';
+export const $myMessageTextBackground = '#595959';
 
 export const headerStyle = {
     backgroundColor: $headerBackgroundColor,
