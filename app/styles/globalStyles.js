@@ -51,3 +51,9 @@ export const tabBarBadge = {
     width:23,
     height:23
 }
+
+export const stackNavIcon = {
+    fontSize: 25,
+    color: $white,
+    marginRight: 13
+};
