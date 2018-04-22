@@ -6,10 +6,30 @@ import Contacts from './screens/Contacts';
 import Menu from './screens/Menu';
 import Groups from './screens/Groups';
 import Login from './screens/Login';
+import AuthLocal from './utils/AuthLocal';
 
 export default class App extends React.Component {
+    constructor(props) {
+      super(props);
+
+      this.state = {
+        userLogged: true,
+        renderView: false
+      }
+    }
+
+    componentWillMount() {
+      AuthLocal.checkToken().then((result) => {
+        this.setState({ userLogged: result, renderView: true });
+      });
+    }
+
+    handleLogin() {
+      this.setState({ userLogged: true });
+    }
+
     render() {
-        const userLogged = true;
+        const { userLogged, renderView } = this.state;
         const Layout = TabNavigator(
           {
               Messages: { screen: Messages },
@@ -55,7 +75,7 @@ export default class App extends React.Component {
           }
         );
 
-        if (userLogged) {
+        if (renderView && userLogged) {
             return (
                 <React.Fragment>
                     <StatusBar
@@ -66,7 +86,7 @@ export default class App extends React.Component {
                 </React.Fragment>
             );
         } else {
-            return (<Login />);
+            return (<Login onUserLogin={this.handleLogin} />);
         }
     }
 }

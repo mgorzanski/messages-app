@@ -2,6 +2,7 @@ import React from 'react';
 import { View, StyleSheet, SectionList, Text, ScrollView, TouchableHighlight } from 'react-native';
 import * as globalStyles from './../../styles/globalStyles';
 import PropTypes from 'prop-types';
+import AuthLocal from './../../utils/AuthLocal';
 
 export default class SettingsList extends React.Component {
     static navigationOptions = () => ({
@@ -19,13 +20,18 @@ export default class SettingsList extends React.Component {
                 <View style={styles.container}>
                     <SectionList
                         sections={[
-                            {title: 'My account', data: [{title: 'My profile', screen: 'Profile'}, {title: 'Logout', screen: ''}]},
+                            {title: 'My account', data: [{title: 'My profile', screen: 'Profile'}, {title: 'Logout', action: () => AuthLocal.deauthenticate}]},
                             {title: 'Settings', data: [{title: 'Notifications settings', screen: ''}]},
                             {title: 'About app', data: [{title: 'Informations', screen: ''}]}
                         ]}
                         renderItem={({item}) => (
-                            <TouchableHighlight onPress={() => 
-                                this.props.navigation.navigate(item.screen)
+                            <TouchableHighlight onPress={() => {
+                                    if (item.screen) {
+                                        this.props.navigation.navigate(item.screen)
+                                    } else {
+                                        item.action();
+                                    }
+                                }
                             } underlayColor="#414141">
                                 <Text style={styles.item}>{item.title}</Text>
                             </TouchableHighlight>
