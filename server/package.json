@@ -11,13 +11,16 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^2.0.0",
     "body-parser": "^1.18.2",
     "express": "^4.16.3",
     "express-validator": "^5.1.2",
+    "jsonwebtoken": "^8.2.1",
     "mongodb": "^3.0.6",
     "morgan": "^1.9.0"
   },
   "devDependencies": {
+    "eslint": "^4.19.1",
     "node-dev": "^3.1.3"
   }
 }

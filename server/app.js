@@ -6,6 +6,7 @@ const routes = require('./routes');
 const mongodb = require('mongodb');
 const MongoClient = mongodb.MongoClient;
 const config = require('./config');
+const verifyToken = require('./verifyToken');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -21,8 +22,8 @@ MongoClient.connect(config.mongodb, (err, db) => {
         res.sendStatus(200);
     });
 
-    app.post('/users', routes.users.addUserValidations, (req, res) => routes.users.addUser(req, res, db));
-    
+    app.post('/users', verifyToken, routes.users.addUserValidations, (req, res) => routes.users.addUser(req, res, db));
+    app.post('/auth/login', routes.auth.authenticateUserValidations, (req, res) => routes.auth.authenticateUser(req, res, db));
 });
 
 app.listen(3000, '', () => {
