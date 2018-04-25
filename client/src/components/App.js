@@ -14,10 +14,10 @@ class App extends Component {
             <div className="app">
                 <main className="page-content">
                     <HeaderBar />
-                    <div className="thread">
+                    <section className="thread">
                         <UserInfo />
                         <Thread />
-                    </div>
+                    </section>
                     <BottomBar />
                 </main>
                 <aside className="sidebar">
