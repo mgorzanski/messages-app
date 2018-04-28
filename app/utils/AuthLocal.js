@@ -1,13 +1,12 @@
 import jwtDecode from 'jwt-decode';
 import { AsyncStorage } from 'react-native';
-import Toast from '@remobile/react-native-toast';
 
 export default class AuthLocal {
     static async authenticate(token) {
         try {
             await AsyncStorage.setItem('token', token);
         } catch (error) {
-            Toast.showShortBottom.bind(null, 'An error occurred');
+            console.log('An error occurred');
         }
     }
 
@@ -31,7 +30,7 @@ export default class AuthLocal {
                 return token;
             }
         } catch(error) {
-            Toast.showShortBottom.bind(null, 'An error occurred');
+            console.log('An error occurred');
         }
     }
 
@@ -46,7 +45,7 @@ export default class AuthLocal {
             }
             return false;
         } catch(error) {
-            Toast.showShortBottom.bind(null, 'An error occurred');
+            console.log('An error occurred');
         }
     }
 

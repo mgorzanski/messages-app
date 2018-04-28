@@ -2,7 +2,8 @@ import React from 'react';
 import { View, Text, TextInput, StyleSheet, TouchableHighlight } from 'react-native';
 import * as globalStyles from './../../styles/globalStyles';
 import Auth from './../../api/Auth';
-import Toast from '@remobile/react-native-toast';
+import { Toast } from 'native-base';
+import PropTypes from 'prop-types';
 
 const styles = StyleSheet.create({
     login: {
@@ -56,9 +57,11 @@ const styles = StyleSheet.create({
 export default class Login extends React.Component {
     constructor(props) {
         super(props);
+        
         this.state = {
             email: '',
-            password: ''
+            password: '',
+            showToast: false
         }
     }
 
@@ -89,11 +92,14 @@ export default class Login extends React.Component {
                         <TouchableHighlight
                             style={styles.button}
                             onPress={() => {
-                                Toast.showShortBottom.bind(null, 'An error occurred');
                                 Auth.login(this.state.email, this.state.password).then(() => {
-                                    Toast.showShortBottom.bind(null, 'An error occurred');
                                     this.props.onUserLogin();
-                                }).catch(() => Toast.showShortBottom.bind(null, 'An error occurred'));
+                                }).catch(() => {
+                                    Toast.show({
+                                        text: 'An error occurred',
+                                        buttonText: 'Close'
+                                    });
+                                });
                             }}
                         >
                             <Text style={styles.buttonText}>Sign in</Text>
@@ -108,4 +114,8 @@ export default class Login extends React.Component {
             </View>
         );
     }
+}
+
+Login.propTypes = {
+    onUserLogin: PropTypes.func
 }

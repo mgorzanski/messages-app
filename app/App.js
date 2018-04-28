@@ -10,6 +10,7 @@ import AuthLocal from './utils/AuthLocal';
 import { Provider } from 'react-redux';
 import { store } from './config/store';
 import { routesConfig } from './config/routes';
+import { Root } from 'native-base';
 
 export default class App extends React.Component {
     constructor(props) {
@@ -42,18 +43,20 @@ export default class App extends React.Component {
 
         if (renderView && userLogged) {
             return (
-                <Provider store={store}>
-                    <React.Fragment>
-                        <StatusBar
-                            backgroundColor="#1e1e1e"
-                            barStyle="light-content"
-                        />
-                        <Router />
-                    </React.Fragment>
-                </Provider>
+                <Root>
+                    <Provider store={store}>
+                        <React.Fragment>
+                            <StatusBar
+                                backgroundColor="#1e1e1e"
+                                barStyle="light-content"
+                            />
+                            <Router />
+                        </React.Fragment>
+                    </Provider>
+                </Root>
             );
         } else {
-            return (<Login onUserLogin={this.handleLogin} />);
+            return (<Root><Login onUserLogin={this.handleLogin} /></Root>);
         }
     }
 }
