@@ -7,7 +7,7 @@ import { ListItem, Thumbnail, Text, Body, Left, Right } from 'native-base';
 export default class Message extends React.Component {
     render() {
         return (
-            <ListItem avatar>
+            <ListItem avatar onPress={() => this.props.navigation.navigate('MessageThread')}>
                 <Left>
                     <Thumbnail source={require('./../../img/icons/user2.png')} />
                 </Left>
@@ -36,7 +36,8 @@ export default class Message extends React.Component {
 Message.propTypes = {
     userName: PropTypes.string,
     message: PropTypes.string,
-    date: PropTypes.string
+    date: PropTypes.string,
+    navigation: PropTypes.object.isRequired
 }
 
 const styles = StyleSheet.create({

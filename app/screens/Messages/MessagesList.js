@@ -42,16 +42,12 @@ export default class MessagesList extends React.Component {
                         <UserPanel />
                     </TouchableHighlight>
                     <List>
-                        <TouchableHighlight onPress={() =>
-                            this.props.navigation.navigate('MessageThread')    
-                        }>
-                            <Message userName="Lorem Ipsum" message="Testowa wiadomość..." date="13:39" />
-                        </TouchableHighlight>
-                        <Message userName="Lorem Ipsum" message="Testowa wiadomość..." date="13:39" />
-                        <Message userName="Lorem Ipsum" message="Testowa wiadomość..." date="13:39" />
-                        <Message userName="Lorem Ipsum" message="Testowa wiadomość..." date="13:39" />
-                        <Message userName="Lorem Ipsum" message="Testowa wiadomość..." date="13:39" />
-                        <Message userName="Lorem Ipsum" message="Testowa wiadomość..." date="13:39" />
+                        <Message navigation={this.props.navigation} userName="Lorem Ipsum" message="Testowa wiadomość..." date="13:39" />
+                        <Message navigation={this.props.navigation} userName="Lorem Ipsum" message="Testowa wiadomość..." date="13:39" />
+                        <Message navigation={this.props.navigation} userName="Lorem Ipsum" message="Testowa wiadomość..." date="13:39" />
+                        <Message navigation={this.props.navigation} userName="Lorem Ipsum" message="Testowa wiadomość..." date="13:39" />
+                        <Message navigation={this.props.navigation} userName="Lorem Ipsum" message="Testowa wiadomość..." date="13:39" />
+                        <Message navigation={this.props.navigation} userName="Lorem Ipsum" message="Testowa wiadomość..." date="13:39" />
                     </List>
                 </Content>
             </Container>
