@@ -7,7 +7,23 @@ import MessageThread from './MessageThread';
 import * as globalStyles from './../../styles/globalStyles';
 import getSlideFromRightTransition from 'react-navigation-slide-from-right-transition';
 
-const Messages = StackNavigator({
+export default class Messages extends React.Component {
+    static navigationOptions = {
+        tabBarLabel: '',
+        tabBarIcon: () => (
+            <Image
+                source={require('./../../img/icons/messages.png')}
+                style={globalStyles.tabBarIcon}
+            />
+        ),
+    };
+
+    render() {
+        return (<MessagesRouter />);
+    }
+}
+
+const MessagesRouter = StackNavigator({
     MessagesList: { screen: MessagesList },
     Profile: { screen: Profile },
     MessageThread: { screen: MessageThread }
@@ -17,11 +33,3 @@ const Messages = StackNavigator({
     },
     transitionConfig: getSlideFromRightTransition
 });
-
-const tabBarIcon = () => (<Image source={require('./../../img/icons/messages.png')} style={globalStyles.tabBarIcon} />);
-Messages.navigationOptions = {
-    tabBarLabel: '',
-    tabBarIcon: tabBarIcon
-}
-
-export default Messages;
