@@ -1,9 +1,9 @@
 import React from 'react';
-import { View, StyleSheet, SectionList, Text, ScrollView, TouchableHighlight } from 'react-native';
+import { View, StyleSheet, Text, ScrollView } from 'react-native';
 import * as globalStyles from './../../styles/globalStyles';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { informationsFetched } from './../../actions';
+import { fetchInformations } from './../../actions';
 import App from './../../api/App';
 
 class Informations extends React.Component {
@@ -23,16 +23,16 @@ class Informations extends React.Component {
     });
 
     componentDidMount() {
-        App.getAppInformations().then((data) => this.props.informationsFetched(data)).then(() => this.setState({ dataLoaded: true}));
+        App.getAppInformations().then((data) => this.props.fetchInformations(data)).then(() => this.setState({ dataLoaded: true}));
     }
 
     render() {
         const dataLoaded = this.state.dataLoaded;
 
         return (
-            <ScrollView style={styles.settings}>
+            <ScrollView style={styles.informations}>
                 <View style={styles.container}>
-                    <Text>{dataLoaded ? this.props.informations : ''}</Text>
+                    <Text style={styles.text}>{dataLoaded ? this.props.informations : ''}</Text>
                 </View>
             </ScrollView>
         );
@@ -40,37 +40,24 @@ class Informations extends React.Component {
 }
 
 const styles = StyleSheet.create({
-    settings: {
+    informations: {
         backgroundColor: globalStyles.$appBackgroundColor,
         height: '100%'
     },
     container: {
-        flex: 1
+        flex: 1,
+        padding: 6
     },
-    sectionHeader: {
-        paddingTop: 5,
-        paddingLeft: 13,
-        paddingRight: 13,
-        paddingBottom: 6,
-        fontSize: 14,
-        fontWeight: 'bold',
-        color: globalStyles.$sectionHeaderFontColor,
-        backgroundColor: globalStyles.$sectionHeaderBackgroundColor
-    },
-    item: {
-        paddingTop: 10,
-        paddingLeft: 13,
-        paddingBottom: 10,
-        paddingRight:13,
-        fontSize: 18,
-        height: 54,
-        marginTop: 8,
-        color: globalStyles.$white
+    text: {
+        color: globalStyles.$white,
+        fontSize: 14
     }
 });
 
 Informations.propTypes = {
-    navigation: PropTypes.object.isRequired
+    navigation: PropTypes.object.isRequired,
+    informations: PropTypes.string,
+    fetchInformations: PropTypes.func
 };
 
 const mapStateToProps = (state) => {
@@ -79,6 +66,6 @@ const mapStateToProps = (state) => {
     }
 };
 
-const mapDispatchToProps = { informationsFetched };
+const mapDispatchToProps = { fetchInformations };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Informations);
