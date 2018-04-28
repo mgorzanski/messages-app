@@ -23,7 +23,7 @@ export default class Messages extends React.Component {
         headerRight: (
             <View style={globalStyles.headerMultipleIcons}>
                 <TouchableHighlight onPress={() =>
-                    navigation.navigate('AddContact')
+                    navigation.navigate('SearchMessages')
                 } style={globalStyles.headerIcon}>
                     <Image 
                         source={require('./../../img/icons/search.png')}

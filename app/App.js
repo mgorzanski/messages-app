@@ -16,6 +16,7 @@ import MessageThread from './screens/Messages/MessageThread';
 import Profile from './screens/Profile';
 import AddContact from './screens/Contacts/AddContact';
 import Informations from './screens/Menu/Informations';
+import SearchMessages from './screens/Messages/SearchMessages';
 
 export default class App extends React.Component {
     constructor(props) {
@@ -53,6 +54,7 @@ export default class App extends React.Component {
             Profile: { screen: Profile },
             AddContact: { screen: AddContact },
             Informations: { screen: Informations },
+            SearchMessages: { screen: SearchMessages }
         }, appRouterConfig);
 
         if (renderView && userLogged) {
