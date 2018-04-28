@@ -19,14 +19,16 @@ const styles = StyleSheet.create({
         padding: 10,
         marginBottom: 10,
         marginLeft: 10,
-        marginRight: 10
+        marginRight: 10,
+        borderRadius: 5
     },
     myMessageViewText: {
         backgroundColor: globalStyles.$myMessageTextBackground,
         padding: 10,
         marginBottom: 10,
         marginLeft: 10,
-        marginRight: 10
+        marginRight: 10,
+        borderRadius: 5
     },
     messages: {
         backgroundColor: globalStyles.$appBackgroundColor,

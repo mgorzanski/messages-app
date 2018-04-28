@@ -1,16 +1,21 @@
 import React from 'react';
 import { StatusBar } from 'react-native';
-import { TabNavigator } from 'react-navigation';
+import { TabNavigator, StackNavigator } from 'react-navigation';
+import AuthLocal from './utils/AuthLocal';
+import { Provider } from 'react-redux';
+import { store } from './config/store';
+import { mainRouterConfig, appRouterConfig } from './config/routers';
+import { Root } from 'native-base';
+
 import Messages from './screens/Messages';
 import Contacts from './screens/Contacts';
 import Menu from './screens/Menu';
 import Groups from './screens/Groups';
 import Login from './screens/Login';
-import AuthLocal from './utils/AuthLocal';
-import { Provider } from 'react-redux';
-import { store } from './config/store';
-import { routesConfig } from './config/routes';
-import { Root } from 'native-base';
+import MessageThread from './screens/Messages/MessageThread';
+import Profile from './screens/Profile';
+import AddContact from './screens/Contacts/AddContact';
+import Informations from './screens/Menu/Informations';
 
 export default class App extends React.Component {
     constructor(props) {
@@ -34,12 +39,21 @@ export default class App extends React.Component {
 
     render() {
         const { userLogged, renderView } = this.state;
-        const Router = TabNavigator({
+
+        const MainRouter = TabNavigator({
               Messages: { screen: Messages },
               Contacts: { screen: Contacts },
               Groups: { screen: Groups },
               More: { screen: Menu }
-        }, routesConfig);
+        }, mainRouterConfig);
+
+        const AppRouter = StackNavigator({
+            MainRouter: { screen: MainRouter },
+            MessageThread: { screen: MessageThread },
+            Profile: { screen: Profile },
+            AddContact: { screen: AddContact },
+            Informations: { screen: Informations },
+        }, appRouterConfig);
 
         if (renderView && userLogged) {
             return (
@@ -50,7 +64,7 @@ export default class App extends React.Component {
                                 backgroundColor="#1e1e1e"
                                 barStyle="light-content"
                             />
-                            <Router />
+                            <AppRouter />
                         </React.Fragment>
                     </Provider>
                 </Root>

@@ -1,4 +1,6 @@
-export const routesConfig = {
+import getSlideFromRightTransition from 'react-navigation-slide-from-right-transition';
+
+export const mainRouterConfig = {
     tabBarOptions: {
       showIcon: true,
       showLabel: true,
@@ -35,3 +37,10 @@ export const routesConfig = {
     swipeEnabled: false,
     animationEnabled: false
   };
+
+  export const appRouterConfig = {
+    cardStyle: {
+      opacity: 1
+    },
+    transitionConfig: getSlideFromRightTransition
+  }

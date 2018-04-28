@@ -1,11 +1,8 @@
 import React from 'react';
-import { Image } from 'react-native';
-import { StackNavigator } from 'react-navigation';
-import SettingsList from './SettingsList';
-import Profile from './../Profile';
-import Informations from './Informations';
+import { View, StyleSheet, SectionList, Image, Text, ScrollView, TouchableHighlight } from 'react-native';
 import * as globalStyles from './../../styles/globalStyles';
-import getSlideFromRightTransition from 'react-navigation-slide-from-right-transition';
+import PropTypes from 'prop-types';
+import AuthLocal from './../../utils/AuthLocal';
 
 export default class Menu extends React.Component {
     static navigationOptions = {
@@ -16,20 +13,73 @@ export default class Menu extends React.Component {
                 style={globalStyles.tabBarIcon}
             />
         ),
+
+        title: "More",
+        headerStyle: globalStyles.headerStyle,
+        headerTitleStyle: globalStyles.headerTitleStyle
     };
 
     render() {
-        return (<StackNav />);
+        return (
+            <ScrollView style={styles.settings}>
+                <View style={styles.container}>
+                    <SectionList
+                        sections={[
+                            {title: 'My account', data: [{title: 'My profile', screen: 'Profile'}, {title: 'Logout', action: () => AuthLocal.deauthenticate}]},
+                            {title: 'Settings', data: [{title: 'Notifications settings', screen: ''}]},
+                            {title: 'About app', data: [{title: 'Informations', screen: 'Informations'}]}
+                        ]}
+                        renderItem={({item}) => (
+                            <TouchableHighlight onPress={() => {
+                                    if (item.screen) {
+                                        this.props.navigation.navigate(item.screen)
+                                    } else {
+                                        item.action();
+                                    }
+                                }
+                            } underlayColor="#414141">
+                                <Text style={styles.item}>{item.title}</Text>
+                            </TouchableHighlight>
+                        )}
+                        renderSectionHeader={({section}) => <Text style={styles.sectionHeader}>{section.title}</Text>}
+                        keyExtractor={(item, index) => index}
+                    />
+                </View>
+            </ScrollView>
+        );
     }
 }
 
-const StackNav = StackNavigator({
-    SettingsList: { screen: SettingsList },
-    Profile: { screen: Profile },
-    Informations: { screen: Informations }
-}, {
-    cardStyle: {
-        opacity: 1
+const styles = StyleSheet.create({
+    settings: {
+        backgroundColor: globalStyles.$appBackgroundColor,
+        height: '100%'
     },
-    transitionConfig: getSlideFromRightTransition
+    container: {
+        flex: 1
+    },
+    sectionHeader: {
+        paddingTop: 5,
+        paddingLeft: 13,
+        paddingRight: 13,
+        paddingBottom: 6,
+        fontSize: 14,
+        fontWeight: 'bold',
+        color: globalStyles.$sectionHeaderFontColor,
+        backgroundColor: globalStyles.$sectionHeaderBackgroundColor
+    },
+    item: {
+        paddingTop: 10,
+        paddingLeft: 13,
+        paddingBottom: 10,
+        paddingRight:13,
+        fontSize: 18,
+        height: 54,
+        marginTop: 8,
+        color: globalStyles.$white
+    }
 });
+
+Menu.propTypes = {
+    navigation: PropTypes.object.isRequired
+};

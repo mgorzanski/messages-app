@@ -3,6 +3,7 @@ import { Container, Content } from 'native-base';
 import { ScrollView } from 'react-native';
 import { StyleSheet } from 'react-native';
 import SingleMessage from './SingleMessage';
+import { NavigationActions } from 'react-navigation';
 import * as globalStyles from './../../styles/globalStyles';
 import Icon from './../../utils/Icon';
 
@@ -23,9 +24,24 @@ export default class MessageThread extends React.Component {
             headerStyle: globalStyles.headerStyle,
             headerTitleStyle: globalStyles.headerTitleStyle,
             headerRight: (<Icon family="MaterialIcons" name="more-vert" style={globalStyles.stackNavIcon} />),
-            headerTintColor: globalStyles.$white,
-            tabBarVisible: false
+            headerTintColor: globalStyles.$white
     };
+
+    componentWillMount() {
+        const setParamsAction = NavigationActions.setParams({
+            params: { hideTabBar: true },
+            key: 'tab-name'
+        });
+        this.props.navigation.dispatch(setParamsAction);
+    }
+
+    componentWillUnmount() {
+        const setParamsAction = NavigationActions.setParams({
+            params: { hideTabBar: false },
+            key: 'tab-name'
+        });
+        this.props.navigation.dispatch(setParamsAction);
+    }
 
     render() {
         return (
