@@ -1,5 +1,8 @@
 export const $headerBackgroundColor = '#1e1e1e';
 export const $white = '#fff';
+export const $black = '#000';
+export const $gray = '#efefef';
+export const $darkGray = '#c4c4c4';
 export const $appBackgroundColor = '#494949';
 export const $userPanelBackgroundColor = '#414141';
 export const $messageThreadItemBackgroundColor= '#2d2d2d';
@@ -39,6 +42,11 @@ export const iconSpacingLeft = {
 export const icon = {
     width: 27,
     height: 27
+}
+
+export const vectorIcon = {
+    fontSize: 31,
+    color: $white,
 }
 
 export const tabBarIcon = {
