@@ -67,10 +67,9 @@ const styles = StyleSheet.create({
 
 export default class ContactsList extends React.Component {
     static navigationOptions = ({ navigation }) => ({
-        title: "CONTACTS",
+        title: "Contacts",
         headerStyle: globalStyles.headerStyle,
         headerTitleStyle: globalStyles.headerTitleStyle,
-        headerLeft: (<View></View>),
         headerRight: (
             <View style={globalStyles.iconSpacingRight}>
                 <TouchableHighlight onPress={() =>

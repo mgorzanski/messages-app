@@ -22,10 +22,9 @@ const styles = StyleSheet.create({
 
 export default class AddContact extends React.Component {
     static navigationOptions = () => ({
-        title: "ADD CONTACT",
+        title: "Add contact",
         headerStyle: globalStyles.headerStyle,
         headerTitleStyle: globalStyles.headerTitleStyle,
-        headerRight: (<View></View>),
         headerTintColor: globalStyles.$white
     });
 

@@ -24,11 +24,17 @@ export const headerStyle = {
 
 export const headerTitleStyle = {
     color: $white,
-    fontFamily: 'RobotoMono-Regular',
-    fontWeight: 'normal',
-    fontSize: 22,
-    textAlign: 'center',
-    flex: 1
+}
+
+export const headerMultipleIcons = {
+    display: 'flex',
+    flexDirection: 'row',
+}
+
+export const headerIcon = {
+    marginLeft:4,
+    marginRight:12,
+    alignSelf: 'center'
 }
 
 export const iconSpacingRight = {
@@ -40,8 +46,8 @@ export const iconSpacingLeft = {
 }
 
 export const icon = {
-    width: 27,
-    height: 27
+    width: 24,
+    height: 24
 }
 
 export const vectorIcon = {

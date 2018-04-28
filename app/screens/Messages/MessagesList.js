@@ -1,5 +1,6 @@
 import React from 'react';
-import { ScrollView, StyleSheet, View, TouchableHighlight, Image } from 'react-native';
+import { StyleSheet, View, TouchableHighlight, Image } from 'react-native';
+import { Container, Content, List } from 'native-base';
 import Message from './Message';
 import UserPanel from './UserPanel';
 import * as globalStyles from './../../styles/globalStyles';
@@ -7,26 +8,22 @@ import PropTypes from 'prop-types';
 
 export default class MessagesList extends React.Component {
     static navigationOptions = ({ navigation }) => ({
-        title: "MESSAGES",
+        title: "Messages",
         headerStyle: globalStyles.headerStyle,
         headerTitleStyle: globalStyles.headerTitleStyle,
-        headerLeft: (
-            <View style={globalStyles.iconSpacingLeft}>
+        headerRight: (
+            <View style={globalStyles.headerMultipleIcons}>
                 <TouchableHighlight onPress={() =>
                     navigation.navigate('AddContact')
-                }>
+                } style={globalStyles.headerIcon}>
                     <Image 
                         source={require('./../../img/icons/search.png')}
                         style={globalStyles.icon}
                     />
                 </TouchableHighlight>
-            </View>
-        ),
-        headerRight: (
-            <View style={globalStyles.iconSpacingRight}>
                 <TouchableHighlight onPress={() =>
                     navigation.navigate('AddContact')
-                }>
+                } style={globalStyles.headerIcon}>
                     <Image 
                         source={require('./../../img/icons/add.png')}
                         style={globalStyles.icon}
@@ -37,33 +34,29 @@ export default class MessagesList extends React.Component {
 
     render() {
         return (
-            <View style={styles.home}>
-                <TouchableHighlight onPress={() => 
-                    this.props.navigation.navigate('Profile')
-                }>
-                    <UserPanel />
-                </TouchableHighlight>
-                <ScrollView>
-                    <TouchableHighlight onPress={() =>
-                        this.props.navigation.navigate('MessageThread')    
+            <Container style={styles.home}>
+                <Content>
+                    <TouchableHighlight onPress={() => 
+                        this.props.navigation.navigate('Profile')
                     }>
-                        <Message userName="Lorem Ipsum" message="Testowa wiadomość..." date="11.03.2018 13:39" />
+                        <UserPanel />
                     </TouchableHighlight>
-                    <Message userName="Lorem Ipsum" message="Testowa wiadomość..." date="11.03.2018 13:39" />
-                    <Message userName="Lorem Ipsum" message="Testowa wiadomość..." date="11.03.2018 13:39" />
-                    <Message userName="Lorem Ipsum" message="Testowa wiadomość..." date="11.03.2018 13:39" />
-                    <Message userName="Lorem Ipsum" message="Testowa wiadomość..." date="11.03.2018 13:39" />
-                    <Message userName="Lorem Ipsum" message="Testowa wiadomość..." date="11.03.2018 13:39" />
-                </ScrollView>
-            </View>
+                    <List>
+                        <Message userName="Lorem Ipsum" message="Testowa wiadomość..." date="13:39" />
+                        <Message userName="Lorem Ipsum" message="Testowa wiadomość..." date="13:39" />
+                        <Message userName="Lorem Ipsum" message="Testowa wiadomość..." date="13:39" />
+                        <Message userName="Lorem Ipsum" message="Testowa wiadomość..." date="13:39" />
+                        <Message userName="Lorem Ipsum" message="Testowa wiadomość..." date="13:39" />
+                    </List>
+                </Content>
+            </Container>
         );
     }
 }
 
 const styles = StyleSheet.create({
     home: {
-        backgroundColor: globalStyles.$appBackgroundColor,
-        height: '100%'
+        backgroundColor: globalStyles.$appBackgroundColor
     }
 });
 

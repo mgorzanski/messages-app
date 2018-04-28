@@ -6,11 +6,9 @@ import AuthLocal from './../../utils/AuthLocal';
 
 export default class SettingsList extends React.Component {
     static navigationOptions = () => ({
-        title: "MORE",
+        title: "More",
         headerStyle: globalStyles.headerStyle,
-        headerTitleStyle: globalStyles.headerTitleStyle,
-        headerLeft: (<View></View>),
-        headerRight: (<View></View>)
+        headerTitleStyle: globalStyles.headerTitleStyle
     });
 
     render() {

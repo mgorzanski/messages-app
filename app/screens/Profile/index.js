@@ -4,7 +4,7 @@ import * as globalStyles from './../../styles/globalStyles';
 
 export default class Profile extends React.Component {
     static navigationOptions = () => ({
-        title: "PROFILE",
+        title: "Profile",
         headerStyle: globalStyles.headerStyle,
         headerTitleStyle: globalStyles.headerTitleStyle,
         headerRight: (<View></View>),

@@ -1,31 +1,34 @@
 import React from 'react';
-import { Text, View, Image, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import * as globalStyles from './../../styles/globalStyles';
 import PropTypes from 'prop-types';
+import { ListItem, Thumbnail, Text, Body, Left, Right } from 'native-base';
 
 export default class Message extends React.Component {
     render() {
         return (
-            <View style={styles.message}>
-                <Image style={styles.userImage} source={require('./../../img/icons/user2.png')} />
-                <React.Fragment>
-                    <View style={styles.user}>
-                        <Text style={styles.userName}>{this.props.userName}</Text>
-                        {/*
-                            If this.props.message was passed, render the text. Otherwise don't render anything here (null).
-                        */}
-                        { this.props.message ? (
-                            <Text style={styles.messageText}>{this.props.message}</Text>
-                        ) : null}
-                    </View>
+            <ListItem avatar>
+                <Left>
+                    <Thumbnail source={require('./../../img/icons/user2.png')} />
+                </Left>
+                <Body>
+                    <Text style={styles.title}>{this.props.userName}</Text>
+                    {/*
+                        If this.props.message was passed, render the text. Otherwise don't render anything here (null).
+                    */}
+                    { this.props.message ? (
+                        <Text style={styles.message} note>{this.props.message}</Text>
+                    ) : null}
+                </Body>
+                <Right>
                     {/*
                         If this.props.date was passed, render the text. Otherwise don't render anything here (null).
                     */}
                     { this.props.date ? (
-                        <Text style={styles.date}>{this.props.date}</Text>
+                        <Text style={styles.timestamp} note>{this.props.date}</Text>
                     ) : null}
-                </React.Fragment>
-            </View>
+                </Right>
+            </ListItem>
         );
     }
 }
@@ -37,44 +40,15 @@ Message.propTypes = {
 }
 
 const styles = StyleSheet.create({
-    user: {
-        display: 'flex',
-        flexDirection: 'column',
-        marginTop: 9,
-        marginLeft: -55
+    title: {
+        color: globalStyles.$white
     },
     message: {
-        backgroundColor: globalStyles.$messageThreadItemBackgroundColor,
-        display: 'flex',
-        flexDirection: 'row',
-        height: 75,
-        borderBottomWidth: 0.25,
-        borderStyle: 'solid',
-        borderBottomColor: globalStyles.$borderColor,
-        justifyContent: 'space-between'
+        color: globalStyles.$darkGray,
+        fontSize: 13
     },
-    userName: {
-        fontFamily: 'Walkway-Bold',
-        fontSize: 30,
-        color: globalStyles.$white,
-    },
-    messageText: {
-        fontFamily: 'arial',
-        color: globalStyles.$white,
-        fontSize: 11,
-        marginTop: 3
-    },
-    date: {
-        fontFamily: 'arial',
-        color: globalStyles.$white,
-        fontSize: 10,
-        marginRight:15,
-        marginTop: 11
-    },
-    userImage: {
-        width: 53,
-        height: 53,
-        marginLeft:13,
-        marginTop: 10
+    timestamp: {
+        color: globalStyles.$darkGray,
+        fontSize: 13
     }
 });
