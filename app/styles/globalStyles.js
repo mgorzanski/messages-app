@@ -16,6 +16,8 @@ export const $buttonBorderColor = $loginLabelColor;
 export const $buttonFontColor = $buttonBorderColor;
 export const $otherMessageTextBackground = '#3a3a3a';
 export const $myMessageTextBackground = '#595959';
+export const $transparent = 'transparent';
+export const $sendButtonBackgroundColor = '#333';
 
 export const headerStyle = {
     backgroundColor: $headerBackgroundColor,
