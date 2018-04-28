@@ -13,11 +13,6 @@ export default class Auth {
             })
         });
         const json = await response.json();
-        if (json.auth) {
-            AuthLocal.authenticate(json.token);
-            return true;
-        } else {
-            return false;
-        }
+        if (json.auth) await AuthLocal.authenticate(json.token);
     }
 }

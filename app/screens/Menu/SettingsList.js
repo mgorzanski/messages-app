@@ -22,7 +22,7 @@ export default class SettingsList extends React.Component {
                         sections={[
                             {title: 'My account', data: [{title: 'My profile', screen: 'Profile'}, {title: 'Logout', action: () => AuthLocal.deauthenticate}]},
                             {title: 'Settings', data: [{title: 'Notifications settings', screen: ''}]},
-                            {title: 'About app', data: [{title: 'Informations', screen: ''}]}
+                            {title: 'About app', data: [{title: 'Informations', screen: 'Informations'}]}
                         ]}
                         renderItem={({item}) => (
                             <TouchableHighlight onPress={() => {

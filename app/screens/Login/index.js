@@ -73,6 +73,7 @@ export default class Login extends React.Component {
                         <TextInput
                             underlineColorAndroid="#b8b8b8"
                             selectionColor="#b8b8b8"
+                            autoCapitalize="none"
                             onChangeText={(email) => this.setState({email})}
                         />
                         <Text style={styles.label}>Password</Text>
@@ -80,6 +81,7 @@ export default class Login extends React.Component {
                             underlineColorAndroid="#b8b8b8"
                             selectionColor="#b8b8b8"
                             secureTextEntry={true}
+                            autoCapitalize="none"
                             onChangeText={(password) => this.setState({password})}
                         />
                     </View>
@@ -87,10 +89,10 @@ export default class Login extends React.Component {
                         <TouchableHighlight
                             style={styles.button}
                             onPress={() => {
-                                Auth.login(this.state.email, this.state.password).then((result) => {
-                                    if (result) {
-                                        this.props.onUserLogin();
-                                    }
+                                Toast.showShortBottom.bind(null, 'An error occurred');
+                                Auth.login(this.state.email, this.state.password).then(() => {
+                                    Toast.showShortBottom.bind(null, 'An error occurred');
+                                    this.props.onUserLogin();
                                 }).catch(() => Toast.showShortBottom.bind(null, 'An error occurred'));
                             }}
                         >

@@ -7,6 +7,8 @@ import Menu from './screens/Menu';
 import Groups from './screens/Groups';
 import Login from './screens/Login';
 import AuthLocal from './utils/AuthLocal';
+import { Provider } from 'react-redux';
+import { store } from './config/store';
 
 export default class App extends React.Component {
     constructor(props) {
@@ -77,13 +79,15 @@ export default class App extends React.Component {
 
         if (renderView && userLogged) {
             return (
-                <React.Fragment>
-                    <StatusBar
-                        backgroundColor="#1e1e1e"
-                        barStyle="light-content"
-                    />
-                    <Layout />
-                </React.Fragment>
+                <Provider store={store}>
+                    <React.Fragment>
+                        <StatusBar
+                            backgroundColor="#1e1e1e"
+                            barStyle="light-content"
+                        />
+                        <Layout />
+                    </React.Fragment>
+                </Provider>
             );
         } else {
             return (<Login onUserLogin={this.handleLogin} />);

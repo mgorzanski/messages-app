@@ -3,6 +3,7 @@ import { Image } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import SettingsList from './SettingsList';
 import Profile from './../Profile';
+import Informations from './Informations';
 import * as globalStyles from './../../styles/globalStyles';
 import getSlideFromRightTransition from 'react-navigation-slide-from-right-transition';
 
@@ -24,7 +25,8 @@ export default class Menu extends React.Component {
 
 const StackNav = StackNavigator({
     SettingsList: { screen: SettingsList },
-    Profile: { screen: Profile }
+    Profile: { screen: Profile },
+    Informations: { screen: Informations }
 }, {
     cardStyle: {
         opacity: 1
