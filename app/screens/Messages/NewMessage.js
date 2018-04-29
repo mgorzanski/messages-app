@@ -22,7 +22,7 @@ export default class NewMessage extends React.Component {
                         <Input placeholder="Search contacts" />
                     </Item>
                 </Header>
-                <Content style={styles.content}>
+                <Content>
                     <List>
                         <ListItem>
                             <Left>
@@ -56,9 +56,6 @@ export default class NewMessage extends React.Component {
 }
 
 const styles = StyleSheet.create({
-    content: {
-        //margin:10
-    },
     header: {
         backgroundColor: globalStyles.$headerBackgroundColor,
         height: 64
