@@ -13,10 +13,10 @@ export default class SearchMessages extends React.Component {
     render() {
         return (
             <Container>
-                <Header searchBar rounded style={styles.header}>
+                <Header searchBar rounded style={styles.header} androidStatusBarColor={globalStyles.$headerBackgroundColor}>
                     <Item>
                         <Icon family="MaterialIcons" name="search" />
-                        <Input placeholder="Search" />
+                        <Input placeholder="Search messages" />
                     </Item>
                 </Header>
                 <Content style={styles.content}>
@@ -37,8 +37,8 @@ const styles = StyleSheet.create({
         backgroundColor: globalStyles.$headerBackgroundColor,
         height: 64
     }
-})
+});
 
 SearchMessages.propTypes = {
     navigation: PropTypes.object.isRequired
-}
+};

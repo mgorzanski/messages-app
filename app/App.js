@@ -17,6 +17,7 @@ import Profile from './screens/Profile';
 import AddContact from './screens/Contacts/AddContact';
 import Informations from './screens/Menu/Informations';
 import SearchMessages from './screens/Messages/SearchMessages';
+import NewMessage from './screens/Messages/NewMessage';
 
 export default class App extends React.Component {
     constructor(props) {
@@ -54,7 +55,8 @@ export default class App extends React.Component {
             Profile: { screen: Profile },
             AddContact: { screen: AddContact },
             Informations: { screen: Informations },
-            SearchMessages: { screen: SearchMessages }
+            SearchMessages: { screen: SearchMessages },
+            NewMessage: { screen: NewMessage }
         }, appRouterConfig);
 
         if (renderView && userLogged) {

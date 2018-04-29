@@ -9,7 +9,7 @@ export default class Message extends React.Component {
         return (
             <ListItem avatar onPress={() => this.props.navigation.navigate('MessageThread')}>
                 <Left>
-                    <Thumbnail source={require('./../../img/icons/user2.png')} />
+                    <Thumbnail source={require('./../../img/icons/user2.png')} style={styles.thumbnail} />
                 </Left>
                 <Body>
                     <Text style={styles.title}>{this.props.userName}</Text>
@@ -51,5 +51,9 @@ const styles = StyleSheet.create({
     timestamp: {
         color: globalStyles.$darkGray,
         fontSize: 13
+    },
+    thumbnail: {
+        width: 50,
+        height: 50
     }
 });

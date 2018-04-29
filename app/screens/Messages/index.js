@@ -31,7 +31,7 @@ export default class Messages extends React.Component {
                     />
                 </TouchableHighlight>
                 <TouchableHighlight onPress={() =>
-                    navigation.navigate('AddContact')
+                    navigation.navigate('NewMessage')
                 } style={globalStyles.headerIcon}>
                     <Image 
                         source={require('./../../img/icons/add.png')}
