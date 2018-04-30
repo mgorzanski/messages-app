@@ -7,6 +7,8 @@ const mongodb = require('mongodb');
 const MongoClient = mongodb.MongoClient;
 const config = require('./config');
 const verifyToken = require('./verifyToken');
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -44,8 +46,20 @@ MongoClient.connect(config.mongodb, (err, db) => {
 
     //Additional
     app.get('/app/informations', (req, res) => routes.app.informations(req, res, db));
+
+    // Socket
+    io.on('connection', (socket) => {
+        console.log('User connected');
+        socket.on('disconnect', function() {
+            console.log('User disconnected');
+        });
+
+        socket.on('chat message', function (msg) {
+            io.emit('chat message', msg);
+        });
+    });
 });
 
-app.listen(3000, '', () => {
+http.listen(3000, '', () => {
     console.log('Server running at: http://localhost:3000');
 });

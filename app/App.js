@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 import { store } from './config/store';
 import { mainRouterConfig, appRouterConfig } from './config/routers';
 import { Root } from 'native-base';
+import io from 'socket.io-client';
 
 import Messages from './screens/Messages';
 import Contacts from './screens/Contacts';
@@ -27,6 +28,8 @@ export default class App extends React.Component {
         userLogged: true,
         renderView: false
       }
+
+      this.socket = io('http://192.168.100.4:3000');
     }
 
     componentWillMount() {
