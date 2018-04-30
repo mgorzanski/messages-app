@@ -17,26 +17,30 @@ MongoClient.connect(config.mongodb, (err, db) => {
     console.log('Connected successfully to MongoDB');
 
     db = db.db('messages-app');
-    
+
     app.get('/', (req, res) => {
         res.sendStatus(200);
     });
 
     //User authentication routes
     app.post('/auth/login', routes.auth.authenticateUserValidations, (req, res) => routes.auth.authenticateUser(req, res, db));
-    app.post('/auth/register', routes.auth.registerUserValidations, (req, res) => routes.auth.registrerUser(req, res, db));
+    app.post('/auth/register', routes.auth.registerUserValidations, (req, res) => routes.auth.registerUser(req, res, db));
     app.post('/auth/forgot-password', routes.auth.forgotPasswordValidations, (req, res) => routes.auth.forgotPassword(req, res, db));
     app.post('/auth/logout', verifyToken, (req, res) => routes.auth.logout(req, res));
-    
+
+    //User messages routes
+    app.get('/users/:userId/messages/threads', verifyToken, (req, res) => routes.users.messsages.getThreads(req, res, db));
+
     //User data routes
     app.get('/users/:userId/contacts', verifyToken, (req, res) => routes.users.contacts.getContacts(req, res, db));
-    app.put('/users/:userId/contacts/invitations/:invitationId', verifyToken, routes.users.contacts.acceptInvitationValidations, (req, res) => routes.users.acceptInvitation(req, res, db));
-    app.post('/users/:userId/contacts/invitations', verifyToken, routes.users.contacts.sendInvitationValidations, (req, res) => routes.users.sendInvitation(req, res, db));
-    app.delete('/users/:userId/contacts/invitations/:invitationId', verifyToken, routes.users.contacts.declineInvitationValidations, (req, res) => routes.users.declineInvitation(req, res, db));
+    app.get('/users/:userId/contacts/invitations', verifyToken, (req, res) => routes.users.contacts.getInvitations(req, res, db));
+    app.put('/users/:userId/contacts/invitations/:inviterId', verifyToken, (req, res) => routes.users.contacts.acceptInvitation(req, res, db));
+    app.put('/users/:userId/contacts/invitations', verifyToken, (req, res) => routes.users.contacts.sendInvitation(req, res, db));
+    app.delete('/users/:userId/contacts/invitations/:inviterId', verifyToken, (req, res) => routes.users.contacts.declineInvitation(req, res, db));
 
     //User profile routes
-    app.get('/users/:userId/profile', verifyToken, (req, res) => routes.users.profile.getProfile(req, res, db));
-    app.put('/users/:userId/profile', verifyToken, routes.users.profile.updateProfileValidations, (req, res) => routes.users.profile.updateProfile(req, res, db));
+    // app.get('/users/:userId/profile', verifyToken, (req, res) => routes.users.profile.getProfile(req, res, db));
+    // app.put('/users/:userId/profile', verifyToken, routes.users.profile.updateProfileValidations, (req, res) => routes.users.profile.updateProfile(req, res, db));
 
     //Additional
     app.get('/app/informations', (req, res) => routes.app.informations(req, res, db));
