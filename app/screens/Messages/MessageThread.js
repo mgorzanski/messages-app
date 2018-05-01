@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     form: {
         paddingLeft:6,
         paddingRight:6,
-        backgroundColor: globalStyles.$black,
+        backgroundColor: globalStyles.$formBackgroundColor,
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between'
@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
         borderColor: globalStyles.$transparent,
         backgroundColor: globalStyles.$darkGray,
         flex: 1,
-        margin:7,
+        margin:5,
     },
     textarea: {
         height:45,

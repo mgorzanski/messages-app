@@ -18,6 +18,7 @@ export const $otherMessageTextBackground = '#3a3a3a';
 export const $myMessageTextBackground = '#595959';
 export const $transparent = 'transparent';
 export const $sendButtonBackgroundColor = '#333';
+export const $formBackgroundColor = '#212121';
 
 export const headerStyle = {
     backgroundColor: $headerBackgroundColor,
