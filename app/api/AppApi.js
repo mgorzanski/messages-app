@@ -1,4 +1,4 @@
-export default class App {
+export default class AppApi {
     static async getAppInformations() {
         const response = await fetch('http://192.168.100.4:3000/app/informations', {
             method: 'get',

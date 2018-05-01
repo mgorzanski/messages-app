@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, TextInput, StyleSheet, TouchableHighlight } from 'react-native';
 import * as globalStyles from './../../styles/globalStyles';
-import Auth from './../../api/Auth';
+import AuthApi from './../../api/AuthApi';
 import { Toast } from 'native-base';
 import PropTypes from 'prop-types';
 
@@ -92,7 +92,7 @@ export default class Login extends React.Component {
                         <TouchableHighlight
                             style={styles.button}
                             onPress={() => {
-                                Auth.login(this.state.email, this.state.password).then(() => {
+                                AuthApi.login(this.state.email, this.state.password).then(() => {
                                     this.props.onUserLogin();
                                 }).catch(() => {
                                     Toast.show({

@@ -4,7 +4,7 @@ import * as globalStyles from './../../styles/globalStyles';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { fetchInformations } from './../../actions';
-import App from './../../api/App';
+import AppApi from './../../api/AppApi';
 
 class Informations extends React.Component {
     constructor(props) {
@@ -23,7 +23,7 @@ class Informations extends React.Component {
     });
 
     componentDidMount() {
-        App.getAppInformations().then((data) => this.props.fetchInformations(data)).then(() => this.setState({ dataLoaded: true}));
+        AppApi.getAppInformations().then((data) => this.props.fetchInformations(data)).then(() => this.setState({ dataLoaded: true}));
     }
 
     render() {

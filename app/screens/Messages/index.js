@@ -5,8 +5,21 @@ import Message from './Message';
 import UserPanel from './UserPanel';
 import * as globalStyles from './../../styles/globalStyles';
 import PropTypes from 'prop-types';
+import MessagesApi from './../../api/MessagesApi';
 
 export default class Messages extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            threads: []
+        };
+    }
+
+    componentWillMount() {
+        MessagesApi.getThreads().then((result) => this.setState({ threads: result }));
+    }
+
     static navigationOptions = ({ navigation }) => ({
         tabBarLabel: '',
         tabBarIcon: () => (
@@ -42,6 +55,8 @@ export default class Messages extends React.Component {
     });
 
     render() {
+        const threads = this.state.threads.map((thread) => <Message key={thread._id} navigation={this.props.navigation} userName={thread.name} message="Testowa wiadomość..." date="13:39" />);
+
         return (
             <Container style={styles.home}>
                 <Content>
@@ -51,12 +66,7 @@ export default class Messages extends React.Component {
                         <UserPanel />
                     </TouchableHighlight>
                     <List>
-                        <Message navigation={this.props.navigation} userName="Lorem Ipsum" message="Testowa wiadomość..." date="13:39" />
-                        <Message navigation={this.props.navigation} userName="Lorem Ipsum" message="Testowa wiadomość..." date="13:39" />
-                        <Message navigation={this.props.navigation} userName="Lorem Ipsum" message="Testowa wiadomość..." date="13:39" />
-                        <Message navigation={this.props.navigation} userName="Lorem Ipsum" message="Testowa wiadomość..." date="13:39" />
-                        <Message navigation={this.props.navigation} userName="Lorem Ipsum" message="Testowa wiadomość..." date="13:39" />
-                        <Message navigation={this.props.navigation} userName="Lorem Ipsum" message="Testowa wiadomość..." date="13:39" />
+                        {threads}
                     </List>
                 </Content>
             </Container>
