@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, TouchableHighlight, Image } from 'react-native';
+import { StyleSheet, View, TouchableHighlight, Image, RefreshControl } from 'react-native';
 import { Container, Content, List } from 'native-base';
 import Message from './Message';
 import UserPanel from './UserPanel';
@@ -12,11 +12,16 @@ export default class Messages extends React.Component {
         super(props);
 
         this.state = {
-            threads: []
+            threads: [],
+            refreshing: false
         };
     }
 
     componentWillMount() {
+        this.getThreads();
+    }
+
+    getThreads() {
         MessagesApi.getThreads().then((result) => this.setState({ threads: result }));
     }
 
@@ -59,7 +64,9 @@ export default class Messages extends React.Component {
 
         return (
             <Container style={styles.home}>
-                <Content>
+                <Content refreshControl={
+                    <RefreshControl refreshing={this.state.refreshing} onRefresh={() => this.getThreads()} />
+                }>
                     <TouchableHighlight onPress={() => 
                         this.props.navigation.navigate('Profile')
                     }>
