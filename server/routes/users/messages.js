@@ -2,19 +2,32 @@ const ObjectId = require('mongodb').ObjectId;
 
 module.exports = {
     getThreads(req, res, db) {
-        db.collection('users').find({ _id: ObjectId(req.params.userId)}, { threads: 1, _id: 0 }).toArray((error, result) => {
-        	if (error) res.send(500);
-        	if (result.threads && result.threads.length) {
-	        	for (let i = 0; i < result.threads; i++) {
-	        		db.collection('threads').find({ _id: ObjectId(result.threads[i])}).limit(1).toArray((error, result) => {
-	        			if (error) res.send(500);
-	        			res.status(200).send(result);
-	        		});
-	        	}
-    		} else {
-    			res.status(200).send('No threads');
-    		}
-        });
+      db.collection('threads').find({ users: { $elemMatch: { $in: [ObjectId(req.params.userId)] } } }).toArray((error, result) => {
+      	if (error) res.sendStatus(500);
+      	if (result && result.length) {
+	      	(async function () {
+	      		let threads = new Array();
+	      		for (const thread of result) {
+	      			if (thread.users.length === 2) {
+	      				for (const user of thread.users) {
+	      					if (user.toString() !== req.params.userId.toString()) {
+	      						const findUser = await db.collection('users').find({ _id: ObjectId(user) }).limit(1).toArray();
+	      						threads.push({ name: findUser[0].fullName });
+	      					}
+	      				}
+	      			} else {
+	      				threads.push({ name: thread.name });
+	      			}
+	      		}
+	      		return threads;
+	      	})().then((threads) => res.status(200).send(threads)).catch((e) => {
+	      		console.log(e)
+	      		res.sendStatus(500);
+	      	});
+	  	} else {
+	  		res.status(200).send('No threads');
+	  	}
+      });
     },
 
     createThread(req, res, db) {
