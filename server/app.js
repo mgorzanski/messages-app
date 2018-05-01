@@ -9,6 +9,7 @@ const config = require('./config');
 const verifyToken = require('./verifyToken');
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
+const socket = require('./socket');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -31,7 +32,12 @@ MongoClient.connect(config.mongodb, (err, db) => {
     app.post('/auth/logout', verifyToken, (req, res) => routes.auth.logout(req, res));
 
     //User messages routes
-    app.get('/users/:userId/messages/threads', verifyToken, (req, res) => routes.users.messsages.getThreads(req, res, db));
+    app.get('/users/:userId/messages/threads', verifyToken, (req, res) => routes.users.messages.getThreads(req, res, db));
+    app.post('/users/:userId/messages/threads', verifyToken, (req, res) => routes.users.messages.createThread(req, res, db));
+    app.put('/users/:userId/messages/threads/:threadId', verifyToken, (req, res) => routes.users.messages.updateThread(req, res, db));
+    app.delete('/users/:userId/messages/threads/:threadId', verifyToken, (req, res) => routes.users.messages.deleteThread(req, res, db));
+    app.put('/users/:userId/messages/threads/:threadId/add/:userToAddId', verifyToken, (req, res) => routes.users.messages.addUserToThread(req, res, db));
+    app.put('/users/:userId/messages/threads/:threadId/remove/:userToRemoveId', verifyToken, (req, res) => routes.users.messages.removeUserFromThread(req, res, db));
 
     //User data routes
     app.get('/users/:userId/contacts', verifyToken, (req, res) => routes.users.contacts.getContacts(req, res, db));
@@ -47,17 +53,8 @@ MongoClient.connect(config.mongodb, (err, db) => {
     //Additional
     app.get('/app/informations', (req, res) => routes.app.informations(req, res, db));
 
-    // Socket
-    io.on('connection', (socket) => {
-        console.log('User connected');
-        socket.on('disconnect', function() {
-            console.log('User disconnected');
-        });
-
-        socket.on('chat message', function (msg) {
-            io.emit('chat message', msg);
-        });
-    });
+    //Socket
+    socket(io);
 });
 
 http.listen(3000, '', () => {
