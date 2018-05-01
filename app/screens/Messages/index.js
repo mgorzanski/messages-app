@@ -55,7 +55,7 @@ export default class Messages extends React.Component {
     });
 
     render() {
-        const threads = this.state.threads.map((thread) => <Message key={thread._id} navigation={this.props.navigation} userName={thread.name} message="Testowa wiadomość..." date="13:39" />);
+        const threads = this.state.threads.map((thread) => <Message key={thread._id} navigation={this.props.navigation} name={thread.name} message="Testowa wiadomość..." date="13:39" />);
 
         return (
             <Container style={styles.home}>

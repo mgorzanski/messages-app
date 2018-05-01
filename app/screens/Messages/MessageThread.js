@@ -7,13 +7,13 @@ import Icon from './../../utils/Icon';
 import PropTypes from 'prop-types';
 
 export default class MessageThread extends React.Component {
-    static navigationOptions = {
-            title: "Lorem Ipsum",
+    static navigationOptions = ({ navigation }) => ({
+            title: navigation.state.params.name,
             headerStyle: globalStyles.headerStyle,
             headerTitleStyle: globalStyles.headerTitleStyle,
             headerRight: (<Icon family="MaterialIcons" name="more-vert" style={globalStyles.stackNavIcon} />),
             headerTintColor: globalStyles.$white
-    };
+    });
 
     render() {
         return (

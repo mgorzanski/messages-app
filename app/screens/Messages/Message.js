@@ -7,12 +7,12 @@ import { ListItem, Thumbnail, Text, Body, Left, Right } from 'native-base';
 export default class Message extends React.Component {
     render() {
         return (
-            <ListItem avatar onPress={() => this.props.navigation.navigate('MessageThread')}>
+            <ListItem avatar onPress={() => this.props.navigation.navigate('MessageThread', {name: this.props.name})}>
                 <Left>
                     <Thumbnail source={require('./../../img/icons/user2.png')} style={styles.thumbnail} />
                 </Left>
                 <Body>
-                    <Text style={styles.title}>{this.props.userName}</Text>
+                    <Text style={styles.title}>{this.props.name}</Text>
                     {/*
                         If this.props.message was passed, render the text. Otherwise don't render anything here (null).
                     */}
@@ -34,7 +34,7 @@ export default class Message extends React.Component {
 }
 
 Message.propTypes = {
-    userName: PropTypes.string,
+    name: PropTypes.string,
     message: PropTypes.string,
     date: PropTypes.string,
     navigation: PropTypes.object.isRequired
