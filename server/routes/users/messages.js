@@ -65,5 +65,48 @@ module.exports = {
 				res.sendStatus(403);
 			}
 		});
+    },
+
+    updateThread(req, res, db) {
+    	db.collection('threads').updateOne(
+    		{ _id: ObjectId(req.params.threadId) },
+    		{ $set: {
+    			name: req.body.name,
+    			thumbnail: req.body.name,
+
+    		}}
+    	);
+    },
+
+    deleteThread(req, res, db) {
+    	db.collection('threads').find({ _id: ObjectId(req.params.threadId) }, { users: 1, _id: 1 }).limit(1).toArray((error, thread) => {
+    		if (error) res.sendStatus(500);
+    		if (thread && thread.length) {
+    			db.collection('threads').deleteOne({ _id: ObjectId(req.params.threadId) }, (error) => {
+		    		if (error) res.sendStatus(500);
+		    		for (let i = 0; i < thread[0].users.length; i++) {
+		    			db.collection('users').updateOne(
+		    				{ threads: { $elemMatch: { $in: [ObjectId(req.params.threadId)] } } },
+		    				{ $pull: { "threads":
+			    				ObjectId(req.params.threadId)
+			    			}}, (error) => {
+			    				if (error) res.send(500);
+			    				res.status(200).send('Thread deleted');
+			    			}
+		    			);
+		    		}
+		    	});
+    		} else {
+    			res.sendStatus(403);
+    		}
+    	});
+    },
+
+    addUserToThread(req, res, db) {
+
+    },
+
+    removeUserFromThread(req, res, db) {
+
     }
 }
