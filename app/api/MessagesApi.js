@@ -4,7 +4,7 @@ export default class MessagesApi {
             method: 'get',
             headers: new Headers({
                 'Content-Type': 'application/json',
-                'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVhZDIxMzBiNTEwNWU4MzA2Y2M0OGJmZCIsImlhdCI6MTUyNTA5NjkwMiwiZXhwIjoxNTI1MTgzMzAyfQ.Rdrs47OEXRf_uPOWyONlH1XsLybpZTjQEXYGWfnjYdw'
+                'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVhZDIxMzBiNTEwNWU4MzA2Y2M0OGJmZCIsImlhdCI6MTUyNTI4MzE5NywiZXhwIjoxNTI1MzY5NTk3fQ.qDdBDOgjAmQb86p7ChzFVX54NP2QJo0PWQFxfLlGUoI'
             })
         });
         const json = await response.json();

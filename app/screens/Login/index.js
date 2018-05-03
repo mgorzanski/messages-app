@@ -4,6 +4,8 @@ import * as globalStyles from './../../styles/globalStyles';
 import AuthApi from './../../api/AuthApi';
 import { Toast } from 'native-base';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { login } from './../../actions';
 
 const styles = StyleSheet.create({
     login: {
@@ -54,7 +56,7 @@ const styles = StyleSheet.create({
     }
 });
 
-export default class Login extends React.Component {
+class Login extends React.Component {
     constructor(props) {
         super(props);
         
@@ -92,9 +94,19 @@ export default class Login extends React.Component {
                         <TouchableHighlight
                             style={styles.button}
                             onPress={() => {
-                                AuthApi.login(this.state.email, this.state.password).then(() => {
-                                    this.props.onUserLogin();
-                                }).catch(() => {
+                                AuthApi.login(this.state.email, this.state.password).then((result) => {
+                                    if (result.auth) {
+                                        const { auth, token, userId, username, fullName, email } = result;
+                                        this.props.login(token, userId, username, fullName, email);
+                                        this.props.onUserLogin();
+                                    } else {
+                                        Toast.show({
+                                            text: 'An error occurred',
+                                            buttonText: 'Close'
+                                        });
+                                    }
+                                }).catch((error) => {
+                                    console.log(error);
                                     Toast.show({
                                         text: 'An error occurred',
                                         buttonText: 'Close'
@@ -119,3 +131,11 @@ export default class Login extends React.Component {
 Login.propTypes = {
     onUserLogin: PropTypes.func
 }
+
+const mapDispatchToProps = dispatch => {
+    return {
+        login: (token, userId, username, fullName, email) => dispatch(login(token, userId, username, fullName, email))
+    };
+};
+
+export default connect(null, mapDispatchToProps)(Login);

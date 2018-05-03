@@ -13,6 +13,7 @@ export default class AuthApi {
             })
         });
         const json = await response.json();
-        if (json.auth) await AuthLocal.authenticate(json.token);
+        //if (json.auth) await AuthLocal.authenticate(json.token);
+        return json;
     }
 }
