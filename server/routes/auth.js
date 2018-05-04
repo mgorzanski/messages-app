@@ -13,9 +13,7 @@ module.exports = {
             } else {
                 bcrypt.compare(req.body.password, user.password, (err, result) => {
                     if (result === true) {
-                        const token = jwt.sign({ id: user._id }, config.secret, {
-                            expiresIn: 86400
-                        });
+                        const token = jwt.sign({ id: user._id }, config.secret);
                         res.status(200).send({ auth: true, token: token, userId: user._id, username: user.username, fullName: user.fullName, email: user.email });
                     } else {
                         res.status(400).send({ auth: false, token: null });

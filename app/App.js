@@ -3,17 +3,10 @@ import { StatusBar, AsyncStorage, AppState, Text } from 'react-native';
 import { TabNavigator, StackNavigator } from 'react-navigation';
 import AuthLocal from './utils/AuthLocal';
 import { Provider } from 'react-redux';
-//import { store } from './config/store';
+import { store } from './config/store';
 import { mainRouterConfig, appRouterConfig } from './config/routers';
 import { Root } from 'native-base';
 import io from 'socket.io-client';
-
-import { applyMiddleware, createStore } from 'redux';
-import reducers from './reducers';
-import logger from 'redux-logger';
-
-const middleware = applyMiddleware(logger);
-let store = createStore(reducers, middleware);
 
 import Messages from './screens/Messages';
 import Contacts from './screens/Contacts';
@@ -35,7 +28,7 @@ class App extends React.Component {
         userLogged: true,
         renderView: false,
         isStoreLoading: false,
-        store: store
+        store: store()
       }
 
       this.socket = io('http://192.168.100.4:3000');
@@ -47,13 +40,13 @@ class App extends React.Component {
       AsyncStorage.getItem('completeStore').then((value) => {
           if (value && value.length) {
               let initialStore = JSON.parse(value);
-              self.setState({ store: createStore(reducers, initialStore, middleware)});
+              self.setState({ store: store(initialStore) });
           } else {
-              self.setState({ store: store });
+              self.setState({ store: store() });
           }
           self.setState({ isStoreLoading: false });
       }).catch((error) => {
-          self.setState({ store: store, isStoreLoading: false });
+          self.setState({ store: store(), isStoreLoading: false });
       }).then(() => {
           const state = this.state.store.getState();
           console.log(this.state.store.getState());
@@ -68,17 +61,19 @@ class App extends React.Component {
     }
 
     componentWillUnmount() {
-      AppState.removeEventListener('change', this._handleAppStateChange.bind(this));
+        AppState.removeEventListener('change', this._handleAppStateChange.bind(this));
     }
 
     _handleAppStateChange(currentAppState) {
-      console.log(this.state.store.getState());
-      let storingValue = JSON.stringify(this.state.store.getState());
-      AsyncStorage.setItem('completeStore', storingValue);
+        if (currentAppState === 'background') {
+            console.log(this.state.store.getState());
+            let storingValue = JSON.stringify(this.state.store.getState());
+            AsyncStorage.setItem('completeStore', storingValue);
+        }
     }
 
     handleLogin() {
-      this.setState({ userLogged: true, renderView: true });
+        this.setState({ userLogged: true, renderView: true });
     }
 
     render() {

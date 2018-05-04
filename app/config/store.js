@@ -4,4 +4,4 @@ import logger from 'redux-logger';
 
 const middleware = applyMiddleware(logger);
 
-export const store = createStore(reducers, middleware);
+export const store = (initialStore) => { return (initialStore ? createStore(reducers, initialStore, middleware) : createStore(reducers, middleware)) };
