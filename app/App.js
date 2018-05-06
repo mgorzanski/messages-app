@@ -45,11 +45,10 @@ class App extends React.Component {
               self.setState({ store: store() });
           }
           self.setState({ isStoreLoading: false });
-      }).catch((error) => {
+      }).catch(() => {
           self.setState({ store: store(), isStoreLoading: false });
       }).then(() => {
           const state = this.state.store.getState();
-          console.log(this.state.store.getState());
           if (state.user.data && state.user.data.token && state.user.data.token.length) {
               this.setState({ userLogged: true, renderView: true });
           } else {
@@ -66,7 +65,6 @@ class App extends React.Component {
 
     _handleAppStateChange(currentAppState) {
         if (currentAppState === 'background') {
-            console.log(this.state.store.getState());
             let storingValue = JSON.stringify(this.state.store.getState());
             AsyncStorage.setItem('completeStore', storingValue);
         }
