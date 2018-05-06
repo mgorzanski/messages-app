@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, Content, Form, Item, Textarea, Button, Text } from 'native-base';
-import { ScrollView, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import SingleMessage from './SingleMessage';
 import * as globalStyles from './../../styles/globalStyles';
 import Icon from './../../utils/Icon';
@@ -9,8 +9,6 @@ import PropTypes from 'prop-types';
 export default class MessageThread extends React.Component {
     static navigationOptions = ({ navigation }) => ({
             title: navigation.state.params.name,
-            headerStyle: globalStyles.headerStyle,
-            headerTitleStyle: globalStyles.headerTitleStyle,
             headerRight: (<Icon family="MaterialIcons" name="more-vert" style={globalStyles.stackNavIcon} />),
             headerTintColor: globalStyles.$white
     });
@@ -18,15 +16,48 @@ export default class MessageThread extends React.Component {
     render() {
         return (
             <Container style={styles.container}>
-                <ScrollView>
-                    <Content style={styles.thread}>
-                        <SingleMessage text="Testowa wiadomość" author="a" />
-                        <SingleMessage text="..." author="me" />
-                        <SingleMessage text="abcd" author="a" />
-                        <SingleMessage text="Testowa wiadomość" author="me" />
-                        <SingleMessage text="Testowa wiadomość" author="me" />
-                    </Content>
-                </ScrollView>
+                <Content style={styles.thread}>
+                    <SingleMessage text="Testowa wiadomość" author="a" />
+                    <SingleMessage text="..." author="me" />
+                    <SingleMessage text="abcd" author="a" />
+                    <SingleMessage text="Testowa wiadomość" author="me" />
+                    <SingleMessage text="Testowa wiadomość" author="me" />
+                    <SingleMessage text="Testowa wiadomość" author="a" />
+                    <SingleMessage text="..." author="me" />
+                    <SingleMessage text="abcd" author="a" />
+                    <SingleMessage text="Testowa wiadomość" author="me" />
+                    <SingleMessage text="Testowa wiadomość" author="me" />
+                    <SingleMessage text="Testowa wiadomość" author="a" />
+                    <SingleMessage text="..." author="me" />
+                    <SingleMessage text="abcd" author="a" />
+                    <SingleMessage text="Testowa wiadomość" author="me" />
+                    <SingleMessage text="Testowa wiadomość" author="me" />
+                    <SingleMessage text="Testowa wiadomość" author="a" />
+                    <SingleMessage text="..." author="me" />
+                    <SingleMessage text="abcd" author="a" />
+                    <SingleMessage text="Testowa wiadomość" author="me" />
+                    <SingleMessage text="Testowa wiadomość" author="me" />
+                    <SingleMessage text="Testowa wiadomość" author="a" />
+                    <SingleMessage text="..." author="me" />
+                    <SingleMessage text="abcd" author="a" />
+                    <SingleMessage text="Testowa wiadomość" author="me" />
+                    <SingleMessage text="Testowa wiadomość" author="me" />
+                    <SingleMessage text="Testowa wiadomość" author="a" />
+                    <SingleMessage text="..." author="me" />
+                    <SingleMessage text="abcd" author="a" />
+                    <SingleMessage text="Testowa wiadomość" author="me" />
+                    <SingleMessage text="Testowa wiadomość" author="me" />
+                    <SingleMessage text="Testowa wiadomość" author="a" />
+                    <SingleMessage text="..." author="me" />
+                    <SingleMessage text="abcd" author="a" />
+                    <SingleMessage text="Testowa wiadomość" author="me" />
+                    <SingleMessage text="Testowa wiadomość" author="me" />
+                    <SingleMessage text="Testowa wiadomość" author="a" />
+                    <SingleMessage text="..." author="me" />
+                    <SingleMessage text="abcd" author="a" />
+                    <SingleMessage text="Testowa wiadomość" author="me" />
+                    <SingleMessage text="Testowa wiadomość" author="me" />
+                </Content>
                 <Form style={styles.form}>
                     <Item rounded style={styles.item}>
                         <Textarea rowSpan={1} placeholder="Text" rounded style={styles.textarea} />

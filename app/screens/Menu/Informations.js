@@ -16,8 +16,6 @@ class Informations extends React.Component {
 
     static navigationOptions = () => ({
         title: "Informations",
-        headerStyle: globalStyles.headerStyle,
-        headerTitleStyle: globalStyles.headerTitleStyle,
         headerRight: (<View></View>),
         headerTintColor: globalStyles.$white
     });

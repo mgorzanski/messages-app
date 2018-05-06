@@ -19,10 +19,7 @@ export default class Contacts extends React.Component {
                 </Badge>
             </View>
         ),
-
         title: "Contacts",
-        headerStyle: globalStyles.headerStyle,
-        headerTitleStyle: globalStyles.headerTitleStyle,
         headerRight: (
             <View style={globalStyles.iconSpacingRight}>
                 <TouchableHighlight onPress={() =>

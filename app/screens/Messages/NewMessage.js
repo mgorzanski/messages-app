@@ -8,8 +8,6 @@ import Icon from './../../utils/Icon';
 export default class NewMessage extends React.Component {
     static navigationOptions = {
         title: "New message",
-        headerStyle: globalStyles.headerStyle,
-        headerTitleStyle: globalStyles.headerTitleStyle,
         headerTintColor: globalStyles.$white
     };
 

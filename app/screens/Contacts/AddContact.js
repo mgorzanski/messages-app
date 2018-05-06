@@ -7,8 +7,6 @@ import Icon from './../../utils/Icon';
 export default class AddContact extends React.Component {
     static navigationOptions = () => ({
         title: "Add contact",
-        headerStyle: globalStyles.headerStyle,
-        headerTitleStyle: globalStyles.headerTitleStyle,
         headerTintColor: globalStyles.$white
     });
 

@@ -1,4 +1,6 @@
 import getSlideFromRightTransition from 'react-navigation-slide-from-right-transition';
+import * as globalStyles from './../styles/globalStyles';
+//import { Animated, Easing } from 'react-native';
 
 export const mainRouterConfig = {
     tabBarOptions: {
@@ -42,5 +44,16 @@ export const mainRouterConfig = {
     cardStyle: {
       opacity: 1
     },
-    transitionConfig: getSlideFromRightTransition
+    transitionConfig: getSlideFromRightTransition,
+    navigationOptions: {
+      headerStyle: globalStyles.headerStyle,
+      headerTitleStyle: globalStyles.headerTitleStyle
+    },
+    // transitionConfig: () => ({
+    //   transitionSpec: {
+    //     duration: 0,
+    //     timing: Animated.timing,
+    //     easing: Easing.step0
+    //   }
+    // })
   }

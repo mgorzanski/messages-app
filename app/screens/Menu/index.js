@@ -15,8 +15,6 @@ export default class Menu extends React.Component {
         ),
 
         title: "More",
-        headerStyle: globalStyles.headerStyle,
-        headerTitleStyle: globalStyles.headerTitleStyle
     };
 
     render() {

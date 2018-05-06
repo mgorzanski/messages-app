@@ -13,7 +13,8 @@ export default class Messages extends React.Component {
 
         this.state = {
             threads: [],
-            refreshing: false
+            refreshing: false,
+            threadsList: []
         };
     }
 
@@ -22,7 +23,7 @@ export default class Messages extends React.Component {
     }
 
     getThreads() {
-        MessagesApi.getThreads().then((result) => this.setState({ threads: result }));
+        MessagesApi.getThreads().then((result) => this.setState({ threads: result })).then(() => this.setState({ threadsList: this.state.threads.map((thread) => <Message key={thread._id} navigation={this.props.navigation} name={thread.name} message="Testowa wiadomość..." date="13:39" />)}));
     }
 
     static navigationOptions = ({ navigation }) => ({
@@ -34,10 +35,7 @@ export default class Messages extends React.Component {
             />
         ),
         tabBarVisible: navigation.state.params != undefined ? !navigation.state.params.hideTabBar : true,
-        
         title: "Messages",
-        headerStyle: globalStyles.headerStyle,
-        headerTitleStyle: globalStyles.headerTitleStyle,
         headerRight: (
             <View style={globalStyles.headerMultipleIcons}>
                 <TouchableHighlight onPress={() =>
@@ -60,8 +58,6 @@ export default class Messages extends React.Component {
     });
 
     render() {
-        const threads = this.state.threads.map((thread) => <Message key={thread._id} navigation={this.props.navigation} name={thread.name} message="Testowa wiadomość..." date="13:39" />);
-
         return (
             <Container style={styles.home}>
                 <Content refreshControl={
@@ -73,7 +69,7 @@ export default class Messages extends React.Component {
                         <UserPanel />
                     </TouchableHighlight>
                     <List>
-                        {threads}
+                        {this.state.threadsList}
                     </List>
                 </Content>
             </Container>
