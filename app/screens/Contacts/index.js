@@ -4,15 +4,17 @@ import { Badge, Text } from 'native-base';
 import * as globalStyles from './../../styles/globalStyles';
 import PropTypes from 'prop-types';
 import Icon from './../../utils/Icon';
+import AsyncImage from './../../components/AsyncImage';
 
 export default class Contacts extends React.Component {
     static navigationOptions = ({ navigation }) => ({
         tabBarLabel: '',
         tabBarIcon: () => (
             <View>
-                <Image
+                <AsyncImage
                     source={require('./../../img/icons/contacts.png')}
                     style={globalStyles.tabBarIcon}
+                    placeholderColor='#1e1e1e'
                 />
                 <Badge style={globalStyles.tabBarBadge}>
                     <Text>2</Text>
@@ -25,8 +27,10 @@ export default class Contacts extends React.Component {
                 <TouchableHighlight onPress={() =>
                     navigation.navigate('AddContact')
                 }>
-                    <Image 
+                    <AsyncImage 
                         source={require('./../../img/icons/add-user.png')}
+                        style={globalStyles.icon}
+                        placeholderColor={globalStyles.$headerBackgroundColor}
                     />
                 </TouchableHighlight>
             </View>)

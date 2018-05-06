@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
     },
     thread: {
         flex: 1,
-        margin: 10
+        padding: 10
     },
     form: {
         paddingLeft:6,

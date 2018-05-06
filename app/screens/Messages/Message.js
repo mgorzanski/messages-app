@@ -2,14 +2,15 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import * as globalStyles from './../../styles/globalStyles';
 import PropTypes from 'prop-types';
-import { ListItem, Thumbnail, Text, Body, Left, Right } from 'native-base';
+import { ListItem, Text, Body, Left, Right } from 'native-base';
+import AsyncImage from './../../components/AsyncImage';
 
 export default class Message extends React.Component {
     render() {
         return (
             <ListItem avatar onPress={() => this.props.navigation.navigate('MessageThread', {name: this.props.name})}>
                 <Left>
-                    <Thumbnail source={require('./../../img/icons/user2.png')} style={styles.thumbnail} />
+                    <AsyncImage source={require('./../../img/icons/user2.png')} style={styles.thumbnail} placeholderColor={globalStyles.$appBackgroundColor} />
                 </Left>
                 <Body>
                     <Text style={styles.title}>{this.props.name}</Text>

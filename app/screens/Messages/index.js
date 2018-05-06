@@ -1,11 +1,12 @@
 import React from 'react';
-import { StyleSheet, View, TouchableHighlight, Image, RefreshControl } from 'react-native';
+import { StyleSheet, View, TouchableHighlight, RefreshControl } from 'react-native';
 import { Container, Content, List } from 'native-base';
 import Message from './Message';
 import UserPanel from './UserPanel';
 import * as globalStyles from './../../styles/globalStyles';
 import PropTypes from 'prop-types';
 import MessagesApi from './../../api/MessagesApi';
+import AsyncImage from './../../components/AsyncImage';
 
 export default class Messages extends React.Component {
     constructor(props) {
@@ -29,9 +30,10 @@ export default class Messages extends React.Component {
     static navigationOptions = ({ navigation }) => ({
         tabBarLabel: '',
         tabBarIcon: () => (
-            <Image
+            <AsyncImage
                 source={require('./../../img/icons/messages.png')}
                 style={globalStyles.tabBarIcon}
+                placeholderColor='#1e1e1e'
             />
         ),
         tabBarVisible: navigation.state.params != undefined ? !navigation.state.params.hideTabBar : true,
@@ -41,15 +43,19 @@ export default class Messages extends React.Component {
                 <TouchableHighlight onPress={() =>
                     navigation.navigate('SearchMessages')
                 } style={globalStyles.headerIcon}>
-                    <Image 
+                    <AsyncImage 
                         source={require('./../../img/icons/search.png')}
+                        style={globalStyles.icon}
+                        placeholderColor={globalStyles.$headerBackgroundColor}
                     />
                 </TouchableHighlight>
                 <TouchableHighlight onPress={() =>
                     navigation.navigate('NewMessage')
                 } style={globalStyles.headerIcon}>
-                    <Image 
+                    <AsyncImage 
                         source={require('./../../img/icons/add.png')}
+                        style={globalStyles.icon}
+                        placeholderColor={globalStyles.$headerBackgroundColor}
                     />
                 </TouchableHighlight>
             </View>)

@@ -1,8 +1,9 @@
 import React from 'react';
 import * as globalStyles from './../../styles/globalStyles';
 import { StyleSheet } from 'react-native';
-import { Container, Item, Input, List, ListItem, Text, Header, Content, Body, Thumbnail, Button } from 'native-base';
+import { Container, Item, Input, List, ListItem, Text, Header, Content, Body, Button } from 'native-base';
 import Icon from './../../utils/Icon';
+import AsyncImage from './../../components/AsyncImage';
 
 export default class AddContact extends React.Component {
     static navigationOptions = () => ({
@@ -22,7 +23,7 @@ export default class AddContact extends React.Component {
                 <Content>
                     <List>
                         <ListItem>
-                            <Thumbnail roundend size={50} source={require('./../../img/icons/user2.png')} />
+                            <AsyncImage source={require('./../../img/icons/user2.png')} style={styles.thumbnail} placeholderColor={globalStyles.$white} />
                             <Body>
                                 <Text>Sankhadeep</Text>
                             </Body>
@@ -31,7 +32,7 @@ export default class AddContact extends React.Component {
                             </Button>
                         </ListItem>
                         <ListItem>
-                            <Thumbnail roundend size={50} source={require('./../../img/icons/user2.png')} />
+                            <AsyncImage source={require('./../../img/icons/user2.png')} style={styles.thumbnail} placeholderColor={globalStyles.$white} />
                             <Body>
                                 <Text>Supriya</Text>
                             </Body>
@@ -40,7 +41,7 @@ export default class AddContact extends React.Component {
                             </Button>
                         </ListItem>
                         <ListItem>
-                            <Thumbnail roundend size={50} source={require('./../../img/icons/user2.png')} />
+                            <AsyncImage source={require('./../../img/icons/user2.png')} style={styles.thumbnail} placeholderColor={globalStyles.$white} />
                             <Body>
                                 <Text>Shivraj</Text>
                             </Body>
@@ -59,5 +60,9 @@ const styles = StyleSheet.create({
     header: {
         backgroundColor: globalStyles.$headerBackgroundColor,
         height: 64
+    },
+    thumbnail: {
+        width: 56,
+        height: 56
     }
 });

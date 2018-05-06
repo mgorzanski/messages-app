@@ -1,8 +1,9 @@
 import React from 'react';
 import { Text } from 'native-base';
-import { View, StyleSheet, Image } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 import * as globalStyles from './../../styles/globalStyles';
+import AsyncImage from './../../components/AsyncImage';
 
 const styles = StyleSheet.create({
     otherMessageRow: {
@@ -53,14 +54,14 @@ export default class SingleMessage extends React.Component {
             <View style={styles.messages}>
                 { this.props.author === 'me' ? (
                     <View style={styles.myMessageRow}>
-                        <Image source={require('./../../img/icons/user2.png')} style={styles.userImage} />
+                        <AsyncImage source={require('./../../img/icons/user2.png')} style={styles.userImage} placeholderColor='#595959' />
                         <View style={styles.myMessageViewText}>
                             <Text style={styles.text}>{this.props.text}</Text>
                         </View>
                     </View>
                 ) : (
                     <View style={styles.otherMessageRow}>
-                        <Image source={require('./../../img/icons/user2.png')} style={styles.userImage} />
+                        <AsyncImage source={require('./../../img/icons/user2.png')} style={styles.userImage} placeholderColor='#3a3a3a' />
                         <View style={styles.otherMessageViewText}>
                             <Text style={styles.text}>{this.props.text}</Text>
                         </View>

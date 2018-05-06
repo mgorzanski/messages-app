@@ -1,18 +1,20 @@
 import React from 'react';
-import { Image, View, StyleSheet, TouchableHighlight } from 'react-native';
-import { Text, Badge, Container, Content, List, ListItem, Left, Body, Right, Thumbnail } from 'native-base';
+import { View, StyleSheet, TouchableHighlight } from 'react-native';
+import { Text, Badge, Container, Content, List, ListItem, Left, Body, Right } from 'native-base';
 import * as globalStyles from './../../styles/globalStyles';
 import PropTypes from 'prop-types';
 import Icon from './../../utils/Icon';
+import AsyncImage from './../../components/AsyncImage';
 
 export default class Groups extends React.Component {
     static navigationOptions = {
         tabBarLabel: '',
         tabBarIcon: () => (
             <View>
-                <Image
+                <AsyncImage
                     source={require('./../../img/icons/groups.png')}
                     style={globalStyles.tabBarIcon}
+                    placeholderColor='#1e1e1e'
                 />
                 <Badge style={globalStyles.tabBarBadge}>
                     <Text>1</Text>
@@ -40,7 +42,7 @@ export default class Groups extends React.Component {
                     <List>
                         <ListItem avatar>
                             <Left>
-                                <Thumbnail source={require('./../../img/icons/user2.png')} />
+                                <AsyncImage source={require('./../../img/icons/user2.png')} style={styles.thumbnail} placeholderColor={globalStyles.$appBackgroundColor} />
                             </Left>
                             <Body>
                                 <Text style={styles.title}>Kumar Pratik, Kumar Sanket, Megha</Text>
@@ -53,7 +55,7 @@ export default class Groups extends React.Component {
 
                         <ListItem avatar>
                             <Left>
-                                <Thumbnail source={require('./../../img/icons/user2.png')} />
+                                <AsyncImage source={require('./../../img/icons/user2.png')} style={styles.thumbnail} placeholderColor={globalStyles.$appBackgroundColor} />
                             </Left>
                             <Body>
                                 <Text style={styles.title}>Kumar Pratik, Kumar Sanket, Megha</Text>
@@ -66,7 +68,7 @@ export default class Groups extends React.Component {
 
                         <ListItem avatar>
                             <Left>
-                                <Thumbnail source={require('./../../img/icons/user2.png')} />
+                                <AsyncImage source={require('./../../img/icons/user2.png')} style={styles.thumbnail} placeholderColor={globalStyles.$appBackgroundColor} />
                             </Left>
                             <Body>
                                 <Text style={styles.title}>Kumar Pratik, Kumar Sanket, Megha</Text>
@@ -97,6 +99,10 @@ const styles = StyleSheet.create({
     timestamp: {
         color: globalStyles.$darkGray,
         fontSize: 13
+    },
+    thumbnail: {
+        width: 56,
+        height: 56
     }
 });
 

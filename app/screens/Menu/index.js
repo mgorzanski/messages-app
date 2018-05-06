@@ -1,16 +1,18 @@
 import React from 'react';
-import { View, StyleSheet, SectionList, Image, Text, ScrollView, TouchableHighlight } from 'react-native';
+import { View, StyleSheet, SectionList, Text, ScrollView, TouchableHighlight } from 'react-native';
 import * as globalStyles from './../../styles/globalStyles';
 import PropTypes from 'prop-types';
 import AuthLocal from './../../utils/AuthLocal';
+import AsyncImage from './../../components/AsyncImage';
 
 export default class Menu extends React.Component {
     static navigationOptions = {
         tabBarLabel: '',
         tabBarIcon: () => (
-            <Image
+            <AsyncImage
                 source={require('./../../img/icons/menu.png')}
                 style={globalStyles.tabBarIcon}
+                placeholderColor='#1e1e1e'
             />
         ),
 
