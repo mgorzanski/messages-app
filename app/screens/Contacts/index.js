@@ -27,7 +27,6 @@ export default class Contacts extends React.Component {
                 }>
                     <Image 
                         source={require('./../../img/icons/add-user.png')}
-                        style={globalStyles.icon}
                     />
                 </TouchableHighlight>
             </View>)

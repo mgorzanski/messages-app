@@ -28,8 +28,6 @@ const styles = StyleSheet.create({
         marginLeft: 7
     },
     shortcut: {
-        width: 17,
-        height: 17,
         marginRight: 7,
         marginTop: 3
     }

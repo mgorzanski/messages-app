@@ -43,7 +43,6 @@ export default class Messages extends React.Component {
                 } style={globalStyles.headerIcon}>
                     <Image 
                         source={require('./../../img/icons/search.png')}
-                        style={globalStyles.icon}
                     />
                 </TouchableHighlight>
                 <TouchableHighlight onPress={() =>
@@ -51,7 +50,6 @@ export default class Messages extends React.Component {
                 } style={globalStyles.headerIcon}>
                     <Image 
                         source={require('./../../img/icons/add.png')}
-                        style={globalStyles.icon}
                     />
                 </TouchableHighlight>
             </View>)
