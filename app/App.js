@@ -20,7 +20,7 @@ import Informations from './screens/Menu/Informations';
 import SearchMessages from './screens/Messages/SearchMessages';
 import NewMessage from './screens/Messages/NewMessage';
 
-class App extends React.Component {
+class App extends React.PureComponent {
     constructor(props) {
       super(props);
 

@@ -4,10 +4,12 @@ import * as globalStyles from './../../styles/globalStyles';
 import PropTypes from 'prop-types';
 import { ListItem, Text, Body, Left, Right } from 'native-base';
 import AsyncImage from './../../components/AsyncImage';
+import AfterInteractions from './../../components/AfterInteractions';
 
-export default class Message extends React.Component {
+export default class Message extends React.PureComponent {
     render() {
         return (
+            <AfterInteractions>
             <ListItem avatar onPress={() => this.props.navigation.navigate('MessageThread', {name: this.props.name})}>
                 <Left>
                     <AsyncImage source={require('./../../img/icons/user2.png')} style={styles.thumbnail} placeholderColor={globalStyles.$appBackgroundColor} />
@@ -30,6 +32,7 @@ export default class Message extends React.Component {
                     ) : null}
                 </Right>
             </ListItem>
+            </AfterInteractions>
         );
     }
 }

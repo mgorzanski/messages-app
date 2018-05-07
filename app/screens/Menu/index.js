@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import AuthLocal from './../../utils/AuthLocal';
 import AsyncImage from './../../components/AsyncImage';
 
-export default class Menu extends React.Component {
+export default class Menu extends React.PureComponent {
     static navigationOptions = {
         tabBarLabel: '',
         tabBarIcon: () => (

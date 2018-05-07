@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import Icon from './../../utils/Icon';
 import AsyncImage from './../../components/AsyncImage';
 
-export default class Groups extends React.Component {
+export default class Groups extends React.PureComponent {
     static navigationOptions = {
         tabBarLabel: '',
         tabBarIcon: () => (

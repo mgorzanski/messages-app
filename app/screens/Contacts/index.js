@@ -1,12 +1,12 @@
 import React from 'react';
-import { View, Image, StyleSheet, SectionList, ScrollView, TouchableHighlight } from 'react-native';
+import { View, StyleSheet, SectionList, ScrollView, TouchableHighlight } from 'react-native';
 import { Badge, Text } from 'native-base';
 import * as globalStyles from './../../styles/globalStyles';
 import PropTypes from 'prop-types';
 import Icon from './../../utils/Icon';
 import AsyncImage from './../../components/AsyncImage';
 
-export default class Contacts extends React.Component {
+export default class Contacts extends React.PureComponent {
     static navigationOptions = ({ navigation }) => ({
         tabBarLabel: '',
         tabBarIcon: () => (

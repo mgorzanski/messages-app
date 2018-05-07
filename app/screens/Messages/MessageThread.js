@@ -5,8 +5,9 @@ import SingleMessage from './SingleMessage';
 import * as globalStyles from './../../styles/globalStyles';
 import Icon from './../../utils/Icon';
 import PropTypes from 'prop-types';
+import AfterInteractions from './../../components/AfterInteractions';
 
-export default class MessageThread extends React.Component {
+export default class MessageThread extends React.PureComponent {
     static navigationOptions = ({ navigation }) => ({
             title: navigation.state.params.name,
             headerRight: (<Icon family="MaterialIcons" name="more-vert" style={globalStyles.stackNavIcon} />),
@@ -15,6 +16,7 @@ export default class MessageThread extends React.Component {
 
     render() {
         return (
+            <AfterInteractions>
             <Container style={styles.container}>
                 <Content style={styles.thread}>
                     <SingleMessage text="Testowa wiadomość" author="a" />
@@ -65,6 +67,7 @@ export default class MessageThread extends React.Component {
                     <Button rounded style={styles.sendButton}><Text>Send</Text></Button>
                 </Form>
             </Container>
+            </AfterInteractions>
         );
     }
 }

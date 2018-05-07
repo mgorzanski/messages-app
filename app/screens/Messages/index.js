@@ -7,8 +7,9 @@ import * as globalStyles from './../../styles/globalStyles';
 import PropTypes from 'prop-types';
 import MessagesApi from './../../api/MessagesApi';
 import AsyncImage from './../../components/AsyncImage';
+import AfterInteractions from './../../components/AfterInteractions';
 
-export default class Messages extends React.Component {
+export default class Messages extends React.PureComponent {
     constructor(props) {
         super(props);
 
@@ -63,6 +64,7 @@ export default class Messages extends React.Component {
 
     render() {
         return (
+            <AfterInteractions>
             <Container style={styles.home}>
                 <Content refreshControl={
                     <RefreshControl refreshing={this.state.refreshing} onRefresh={() => this.getThreads()} />
@@ -77,6 +79,7 @@ export default class Messages extends React.Component {
                     </List>
                 </Content>
             </Container>
+            </AfterInteractions>
         );
     }
 }
