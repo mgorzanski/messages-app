@@ -20,7 +20,7 @@ export default class Messages extends React.PureComponent {
     }
 
     componentDidMount() {
-        setTimeout(() => {this.setState({render: true})}, 1000);
+        setTimeout(() => {this.setState({render: true})}, 100);
     }
 
     componentWillMount() {
@@ -42,7 +42,7 @@ export default class Messages extends React.PureComponent {
         ),
         title: "Messages",
         headerRight: (
-                    <View style={globalStyles.headerMultipleIcons}>
+            <View style={globalStyles.headerMultipleIcons}>
                 <TouchableHighlight onPress={() =>
                     navigation.navigate('SearchMessages')
                 } style={globalStyles.headerIcon}>
@@ -62,31 +62,29 @@ export default class Messages extends React.PureComponent {
                     />
                 </TouchableHighlight>
             </View>
-                )
+        )
     });
 
     render() {
         const render = this.state.render;
-
-        if (render) {
         return (
             <Container style={styles.home}>
-                <Content refreshControl={
-                    <RefreshControl refreshing={this.state.refreshing} onRefresh={() => this.getThreads()} />
-                }>
-                    <TouchableHighlight onPress={() => 
-                        this.props.navigation.navigate('Profile')
+                { render ? (
+                    <Content refreshControl={
+                        <RefreshControl refreshing={this.state.refreshing} onRefresh={() => this.getThreads()} />
                     }>
-                        <UserPanel />
-                    </TouchableHighlight>
-                    <List>
-                        {this.state.threadsList}
-                    </List>
-                </Content>
+                        <TouchableHighlight onPress={() => 
+                            this.props.navigation.navigate('Profile')
+                        }>
+                            <UserPanel />
+                        </TouchableHighlight>
+                        <List>
+                            {this.state.threadsList}
+                        </List>
+                    </Content>
+                ) : (null) }
             </Container>
         );
-        }
-        return (null);
     }
 }
 

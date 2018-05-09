@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, StyleSheet, Text, ScrollView } from 'react-native';
 import * as globalStyles from './../../styles/globalStyles';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { fetchInformations } from './../../actions';
 import AppApi from './../../api/AppApi';
@@ -29,17 +28,15 @@ class Informations extends React.Component {
     render() {
         const dataLoaded = this.state.dataLoaded;
         const render = this.state.render;
-
-        if (render) {
         return (
             <ScrollView style={styles.informations}>
-                <View style={styles.container}>
-                    <Text style={styles.text}>{dataLoaded ? this.props.informations : ''}</Text>
-                </View>
+                { render ? (
+                    <View style={styles.container}>
+                        <Text style={styles.text}>{dataLoaded ? this.props.informations : ''}</Text>
+                    </View>
+                ) : (null) }
             </ScrollView>
         );
-        }
-        return (null);
     }
 }
 
@@ -57,12 +54,6 @@ const styles = StyleSheet.create({
         fontSize: 14
     }
 });
-
-Informations.propTypes = {
-    navigation: PropTypes.object.isRequired,
-    informations: PropTypes.string,
-    fetchInformations: PropTypes.func
-};
 
 const mapStateToProps = (state) => {
     return {

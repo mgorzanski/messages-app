@@ -2,7 +2,6 @@ import React from 'react';
 import { View, StyleSheet, SectionList, ScrollView, TouchableHighlight } from 'react-native';
 import { Badge, Text } from 'native-base';
 import * as globalStyles from './../../styles/globalStyles';
-import PropTypes from 'prop-types';
 import Icon from './../../utils/Icon';
 import AsyncImage from './../../components/AsyncImage';
 
@@ -36,43 +35,57 @@ export default class Contacts extends React.PureComponent {
             </View>)
     });
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            render: false
+        }
+    }
+
+    componentDidMount() {
+        setTimeout(() => {this.setState({render: true})}, 50);
+    }
+
     render() {
+        const render = this.state.render;
         return (
             <ScrollView style={styles.contacts}>
-                <View style={styles.container}>
-                    <SectionList
-                        sections={[
-                            {title: 'Invitations', data: ['Test User', 'Someone Else']}
-                        ]}
-                        renderItem={({item}) => (
-                            <View style={styles.invitationView}>
-                                <Text style={styles.item}>{item}</Text>
-                                <View style={styles.invitationViewIcons}>
-                                    <Icon family="MaterialIcons" name="check" style={styles.invitationViewIcon} />
-                                    <Icon family="FontAwesome" name="remove" style={styles.invitationViewIcon} />
+                { render ? (
+                    <View style={styles.container}>
+                        <SectionList
+                            sections={[
+                                {title: 'Invitations', data: ['Test User', 'Someone Else']}
+                            ]}
+                            renderItem={({item}) => (
+                                <View style={styles.invitationView}>
+                                    <Text style={styles.item}>{item}</Text>
+                                    <View style={styles.invitationViewIcons}>
+                                        <Icon family="MaterialIcons" name="check" style={styles.invitationViewIcon} />
+                                        <Icon family="FontAwesome" name="remove" style={styles.invitationViewIcon} />
+                                    </View>
                                 </View>
-                            </View>
-                        )}
-                        renderSectionHeader={({section}) => (
-                            <View style={styles.invitationsView}>
-                                <Text style={styles.sectionInvitationsHeader}>{section.title}</Text>
-                                <Badge style={styles.invitationsViewBadge}>
-                                    <Text>2</Text>
-                                </Badge>
-                            </View>
-                        )}
-                        keyExtractor={(item, index) => index}
-                    />
-                    <SectionList
-                        sections={[
-                            {title: 'D', data: ['Devin']},
-                            {title: 'J', data: ['Jackson', 'James', 'Jillian', 'Jimmy', 'Joel', 'John', 'Julie']},
-                        ]}
-                        renderItem={({item}) => <Text style={styles.item}>{item}</Text>}
-                        renderSectionHeader={({section}) => <Text style={styles.sectionHeader}>{section.title}</Text>}
-                        keyExtractor={(item, index) => index}
-                    />
-                </View>
+                            )}
+                            renderSectionHeader={({section}) => (
+                                <View style={styles.invitationsView}>
+                                    <Text style={styles.sectionInvitationsHeader}>{section.title}</Text>
+                                    <Badge style={styles.invitationsViewBadge}>
+                                        <Text>2</Text>
+                                    </Badge>
+                                </View>
+                            )}
+                            keyExtractor={(item, index) => index}
+                        />
+                        <SectionList
+                            sections={[
+                                {title: 'D', data: ['Devin']},
+                                {title: 'J', data: ['Jackson', 'James', 'Jillian', 'Jimmy', 'Joel', 'John', 'Julie']},
+                            ]}
+                            renderItem={({item}) => <Text style={styles.item}>{item}</Text>}
+                            renderSectionHeader={({section}) => <Text style={styles.sectionHeader}>{section.title}</Text>}
+                            keyExtractor={(item, index) => index}
+                        />
+                    </View>
+                ) : (null) }
             </ScrollView>
         );
     }
@@ -137,7 +150,3 @@ const styles = StyleSheet.create({
         flexDirection: 'row'
     }
 });
-
-Contacts.propTypes = {
-    navigation: PropTypes.object.isRequired
-}

@@ -1,7 +1,6 @@
 import React from 'react';
 import { Text } from 'native-base';
 import { View, StyleSheet } from 'react-native';
-import PropTypes from 'prop-types';
 import * as globalStyles from './../../styles/globalStyles';
 import AsyncImage from './../../components/AsyncImage';
 
@@ -70,9 +69,4 @@ export default class SingleMessage extends React.PureComponent {
             </View>
         );
     }
-}
-
-SingleMessage.propTypes = {
-    text: PropTypes.string,
-    author: PropTypes.string
 }

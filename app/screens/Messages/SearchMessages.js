@@ -1,6 +1,5 @@
 import React from 'react';
 import * as globalStyles from './../../styles/globalStyles';
-import PropTypes from 'prop-types';
 import { StyleSheet } from 'react-native';
 import { Container, Item, Input, Button, Text, Header, Content } from 'native-base';
 import Icon from './../../utils/Icon';
@@ -10,8 +9,21 @@ export default class SearchMessages extends React.Component {
         header:  null
     };
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            render: false
+        }
+    }
+
+    componentDidMount() {
+        setTimeout(() => {this.setState({render: true})}, 50);
+    }
+
     render() {
-        return (
+        const render = this.state.render;
+        if (render) {
+            return (
                 <Container>
                     <Header searchBar rounded style={styles.header} androidStatusBarColor={globalStyles.$headerBackgroundColor}>
                         <Item>
@@ -25,7 +37,9 @@ export default class SearchMessages extends React.Component {
                         </Button>
                     </Content>
                 </Container>
-        );
+            );
+        }
+        return (null);
     }
 }
 
@@ -38,7 +52,3 @@ const styles = StyleSheet.create({
         height: 64
     }
 });
-
-SearchMessages.propTypes = {
-    navigation: PropTypes.object.isRequired
-};

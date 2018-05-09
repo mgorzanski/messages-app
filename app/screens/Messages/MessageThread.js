@@ -4,7 +4,6 @@ import { StyleSheet } from 'react-native';
 import SingleMessage from './SingleMessage';
 import * as globalStyles from './../../styles/globalStyles';
 import Icon from './../../utils/Icon';
-import PropTypes from 'prop-types';
 
 export default class MessageThread extends React.PureComponent {
     static navigationOptions = ({ navigation }) => ({
@@ -21,7 +20,7 @@ export default class MessageThread extends React.PureComponent {
     }
 
     componentDidMount() {
-        setTimeout(() => {this.setState({render: true})}, 1000);
+        setTimeout(() => {this.setState({render: true})}, 500);
     }
 
     render() {
@@ -93,7 +92,7 @@ const styles = StyleSheet.create({
     },
     thread: {
         flex: 1,
-        padding: 10
+        padding: 10,
     },
     form: {
         paddingLeft:6,
@@ -118,7 +117,3 @@ const styles = StyleSheet.create({
         backgroundColor: globalStyles.$sendButtonBackgroundColor
     }
 });
-
-MessageThread.propTypes = {
-    navigation: PropTypes.object.isRequired
-}

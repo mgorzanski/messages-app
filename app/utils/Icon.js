@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { StyleProvider, getTheme, Icon as IconBase } from 'native-base';
-import PropTypes from 'prop-types';
 
 export default class Icon extends Component {
   render () {
@@ -14,9 +13,3 @@ export default class Icon extends Component {
     }
   }
 }
-
-Icon.propTypes = {
-  family: PropTypes.string,
-  name: PropTypes.string.isRequired,
-  style: PropTypes.any
-};

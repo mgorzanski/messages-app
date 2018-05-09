@@ -13,7 +13,7 @@ export default class Message extends React.PureComponent {
     }
 
     componentDidMount() {
-        setTimeout(() => {this.setState({render: true})}, 1000);
+        setTimeout(() => {this.setState({render: true})}, 100);
     }
 
     render() {

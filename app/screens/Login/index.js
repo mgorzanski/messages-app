@@ -3,7 +3,6 @@ import { View, Text, TextInput, StyleSheet, TouchableHighlight } from 'react-nat
 import * as globalStyles from './../../styles/globalStyles';
 import AuthApi from './../../api/AuthApi';
 import { Toast } from 'native-base';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { login } from './../../actions';
 
@@ -126,10 +125,6 @@ class Login extends React.Component {
             </View>
         );
     }
-}
-
-Login.propTypes = {
-    onUserLogin: PropTypes.func
 }
 
 const mapDispatchToProps = dispatch => {

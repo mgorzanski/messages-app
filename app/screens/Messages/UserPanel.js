@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, Image, View, StyleSheet } from 'react-native';
 import * as globalStyles from './../../styles/globalStyles';
-import AsyncImage from './../../components/AsyncImage';
+//import AsyncImage from './../../components/AsyncImage';
 
 export default class UserPanel extends React.Component {
     constructor(props) {
@@ -17,14 +17,13 @@ export default class UserPanel extends React.Component {
 
     render() {
         const render = this.state.render;
-
         if (render) {
-        return (
-            <View style={styles.panel}>
-                <Text style={styles.userName}>MATEUSZ GÓRZAŃSKI</Text>
-                <AsyncImage source={require('./../../img/icons/arrow.png')} style={styles.shortcut} placeholderColor={globalStyles.$userPanelBackgroundColor} />
-            </View>
-        );
+            return (
+                <View style={styles.panel}>
+                    <Text style={styles.userName}>MATEUSZ GÓRZAŃSKI</Text>
+                    <Image source={require('./../../img/icons/arrow.png')} style={styles.shortcut} placeholderColor={globalStyles.$userPanelBackgroundColor} />
+                </View>
+            );
         }
         return (null);
     }
