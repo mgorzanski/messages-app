@@ -54,6 +54,12 @@
 		78AD1DE38A1E4753B88EFFB2 /* rubicon-icon-font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F29B4265A5E442618DF7DDF2 /* rubicon-icon-font.ttf */; };
 		4CEB6715FB694C90A3C88801 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 778667C5882E47DD855E9EEF /* SimpleLineIcons.ttf */; };
 		CD106B9A6A5A414297323A72 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DDFA87EE246946BC8ACB02A3 /* Zocial.ttf */; };
+		46AB31100DB94D7A9A462DB6 /* arial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CADC95D22ACB406AABE46F47 /* arial.ttf */; };
+		041E2FFD78B447AC94DC583A /* BebasNeue.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8571BF7FE07549AEA3DC898E /* BebasNeue.otf */; };
+		A2E599AA755747888569E806 /* MuktaMahee-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C872536150A642B292708DC7 /* MuktaMahee-Regular.ttf */; };
+		E555C532666B487BBE48D6EE /* RammettoOne-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 36AD0E59000C4774B98C0164 /* RammettoOne-Regular.ttf */; };
+		3D8048D7F09449A8B2B76ABC /* RobotoMono-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 01727C2C503247B0B8E8CF85 /* RobotoMono-Regular.ttf */; };
+		378AA7C610BC45D89B6E722B /* Walkway-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5013429603B04480B62E231A /* Walkway-Bold.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -321,6 +327,12 @@
 		F29B4265A5E442618DF7DDF2 /* rubicon-icon-font.ttf */ = {isa = PBXFileReference; name = "rubicon-icon-font.ttf"; path = "../node_modules/native-base/Fonts/rubicon-icon-font.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		778667C5882E47DD855E9EEF /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; name = "SimpleLineIcons.ttf"; path = "../node_modules/native-base/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		DDFA87EE246946BC8ACB02A3 /* Zocial.ttf */ = {isa = PBXFileReference; name = "Zocial.ttf"; path = "../node_modules/native-base/Fonts/Zocial.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		CADC95D22ACB406AABE46F47 /* arial.ttf */ = {isa = PBXFileReference; name = "arial.ttf"; path = "../app/fonts/arial.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		8571BF7FE07549AEA3DC898E /* BebasNeue.otf */ = {isa = PBXFileReference; name = "BebasNeue.otf"; path = "../app/fonts/BebasNeue.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		C872536150A642B292708DC7 /* MuktaMahee-Regular.ttf */ = {isa = PBXFileReference; name = "MuktaMahee-Regular.ttf"; path = "../app/fonts/MuktaMahee-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		36AD0E59000C4774B98C0164 /* RammettoOne-Regular.ttf */ = {isa = PBXFileReference; name = "RammettoOne-Regular.ttf"; path = "../app/fonts/RammettoOne-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		01727C2C503247B0B8E8CF85 /* RobotoMono-Regular.ttf */ = {isa = PBXFileReference; name = "RobotoMono-Regular.ttf"; path = "../app/fonts/RobotoMono-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		5013429603B04480B62E231A /* Walkway-Bold.ttf */ = {isa = PBXFileReference; name = "Walkway-Bold.ttf"; path = "../app/fonts/Walkway-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -595,6 +607,12 @@
 				F29B4265A5E442618DF7DDF2 /* rubicon-icon-font.ttf */,
 				778667C5882E47DD855E9EEF /* SimpleLineIcons.ttf */,
 				DDFA87EE246946BC8ACB02A3 /* Zocial.ttf */,
+				CADC95D22ACB406AABE46F47 /* arial.ttf */,
+				8571BF7FE07549AEA3DC898E /* BebasNeue.otf */,
+				C872536150A642B292708DC7 /* MuktaMahee-Regular.ttf */,
+				36AD0E59000C4774B98C0164 /* RammettoOne-Regular.ttf */,
+				01727C2C503247B0B8E8CF85 /* RobotoMono-Regular.ttf */,
+				5013429603B04480B62E231A /* Walkway-Bold.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1008,6 +1026,12 @@
 				78AD1DE38A1E4753B88EFFB2 /* rubicon-icon-font.ttf in Resources */,
 				4CEB6715FB694C90A3C88801 /* SimpleLineIcons.ttf in Resources */,
 				CD106B9A6A5A414297323A72 /* Zocial.ttf in Resources */,
+				46AB31100DB94D7A9A462DB6 /* arial.ttf in Resources */,
+				041E2FFD78B447AC94DC583A /* BebasNeue.otf in Resources */,
+				A2E599AA755747888569E806 /* MuktaMahee-Regular.ttf in Resources */,
+				E555C532666B487BBE48D6EE /* RammettoOne-Regular.ttf in Resources */,
+				3D8048D7F09449A8B2B76ABC /* RobotoMono-Regular.ttf in Resources */,
+				378AA7C610BC45D89B6E722B /* Walkway-Bold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
