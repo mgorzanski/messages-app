@@ -4,7 +4,6 @@ import { View, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 import * as globalStyles from './../../styles/globalStyles';
 import AsyncImage from './../../components/AsyncImage';
-import AfterInteractions from './../../components/AfterInteractions';
 
 const styles = StyleSheet.create({
     otherMessageRow: {
@@ -52,7 +51,6 @@ const styles = StyleSheet.create({
 export default class SingleMessage extends React.PureComponent {
     render() {
         return (
-            <AfterInteractions>
             <View style={styles.messages}>
                 { this.props.author === 'me' ? (
                     <View style={styles.myMessageRow}>
@@ -70,7 +68,6 @@ export default class SingleMessage extends React.PureComponent {
                     </View>
                 ) }
             </View>
-            </AfterInteractions>
         );
     }
 }

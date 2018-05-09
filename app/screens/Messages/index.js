@@ -4,10 +4,8 @@ import { Container, Content, List } from 'native-base';
 import Message from './Message';
 import UserPanel from './UserPanel';
 import * as globalStyles from './../../styles/globalStyles';
-import PropTypes from 'prop-types';
 import MessagesApi from './../../api/MessagesApi';
 import AsyncImage from './../../components/AsyncImage';
-import AfterInteractions from './../../components/AfterInteractions';
 
 export default class Messages extends React.PureComponent {
     constructor(props) {
@@ -16,8 +14,13 @@ export default class Messages extends React.PureComponent {
         this.state = {
             threads: [],
             refreshing: false,
-            threadsList: []
+            threadsList: [],
+            render: false
         };
+    }
+
+    componentDidMount() {
+        setTimeout(() => {this.setState({render: true})}, 1000);
     }
 
     componentWillMount() {
@@ -37,10 +40,9 @@ export default class Messages extends React.PureComponent {
                 placeholderColor='#1e1e1e'
             />
         ),
-        tabBarVisible: navigation.state.params != undefined ? !navigation.state.params.hideTabBar : true,
         title: "Messages",
         headerRight: (
-            <View style={globalStyles.headerMultipleIcons}>
+                    <View style={globalStyles.headerMultipleIcons}>
                 <TouchableHighlight onPress={() =>
                     navigation.navigate('SearchMessages')
                 } style={globalStyles.headerIcon}>
@@ -59,12 +61,15 @@ export default class Messages extends React.PureComponent {
                         placeholderColor={globalStyles.$headerBackgroundColor}
                     />
                 </TouchableHighlight>
-            </View>)
+            </View>
+                )
     });
 
     render() {
+        const render = this.state.render;
+
+        if (render) {
         return (
-            <AfterInteractions>
             <Container style={styles.home}>
                 <Content refreshControl={
                     <RefreshControl refreshing={this.state.refreshing} onRefresh={() => this.getThreads()} />
@@ -79,16 +84,14 @@ export default class Messages extends React.PureComponent {
                     </List>
                 </Content>
             </Container>
-            </AfterInteractions>
         );
+        }
+        return (null);
     }
 }
+
 const styles = StyleSheet.create({
     home: {
         backgroundColor: globalStyles.$appBackgroundColor
     }
 });
-
-Messages.propTypes = {
-    navigation: PropTypes.object.isRequired
-};

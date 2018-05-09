@@ -5,7 +5,6 @@ import SingleMessage from './SingleMessage';
 import * as globalStyles from './../../styles/globalStyles';
 import Icon from './../../utils/Icon';
 import PropTypes from 'prop-types';
-import AfterInteractions from './../../components/AfterInteractions';
 
 export default class MessageThread extends React.PureComponent {
     static navigationOptions = ({ navigation }) => ({
@@ -14,11 +13,25 @@ export default class MessageThread extends React.PureComponent {
             headerTintColor: globalStyles.$white
     });
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            render: false
+        }
+    }
+
+    componentDidMount() {
+        setTimeout(() => {this.setState({render: true})}, 1000);
+    }
+
     render() {
+        const render = this.state.render;
+
         return (
-            <AfterInteractions>
             <Container style={styles.container}>
-                <Content style={styles.thread}>
+                { render ? (
+                    <React.Fragment>
+                    <Content style={styles.thread}>
                     <SingleMessage text="Testowa wiadomość" author="a" />
                     <SingleMessage text="..." author="me" />
                     <SingleMessage text="abcd" author="a" />
@@ -66,8 +79,9 @@ export default class MessageThread extends React.PureComponent {
                     </Item>
                     <Button rounded style={styles.sendButton}><Text>Send</Text></Button>
                 </Form>
+                </React.Fragment>
+                ) : null }
             </Container>
-            </AfterInteractions>
         );
     }
 }

@@ -10,7 +10,8 @@ class Informations extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            dataLoaded: false
+            dataLoaded: false,
+            render: false
         };
     }
 
@@ -21,12 +22,15 @@ class Informations extends React.Component {
     });
 
     componentDidMount() {
+        setTimeout(() => {this.setState({render: true})}, 100);
         AppApi.getAppInformations().then((data) => this.props.fetchInformations(data)).then(() => this.setState({ dataLoaded: true}));
     }
 
     render() {
         const dataLoaded = this.state.dataLoaded;
+        const render = this.state.render;
 
+        if (render) {
         return (
             <ScrollView style={styles.informations}>
                 <View style={styles.container}>
@@ -34,6 +38,8 @@ class Informations extends React.Component {
                 </View>
             </ScrollView>
         );
+        }
+        return (null);
     }
 }
 

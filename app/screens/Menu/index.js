@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, StyleSheet, SectionList, Text, ScrollView, TouchableHighlight } from 'react-native';
 import * as globalStyles from './../../styles/globalStyles';
-import PropTypes from 'prop-types';
 import AuthLocal from './../../utils/AuthLocal';
 import AsyncImage from './../../components/AsyncImage';
 
@@ -19,7 +18,21 @@ export default class Menu extends React.PureComponent {
         title: "More",
     };
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            render: false
+        }
+    }
+
+    componentDidMount() {
+        setTimeout(() => {this.setState({render: true})}, 100);
+    }
+
     render() {
+        const render = this.state.render;
+
+        if (render) {
         return (
             <ScrollView style={styles.settings}>
                 <View style={styles.container}>
@@ -47,6 +60,8 @@ export default class Menu extends React.PureComponent {
                 </View>
             </ScrollView>
         );
+        }
+        return (null);
     }
 }
 
@@ -79,7 +94,3 @@ const styles = StyleSheet.create({
         color: globalStyles.$white
     }
 });
-
-Menu.propTypes = {
-    navigation: PropTypes.object.isRequired
-};

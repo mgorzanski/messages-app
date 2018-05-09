@@ -2,5 +2,6 @@
     "parser": "babel-eslint",
     "plugins": ["react", "react-native", "jest"],
     "env": { "react-native/react-native": true, "jest/globals": true, "browser": true },
-    "extends": ["eslint:recommended", "plugin:react-native/all", "plugin:react/recommended"]
+    "extends": ["eslint:recommended", "plugin:react-native/all", "plugin:react/recommended"],
+    "rules": { "react/prop-types": 0 }
 }

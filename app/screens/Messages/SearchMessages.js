@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { StyleSheet } from 'react-native';
 import { Container, Item, Input, Button, Text, Header, Content } from 'native-base';
 import Icon from './../../utils/Icon';
-import AfterInteractions from './../../components/AfterInteractions';
 
 export default class SearchMessages extends React.Component {
     static navigationOptions = {
@@ -13,7 +12,6 @@ export default class SearchMessages extends React.Component {
 
     render() {
         return (
-            <AfterInteractions>
                 <Container>
                     <Header searchBar rounded style={styles.header} androidStatusBarColor={globalStyles.$headerBackgroundColor}>
                         <Item>
@@ -27,7 +25,6 @@ export default class SearchMessages extends React.Component {
                         </Button>
                     </Content>
                 </Container>
-            </AfterInteractions>
         );
     }
 }

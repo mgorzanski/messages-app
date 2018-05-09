@@ -7,6 +7,8 @@ export const mainRouterConfig = {
       showIcon: true,
       showLabel: true,
       upperCaseLabel: false,
+      lazy: false,
+      removeClippedSubviews: false,
       style: {
         height: 65,
         backgroundColor: '#1e1e1e',

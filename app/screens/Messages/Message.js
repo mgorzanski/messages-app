@@ -1,15 +1,26 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import * as globalStyles from './../../styles/globalStyles';
-import PropTypes from 'prop-types';
 import { ListItem, Text, Body, Left, Right } from 'native-base';
 import AsyncImage from './../../components/AsyncImage';
-import AfterInteractions from './../../components/AfterInteractions';
 
 export default class Message extends React.PureComponent {
+    constructor(props) {
+        super(props);
+        this.state = {
+            render: false
+        }
+    }
+
+    componentDidMount() {
+        setTimeout(() => {this.setState({render: true})}, 1000);
+    }
+
     render() {
+        const render = this.state.render;
+
+        if (render) {
         return (
-            <AfterInteractions>
             <ListItem avatar onPress={() => this.props.navigation.navigate('MessageThread', {name: this.props.name})}>
                 <Left>
                     <AsyncImage source={require('./../../img/icons/user2.png')} style={styles.thumbnail} placeholderColor={globalStyles.$appBackgroundColor} />
@@ -32,16 +43,10 @@ export default class Message extends React.PureComponent {
                     ) : null}
                 </Right>
             </ListItem>
-            </AfterInteractions>
         );
+        }
+        return (null);
     }
-}
-
-Message.propTypes = {
-    name: PropTypes.string,
-    message: PropTypes.string,
-    date: PropTypes.string,
-    navigation: PropTypes.object.isRequired
 }
 
 const styles = StyleSheet.create({
