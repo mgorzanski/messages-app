@@ -4,6 +4,8 @@ import { StyleSheet } from 'react-native';
 import SingleMessage from './SingleMessage';
 import * as globalStyles from './../../styles/globalStyles';
 import Icon from './../../utils/Icon';
+import { socketUrl } from './../../config/socket';
+import io from 'socket.io-client';
 
 export default class MessageThread extends React.PureComponent {
     static navigationOptions = ({ navigation }) => ({
@@ -15,8 +17,11 @@ export default class MessageThread extends React.PureComponent {
     constructor(props) {
         super(props);
         this.state = {
-            render: false
+            render: false,
+            messageInput: ''
         }
+
+        this.socket = io(socketUrl);
     }
 
     componentDidMount() {
@@ -74,9 +79,12 @@ export default class MessageThread extends React.PureComponent {
                 </Content>
                 <Form style={styles.form}>
                     <Item rounded style={styles.item}>
-                        <Textarea rowSpan={1} placeholder="Text" rounded style={styles.textarea} />
+                        <Textarea rowSpan={1} placeholder="Text" rounded style={styles.textarea} onChangeText={(messageInput) => this.setState({messageInput})} />
                     </Item>
-                    <Button rounded style={styles.sendButton}><Text>Send</Text></Button>
+                    <Button rounded style={styles.sendButton} onPress={() => {
+                        const messageInput = this.state.messageInput;
+                        this.socket.emit('send-message', messageInput);
+                    }}><Text>Send</Text></Button>
                 </Form>
                 </React.Fragment>
                 ) : null }

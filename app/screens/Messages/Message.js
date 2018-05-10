@@ -21,7 +21,7 @@ export default class Message extends React.PureComponent {
 
         if (render) {
         return (
-            <ListItem avatar onPress={() => this.props.navigation.navigate('MessageThread', {name: this.props.name})}>
+            <ListItem avatar onPress={() => this.props.navigation.navigate('MessageThread', {name: this.props.name, threadId: this.props.threadId})}>
                 <Left>
                     <AsyncImage source={require('./../../img/icons/user2.png')} style={styles.thumbnail} placeholderColor={globalStyles.$appBackgroundColor} />
                 </Left>

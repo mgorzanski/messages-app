@@ -54,7 +54,7 @@ MongoClient.connect(config.mongodb, (err, db) => {
     app.get('/app/informations', (req, res) => routes.app.informations(req, res, db));
 
     //Socket
-    socket(io);
+    socket(io, db);
 });
 
 http.listen(3000, '', () => {
