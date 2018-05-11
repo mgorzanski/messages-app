@@ -6,8 +6,9 @@ import * as globalStyles from './../../styles/globalStyles';
 import Icon from './../../utils/Icon';
 import { socketUrl } from './../../config/socket';
 import io from 'socket.io-client';
+import { connect } from 'react-redux';
 
-export default class MessageThread extends React.PureComponent {
+class MessageThread extends React.PureComponent {
     static navigationOptions = ({ navigation }) => ({
             title: navigation.state.params.name,
             headerRight: (<Icon family="MaterialIcons" name="more-vert" style={globalStyles.stackNavIcon} />),
@@ -18,7 +19,7 @@ export default class MessageThread extends React.PureComponent {
         super(props);
         this.state = {
             render: false,
-            messageInput: ''
+            data: { threadId: this.props.navigation.state.params.threadId, userId: this.props.user.data.userId, message: '' }
         }
 
         this.socket = io(socketUrl);
@@ -79,11 +80,15 @@ export default class MessageThread extends React.PureComponent {
                 </Content>
                 <Form style={styles.form}>
                     <Item rounded style={styles.item}>
-                        <Textarea rowSpan={1} placeholder="Text" rounded style={styles.textarea} onChangeText={(messageInput) => this.setState({messageInput})} />
+                        <Textarea rowSpan={1} placeholder="Text" rounded style={styles.textarea} onChangeText={(message) => {
+                            const data = this.state.data;
+                            data.message = message;
+                            this.setState({ data });
+                        }} />
                     </Item>
                     <Button rounded style={styles.sendButton} onPress={() => {
-                        const messageInput = this.state.messageInput;
-                        this.socket.emit('send-message', messageInput);
+                        const data = this.state.data;
+                        this.socket.emit('send-message', data);
                     }}><Text>Send</Text></Button>
                 </Form>
                 </React.Fragment>
@@ -125,3 +130,9 @@ const styles = StyleSheet.create({
         backgroundColor: globalStyles.$sendButtonBackgroundColor
     }
 });
+
+const mapStateToProps = state => {
+    return state;
+};
+
+export default connect(mapStateToProps)(MessageThread);

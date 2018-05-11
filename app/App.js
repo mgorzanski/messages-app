@@ -1,7 +1,7 @@
 import React from 'react';
 import { StatusBar, AsyncStorage, AppState, Text } from 'react-native';
 import { TabNavigator, StackNavigator } from 'react-navigation';
-import AuthLocal from './utils/AuthLocal';
+//import AuthLocal from './utils/AuthLocal';
 import { Provider } from 'react-redux';
 import { store } from './config/store';
 import { mainRouterConfig, appRouterConfig } from './config/routers';

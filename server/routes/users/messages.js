@@ -12,11 +12,11 @@ module.exports = {
 	      				for (const user of thread.users) {
 	      					if (user.toString() !== req.params.userId.toString()) {
 	      						const findUser = await db.collection('users').find({ _id: ObjectId(user) }).limit(1).toArray();
-	      						threads.push({ _id: findUser[0]._id, name: findUser[0].fullName });
+	      						threads.push({ _id: thread._id, name: findUser[0].fullName, userId: findUser[0]._id });
 	      					}
 	      				}
 	      			} else {
-	      				threads.push({ _id: thread._id, name: thread.name });
+	      				threads.push({ _id: thread._id, name: thread.name, userId: null });
 	      			}
 	      		}
 	      		return threads;

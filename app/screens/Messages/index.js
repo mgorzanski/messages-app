@@ -28,7 +28,7 @@ export default class Messages extends React.PureComponent {
     }
 
     getThreads() {
-        MessagesApi.getThreads().then((result) => this.setState({ threads: result })).then(() => this.setState({ threadsList: this.state.threads.map((thread) => <Message key={thread._id} navigation={this.props.navigation} name={thread.name} message="Testowa wiadomość..." date="13:39" threadId={thread._id} />)}));
+        MessagesApi.getThreads().then((result) => this.setState({ threads: result })).then(() => this.setState({ threadsList: this.state.threads.map((thread) => <Message key={thread._id} navigation={this.props.navigation} name={thread.name} message="Testowa wiadomość..." date="13:39" threadId={thread._id} userId={thread.userId} />)}));
     }
 
     static navigationOptions = ({ navigation }) => ({
