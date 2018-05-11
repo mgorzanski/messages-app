@@ -84,11 +84,14 @@ class MessageThread extends React.PureComponent {
                             const data = this.state.data;
                             data.message = message;
                             this.setState({ data });
-                        }} />
+                        }} ref={component => this._textInput = component} />
                     </Item>
                     <Button rounded style={styles.sendButton} onPress={() => {
                         const data = this.state.data;
                         this.socket.emit('send-message', data);
+                        data.message = '';
+                        this.setState({ data });
+                        setTimeout(() => this._textInput.setNativeProps({text: ''}), 1);
                     }}><Text>Send</Text></Button>
                 </Form>
                 </React.Fragment>
