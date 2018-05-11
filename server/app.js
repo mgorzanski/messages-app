@@ -35,6 +35,7 @@ MongoClient.connect(config.mongodb, (err, db) => {
     app.get('/users/:userId/messages/threads', verifyToken, (req, res) => routes.users.messages.getThreads(req, res, db));
     app.post('/users/:userId/messages/threads', verifyToken, (req, res) => routes.users.messages.createThread(req, res, db));
     //app.put('/users/:userId/messages/threads/:threadId', verifyToken, (req, res) => routes.users.messages.updateThread(req, res, db));
+    app.get('/users/:userId/messages/threads/:threadId', verifyToken, (req, res) => routes.users.messages.getMessagesFromThread(req, res, db));
     app.delete('/users/:userId/messages/threads/:threadId', verifyToken, (req, res) => routes.users.messages.deleteThread(req, res, db));
     app.put('/users/:userId/messages/threads/:threadId/add/:userToAddId', verifyToken, (req, res) => routes.users.messages.addUserToThread(req, res, db));
     app.put('/users/:userId/messages/threads/:threadId/remove/:userToRemoveId', verifyToken, (req, res) => routes.users.messages.removeUserFromThread(req, res, db));

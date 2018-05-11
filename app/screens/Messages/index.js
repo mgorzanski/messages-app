@@ -1,13 +1,14 @@
 import React from 'react';
 import { StyleSheet, View, TouchableHighlight, RefreshControl } from 'react-native';
-import { Container, Content, List } from 'native-base';
+import { Container, Content, List, Toast } from 'native-base';
 import Message from './Message';
 import UserPanel from './UserPanel';
 import * as globalStyles from './../../styles/globalStyles';
 import MessagesApi from './../../api/MessagesApi';
 import AsyncImage from './../../components/AsyncImage';
+import { connect } from 'react-redux';
 
-export default class Messages extends React.PureComponent {
+class Messages extends React.PureComponent {
     constructor(props) {
         super(props);
 
@@ -15,7 +16,8 @@ export default class Messages extends React.PureComponent {
             threads: [],
             refreshing: false,
             threadsList: [],
-            render: false
+            render: false,
+            showToast: false
         };
     }
 
@@ -28,7 +30,13 @@ export default class Messages extends React.PureComponent {
     }
 
     getThreads() {
-        MessagesApi.getThreads().then((result) => this.setState({ threads: result })).then(() => this.setState({ threadsList: this.state.threads.map((thread) => <Message key={thread._id} navigation={this.props.navigation} name={thread.name} message="Testowa wiadomość..." date="13:39" threadId={thread._id} userId={thread.userId} />)}));
+        MessagesApi.getThreads(this.props.user.data.token)
+            .then((result) => this.setState({ threads: result }))
+            .catch(() => Toast.show({
+                text: 'Cannot get any threads',
+                buttonText: 'Close'
+            }))
+            .then(() => this.setState({ threadsList: this.state.threads.map((thread) => <Message key={thread._id} navigation={this.props.navigation} name={thread.name} message="Testowa wiadomość..." date="13:39" threadId={thread._id} userId={thread.userId} />)}));
     }
 
     static navigationOptions = ({ navigation }) => ({
@@ -93,3 +101,9 @@ const styles = StyleSheet.create({
         backgroundColor: globalStyles.$appBackgroundColor
     }
 });
+
+const mapStateToProps = state => {
+    return state;
+}
+
+export default connect(mapStateToProps)(Messages);

@@ -1,6 +1,17 @@
 const ObjectId = require('mongodb').ObjectId;
 
 module.exports = {
+	getMessagesFromThread(req, res, db) {
+		db.collection('threads').findOne({ _id: ObjectId(req.params.threadId) }, (error, result) => {
+			if (error) res.sendStatus(500);
+			if (result && result.messages.length) {
+				res.status(200).send({ messages: result.messages });
+			} else {
+				res.status(200).send('No messages');
+			}
+		});
+	},
+
     getThreads(req, res, db) {
       db.collection('threads').find({ users: { $elemMatch: { $in: [ObjectId(req.params.userId)] } } }).toArray((error, result) => {
       	if (error) res.sendStatus(500);

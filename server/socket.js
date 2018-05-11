@@ -13,6 +13,7 @@ module.exports = (io, db) => {
                 { $push: 
                     { 'messages':
                         {
+                            _id: ObjectId(),
                             userId: ObjectId(data.userId),
                             date: new Date(),
                             message: data.message,
