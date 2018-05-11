@@ -4,8 +4,23 @@ module.exports = {
 	getMessagesFromThread(req, res, db) {
 		db.collection('threads').findOne({ _id: ObjectId(req.params.threadId) }, (error, result) => {
 			if (error) res.sendStatus(500);
-			if (result && result.messages.length) {
-				res.status(200).send({ messages: result.messages });
+			const messagesLength = result.messages.length;
+			if (result && messagesLength) {
+				let users = [];
+				for (let i = 0; i < messagesLength; i++) {
+					if (users.indexOf(result.messages[i].userId.toString()) === -1) {
+						users.push(result.messages[i].userId.toString());
+					}
+				}
+
+				(async function () {
+					let usersArr = [];
+					for (let user of users) {
+						const result = await db.collection('users').findOne({ _id: ObjectId(user) });
+						usersArr.push(result);
+					}
+					return usersArr;
+				})().then((users) => res.status(200).send({ messages: result.messages, users: users }));
 			} else {
 				res.status(200).send('No messages');
 			}
