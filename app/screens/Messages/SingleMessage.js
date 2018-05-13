@@ -3,6 +3,7 @@ import { Text } from 'native-base';
 import { View, StyleSheet } from 'react-native';
 import * as globalStyles from './../../styles/globalStyles';
 import AsyncImage from './../../components/AsyncImage';
+import { connect } from 'react-redux';
 
 const styles = StyleSheet.create({
     otherMessageRow: {
@@ -18,16 +19,16 @@ const styles = StyleSheet.create({
         backgroundColor: globalStyles.$otherMessageTextBackground,
         padding: 10,
         marginBottom: 10,
-        marginLeft: 10,
-        marginRight: 10,
+        marginLeft: 0,
+        marginRight: 0,
         borderRadius: 5
     },
     myMessageViewText: {
         backgroundColor: globalStyles.$myMessageTextBackground,
         padding: 10,
         marginBottom: 10,
-        marginLeft: 10,
-        marginRight: 10,
+        marginLeft: 0,
+        marginRight: 0,
         borderRadius: 5
     },
     messages: {
@@ -41,19 +42,18 @@ const styles = StyleSheet.create({
         marginTop:2
     },
     text: {
-        fontSize: 18,
+        fontSize: 16,
         fontFamily: 'arial',
         color: globalStyles.$white
     }
 });
 
-export default class SingleMessage extends React.PureComponent {
+class SingleMessage extends React.PureComponent {
     render() {
         return (
             <View style={styles.messages}>
-                { this.props.author === 'me' ? (
+                { this.props._id === this.props.user.data.userId ? (
                     <View style={styles.myMessageRow}>
-                        <AsyncImage source={require('./../../img/icons/user2.png')} style={styles.userImage} placeholderColor='#595959' />
                         <View style={styles.myMessageViewText}>
                             <Text style={styles.text}>{this.props.text}</Text>
                         </View>
@@ -70,3 +70,9 @@ export default class SingleMessage extends React.PureComponent {
         );
     }
 }
+
+const mapStateToProps = state => {
+    return state;
+};
+
+export default connect(mapStateToProps)(SingleMessage);

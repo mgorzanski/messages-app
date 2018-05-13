@@ -23,6 +23,8 @@ class MessageThread extends React.PureComponent {
             data: { threadId: this.props.navigation.state.params.threadId, userId: this.props.user.data.userId, message: '' },
             showToast: false,
             messages: [],
+            users: [],
+            messagesLoaded: false
         }
 
         this.socket = io(socketUrl);
@@ -34,12 +36,21 @@ class MessageThread extends React.PureComponent {
 
     getMessages() {
         MessagesApi.getMessagesFromThread(this.props.user.data.token, this.props.navigation.state.params.threadId)
-        .then((result) => this.setState({ messages: result.messages }))
+        .then((result) => this.setState({ messages: result.messages, users: result.users }))
         .catch(() => Toast.show({
             text: 'Cannot load messages from this thread',
             buttonText: 'Close'
         }))
-        .then(() => this.setState({ messages: this.state.messages.map((message) => <SingleMessage key={message._id} text={message.message} author="a" />)}));
+        .then(() => {
+            let users = this.state.users.slice();
+            users = users.filter((item) => item !== null && item !== undefined);
+            this.setState({ users });
+        })
+        .then(() => this.setState({ messages: this.state.messages.map((message) => {
+            const author = this.state.users.find(user => user._id === message.userId);
+            return <SingleMessage key={message._id} text={message.message} {...author} />;
+        })}))
+        .then(() => this.setState({ messagesLoaded: true }));
     }
 
     componentDidMount() {
@@ -49,13 +60,14 @@ class MessageThread extends React.PureComponent {
     render() {
         const render = this.state.render;
         const messages = this.state.messages;
+        const messagesLoaded = this.state.messagesLoaded;
 
         return (
             <Container style={styles.container}>
                 { render ? (
                     <React.Fragment>
                     <Content style={styles.thread}>
-                        {messages}
+                        { messagesLoaded ? messages : null }
                     </Content>
                     <Form style={styles.form}>
                         <Item rounded style={styles.item}>
