@@ -25,6 +25,8 @@ module.exports = (io, db) => {
                     console.log(`New message hast been sent to the thread of ID ${data.threadId} with a content: "${data.message}" from a user of ID ${data.userId}.`);
                 }
             );
+
+            io.emit('new-message-added');
         });
     });
 };

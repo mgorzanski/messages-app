@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
         backgroundColor: globalStyles.$otherMessageTextBackground,
         padding: 10,
         marginBottom: 10,
-        marginLeft: 0,
+        marginLeft: 10,
         marginRight: 0,
         borderRadius: 5
     },

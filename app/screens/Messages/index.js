@@ -30,7 +30,7 @@ class Messages extends React.PureComponent {
     }
 
     getThreads() {
-        MessagesApi.getThreads(this.props.user.data.token)
+        MessagesApi.getThreads(this.props.user.data.token, this.props.user.data.userId)
             .then((result) => this.setState({ threads: result }))
             .catch(() => Toast.show({
                 text: 'Cannot get any threads',

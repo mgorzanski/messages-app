@@ -23,6 +23,7 @@ class MessageThread extends React.PureComponent {
             data: { threadId: this.props.navigation.state.params.threadId, userId: this.props.user.data.userId, message: '' },
             showToast: false,
             messages: [],
+            messagesList: [],
             users: [],
             messagesLoaded: false
         }
@@ -35,7 +36,7 @@ class MessageThread extends React.PureComponent {
     }
 
     getMessages() {
-        MessagesApi.getMessagesFromThread(this.props.user.data.token, this.props.navigation.state.params.threadId)
+        MessagesApi.getMessagesFromThread(this.props.user.data.token, this.props.user.data.userId, this.props.navigation.state.params.threadId)
         .then((result) => this.setState({ messages: result.messages, users: result.users }))
         .catch(() => Toast.show({
             text: 'Cannot load messages from this thread',
@@ -46,7 +47,7 @@ class MessageThread extends React.PureComponent {
             users = users.filter((item) => item !== null && item !== undefined);
             this.setState({ users });
         })
-        .then(() => this.setState({ messages: this.state.messages.map((message) => {
+        .then(() => this.setState({ messagesList: this.state.messages.map((message) => {
             const author = this.state.users.find(user => user._id === message.userId);
             return <SingleMessage key={message._id} text={message.message} {...author} />;
         })}))
@@ -59,8 +60,12 @@ class MessageThread extends React.PureComponent {
 
     render() {
         const render = this.state.render;
-        const messages = this.state.messages;
+        const messagesList = this.state.messagesList;
         const messagesLoaded = this.state.messagesLoaded;
+
+        this.socket.on('new-message-added', () => {
+            this.getMessages();
+        });
 
         return (
             <Container style={styles.container}>
@@ -69,7 +74,7 @@ class MessageThread extends React.PureComponent {
                     <Content
                         style={styles.thread}
                         ref={c => this.component = c}>
-                            { messagesLoaded ? messages : null }
+                            { messagesLoaded ? messagesList : null }
                     </Content>
                     <Form style={styles.form}>
                         <Item rounded style={styles.item}>
@@ -89,10 +94,9 @@ class MessageThread extends React.PureComponent {
                             this.socket.emit('send-message', data);
                             data.message = '';
 
-                            this.setState({ data, messages });
+                            this.setState({ data });
                             setTimeout(() => {
                                 this._textInput.setNativeProps({text: ''})
-                                this.component._root.scrollToEnd();
                             }, 1);
                         }}><Text>Send</Text></Button>
                     </Form>
