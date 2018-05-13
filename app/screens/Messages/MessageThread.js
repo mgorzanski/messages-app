@@ -66,8 +66,10 @@ class MessageThread extends React.PureComponent {
             <Container style={styles.container}>
                 { render ? (
                     <React.Fragment>
-                    <Content style={styles.thread}>
-                        { messagesLoaded ? messages : null }
+                    <Content
+                        style={styles.thread}
+                        ref={c => this.component = c}>
+                            { messagesLoaded ? messages : null }
                     </Content>
                     <Form style={styles.form}>
                         <Item rounded style={styles.item}>
@@ -79,10 +81,19 @@ class MessageThread extends React.PureComponent {
                         </Item>
                         <Button rounded style={styles.sendButton} onPress={() => {
                             const data = this.state.data;
+                            const messages = this.state.messages.slice();
+                            const author = this.state.users.find(user => user._id === this.props.user.data.userId);
+                            const singleMessage = <SingleMessage text={data.message} {...author} />;
+                            messages.push(singleMessage);
+                            
                             this.socket.emit('send-message', data);
                             data.message = '';
-                            this.setState({ data });
-                            setTimeout(() => this._textInput.setNativeProps({text: ''}), 1);
+
+                            this.setState({ data, messages });
+                            setTimeout(() => {
+                                this._textInput.setNativeProps({text: ''})
+                                this.component._root.scrollToEnd();
+                            }, 1);
                         }}><Text>Send</Text></Button>
                     </Form>
                 </React.Fragment>
