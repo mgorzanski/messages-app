@@ -3,9 +3,25 @@ const ObjectId = require('mongodb').ObjectId;
 module.exports = {
 	getContacts(req, res, db) {
 		db.collection('users').find({ _id: ObjectId(req.params.userId) }).project({ contacts: 1 }).toArray((error, contacts) => {
-			if (error) res.send(500);
-			res.status(200).send(contacts);
+			if (error) res.sendStatus(500);
+			const contactsDetails = new Array();
+			(async function() {
+				for (let contact of contacts) {
+					const details = await db.collection('users').findOne({ _id: ObjectId(contact._id)});
+					contactsDetails.push(details);
+				}
+			})().then(() => res.status(200).send(contactsDetails));
 		});
+	},
+
+	searchUsers(req, res, db) {
+		if (req.body.searchQuery === '') res.sendStatus(200);
+		else {
+			db.collection('users').find({ $or: [ { username: { $regex: req.body.searchQuery, $options: 'i' } }, { fullName: { $regex: req.body.searchQuery, $options: 'i' } } ] }).toArray((error, results) => {
+				if (error) res.sendStatus(500);
+				res.status(200).send(results);
+			});
+		}
 	},
 
 	getInvitations(req, res, db) {

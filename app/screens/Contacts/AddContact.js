@@ -1,11 +1,13 @@
 import React from 'react';
 import * as globalStyles from './../../styles/globalStyles';
 import { StyleSheet } from 'react-native';
-import { Container, Item, Input, List, ListItem, Text, Header, Content, Body, Button } from 'native-base';
+import { Container, Item, Input, List, ListItem, Text, Header, Content, Body, Button, Toast } from 'native-base';
 import Icon from './../../utils/Icon';
 import AsyncImage from './../../components/AsyncImage';
+import { connect } from 'react-redux';
+import ContactsApi from './../../api/ContactsApi';
 
-export default class AddContact extends React.Component {
+class AddContact extends React.Component {
     static navigationOptions = () => ({
         title: "Add contact",
         headerTintColor: globalStyles.$white
@@ -14,7 +16,10 @@ export default class AddContact extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            render: false
+            render: false,
+            contacts: [],
+            searchPerformed: false,
+            showToast: false
         }
     }
 
@@ -22,46 +27,47 @@ export default class AddContact extends React.Component {
         setTimeout(() => {this.setState({render: true})}, 50);
     }
 
+    searchUsers(searchQuery) {
+        ContactsApi.searchUsers(this.props.user.data.token, this.props.user.data.userId, searchQuery)
+        .then((results) => this.setState({ contacts: results, searchPerformed: true }))
+        .catch(() => Toast.show({
+            text: 'Cannot get any results',
+            buttonText: 'Close'
+        }));
+    }
+
     render() {
         const render = this.state.render;
+        let contacts = this.state.contacts;
+        const searchPerformed = this.state.searchPerformed;
+
+        contacts = contacts.map((contact) => 
+            <ListItem key={contact._id}>
+                <AsyncImage source={require('./../../img/icons/user2.png')} style={styles.thumbnail} placeholderColor={globalStyles.$white} />
+                <Body>
+                    <Text>{contact.fullName}</Text>
+                    <Text note>{contact.username}</Text>
+                </Body>
+                <Button transparent success>
+                    <Text>Invite</Text>
+                </Button>
+            </ListItem>
+        );
+
         if (render) {
             return (
                 <Container>
                     <Header searchBar rounded style={styles.header} androidStatusBarColor={globalStyles.$headerBackgroundColor}>
                         <Item>
                             <Icon family="MaterialIcons" name="search" />
-                            <Input placeholder="Search users" />
+                            <Input placeholder="Search users" onSubmitEditing={(event) => {
+                                this.searchUsers(event.nativeEvent.text);
+                            }} />
                         </Item>
                     </Header>
                     <Content>
                         <List>
-                            <ListItem>
-                                <AsyncImage source={require('./../../img/icons/user2.png')} style={styles.thumbnail} placeholderColor={globalStyles.$white} />
-                                <Body>
-                                    <Text>Sankhadeep</Text>
-                                </Body>
-                                <Button transparent success>
-                                    <Text>Invite</Text>
-                                </Button>
-                            </ListItem>
-                            <ListItem>
-                                <AsyncImage source={require('./../../img/icons/user2.png')} style={styles.thumbnail} placeholderColor={globalStyles.$white} />
-                                <Body>
-                                    <Text>Supriya</Text>
-                                </Body>
-                                <Button transparent success>
-                                    <Text>Invite</Text>
-                                </Button>
-                            </ListItem>
-                            <ListItem>
-                                <AsyncImage source={require('./../../img/icons/user2.png')} style={styles.thumbnail} placeholderColor={globalStyles.$white} />
-                                <Body>
-                                    <Text>Shivraj</Text>
-                                </Body>
-                                <Button transparent success>
-                                    <Text>Invite</Text>
-                                </Button>
-                            </ListItem>
+                            { searchPerformed ? contacts : null }
                         </List>
                     </Content>
                 </Container>
@@ -81,3 +87,9 @@ const styles = StyleSheet.create({
         height: 56
     }
 });
+
+const mapStateToProps = state => {
+    return state;
+};
+
+export default connect(mapStateToProps)(AddContact);

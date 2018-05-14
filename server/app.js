@@ -46,6 +46,7 @@ MongoClient.connect(config.mongodb, (err, db) => {
     app.put('/users/:userId/contacts/invitations/:inviterId', verifyToken, (req, res) => routes.users.contacts.acceptInvitation(req, res, db));
     app.put('/users/:userId/contacts/invitations', verifyToken, (req, res) => routes.users.contacts.sendInvitation(req, res, db));
     app.delete('/users/:userId/contacts/invitations/:inviterId', verifyToken, (req, res) => routes.users.contacts.declineInvitation(req, res, db));
+    app.post('/users/:userId/contacts/search', verifyToken, (req, res) => routes.users.contacts.searchUsers(req, res, db));
 
     //User profile routes
     // app.get('/users/:userId/profile', verifyToken, (req, res) => routes.users.profile.getProfile(req, res, db));
