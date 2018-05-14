@@ -39,7 +39,7 @@ export const mainRouterConfig = {
     },
     tabBarPosition: 'bottom',
     swipeEnabled: false,
-    animationEnabled: true
+    animationEnabled: false
   };
 
   export const appRouterConfig = {

@@ -31,9 +31,9 @@ export default class Menu extends React.PureComponent {
 
     render() {
         const render = this.state.render;
-        if (render) {
-            return (
-                <ScrollView style={styles.settings}>
+        return (
+            <ScrollView style={styles.settings}>
+                { render ? (
                     <View style={styles.container}>
                         <SectionList
                             sections={[
@@ -57,10 +57,9 @@ export default class Menu extends React.PureComponent {
                             keyExtractor={(item, index) => index}
                         />
                     </View>
-                </ScrollView>
-            );
-        }
-        return (null);
+                ) : null }
+            </ScrollView>
+        );
     }
 }
 
