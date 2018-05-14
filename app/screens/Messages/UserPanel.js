@@ -1,9 +1,9 @@
 import React from 'react';
 import { Text, Image, View, StyleSheet } from 'react-native';
 import * as globalStyles from './../../styles/globalStyles';
-//import AsyncImage from './../../components/AsyncImage';
+import { connect } from 'react-redux';
 
-export default class UserPanel extends React.Component {
+class UserPanel extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -20,7 +20,7 @@ export default class UserPanel extends React.Component {
         if (render) {
             return (
                 <View style={styles.panel}>
-                    <Text style={styles.userName}>MATEUSZ GÓRZAŃSKI</Text>
+                    <Text style={styles.userName}>{this.props.user.data.fullName.toUpperCase()}</Text>
                     <Image source={require('./../../img/icons/arrow.png')} style={styles.shortcut} placeholderColor={globalStyles.$userPanelBackgroundColor} />
                 </View>
             );
@@ -48,3 +48,9 @@ const styles = StyleSheet.create({
         marginTop: 3
     }
 });
+
+const mapStateToProps = state => {
+    return state;
+}
+
+export default connect(mapStateToProps)(UserPanel);
