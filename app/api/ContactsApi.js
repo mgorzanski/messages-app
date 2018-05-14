@@ -15,4 +15,16 @@ export default class ContactsApi {
         const json = await response.json();
         return json;
     }
+
+    static async getInvitations(token, userId) {
+        const response = await fetch(`${serverUrl}/users/${userId}/contacts/invitations`, {
+            method: 'get',
+            headers: new Headers({
+                'Content-Type': 'application/json',
+                'x-access-token': token
+            })
+        });
+        const json = await response.json();
+        return json;
+    }
 }

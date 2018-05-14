@@ -25,7 +25,7 @@ module.exports = {
 	},
 
 	getInvitations(req, res, db) {
-		db.collection('users').find({ _id: ObjectId(req.params.userId) }).project({ invitations: 1 }).toArray((error, invitations) => {
+		db.collection('users').find({ _id: ObjectId(req.params.userId) }).project({ invitations: 1, _id: 0 }).toArray((error, invitations) => {
 			if (error) res.send(500);
 			res.status(200).send(invitations);
 		});

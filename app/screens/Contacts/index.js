@@ -4,8 +4,10 @@ import { Badge, Text } from 'native-base';
 import * as globalStyles from './../../styles/globalStyles';
 import Icon from './../../utils/Icon';
 import AsyncImage from './../../components/AsyncImage';
+import { connect } from 'react-redux';
+import ContactsApi from './../../api/ContactsApi';
 
-export default class Contacts extends React.PureComponent {
+class Contacts extends React.PureComponent {
     static navigationOptions = ({ navigation }) => ({
         tabBarLabel: '',
         tabBarIcon: () => (
@@ -38,12 +40,26 @@ export default class Contacts extends React.PureComponent {
     constructor(props) {
         super(props);
         this.state = {
-            render: false
+            render: false,
+            invitations: []
         }
     }
 
     componentDidMount() {
         setTimeout(() => {this.setState({render: true})}, 50);
+
+        this.getInvitations();
+    }
+
+    getInvitations() {
+        ContactsApi.getInvitations(this.props.user.data.token, this.props.user.data.userId)
+        .then((results) => {
+            let invitations = results.filter((invitation) => invitation.fullName);
+            invitations = invitations.map((invitation) => {
+                 if (invitation.fullName) return invitation.fullName;
+            });
+            this.setState({ invitations });
+        });
     }
 
     render() {
@@ -54,7 +70,7 @@ export default class Contacts extends React.PureComponent {
                     <View style={styles.container}>
                         <SectionList
                             sections={[
-                                {title: 'Invitations', data: ['Test User', 'Someone Else']}
+                                {title: 'Invitations', data: this.state.invitations}
                             ]}
                             renderItem={({item}) => (
                                 <View style={styles.invitationView}>
@@ -150,3 +166,9 @@ const styles = StyleSheet.create({
         flexDirection: 'row'
     }
 });
+
+const mapStateToProps = state => {
+    return state;
+};
+
+export default connect(mapStateToProps)(Contacts);
