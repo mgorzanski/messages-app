@@ -1,0 +1,11 @@
+@import '~normalize.css/normalize.css';
+
+.main {
+    float:left;
+    width:81vw;
+}
+
+.sidebar {
+    float:right;
+    width:19vw;
+}
