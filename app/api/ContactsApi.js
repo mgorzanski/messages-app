@@ -62,4 +62,30 @@ export default class ContactsApi {
             })
         });
     }
+
+    static async getContacts(token, userId) {
+        const response = await fetch(`${serverUrl}/users/${userId}/contacts`, {
+            method: 'get',
+            headers: new Headers({
+                'Content-Type': 'application/json',
+                'x-access-token': token
+            })
+        });
+        const json = await response.json();
+        return json;
+    }
+
+    static spreadContacts(contactsArray) {
+        let list = new Array();
+        contactsArray.forEach((item) => {
+            const letter = item.fullName.substr(0, 1);
+            const letterIndexInList = list.findIndex(x => x.title === letter);
+            if (letterIndexInList !== -1) {
+                list[letterIndexInList].data.push(item);
+            } else {
+                list.push({ title: letter, data: new Array(item) });
+            }
+        });
+        return list;
+    }
 }

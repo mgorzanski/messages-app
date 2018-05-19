@@ -41,8 +41,9 @@ class Contacts extends React.PureComponent {
         super(props);
         this.state = {
             render: false,
-            invitationsList: [],
+            invitations: [],
             invitationsCount: 0,
+            contactsList: [],
             refreshing: false,
             showToast: false
         }
@@ -52,6 +53,7 @@ class Contacts extends React.PureComponent {
         setTimeout(() => {this.setState({render: true})}, 50);
 
         this.getInvitations();
+        this.getContacts();
     }
 
     getInvitations() {
@@ -59,6 +61,14 @@ class Contacts extends React.PureComponent {
         .then((results) => {
             let invitations = results.invitations.filter((invitation) => invitation.fullName);
             this.setState({ invitations, invitationsCount: invitations.length });
+        });
+    }
+
+    getContacts() {
+        ContactsApi.getContacts(this.props.user.data.token, this.props.user.data.userId)
+        .then((contacts) => {
+            contacts = ContactsApi.spreadContacts(contacts);
+            this.setState({ contacts });
         });
     }
 
@@ -131,11 +141,8 @@ class Contacts extends React.PureComponent {
                             keyExtractor={(item, index) => index}
                         />
                         <SectionList
-                            sections={[
-                                {title: 'D', data: ['Devin']},
-                                {title: 'J', data: ['Jackson', 'James', 'Jillian', 'Jimmy', 'Joel', 'John', 'Julie']},
-                            ]}
-                            renderItem={({item}) => <Text style={styles.item}>{item}</Text>}
+                            sections={this.state.contacts}
+                            renderItem={({item}) => <Text style={styles.item}>{item.fullName}</Text>}
                             renderSectionHeader={({section}) => <Text style={styles.sectionHeader}>{section.title}</Text>}
                             keyExtractor={(item, index) => index}
                         />
