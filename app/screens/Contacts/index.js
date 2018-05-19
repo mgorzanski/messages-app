@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, StyleSheet, SectionList, ScrollView, TouchableHighlight } from 'react-native';
-import { Badge, Text } from 'native-base';
+import { View, StyleSheet, SectionList, ScrollView, TouchableHighlight, RefreshControl } from 'react-native';
+import { Badge, Text, Toast } from 'native-base';
 import * as globalStyles from './../../styles/globalStyles';
 import Icon from './../../utils/Icon';
 import AsyncImage from './../../components/AsyncImage';
@@ -41,7 +41,10 @@ class Contacts extends React.PureComponent {
         super(props);
         this.state = {
             render: false,
-            invitations: []
+            invitationsList: [],
+            invitationsCount: 0,
+            refreshing: false,
+            showToast: false
         }
     }
 
@@ -54,18 +57,46 @@ class Contacts extends React.PureComponent {
     getInvitations() {
         ContactsApi.getInvitations(this.props.user.data.token, this.props.user.data.userId)
         .then((results) => {
-            let invitations = results.filter((invitation) => invitation.fullName);
-            invitations = invitations.map((invitation) => {
-                 if (invitation.fullName) return invitation.fullName;
-            });
-            this.setState({ invitations });
+            let invitations = results.invitations.filter((invitation) => invitation.fullName);
+            this.setState({ invitations, invitationsCount: invitations.length });
         });
+    }
+
+    acceptInvitation(inviterId) {
+        ContactsApi.acceptInvitation(this.props.user.data.token, this.props.user.data.userId, inviterId)
+        .then(() => {
+            this.getInvitations();
+            Toast.show({
+                text: 'Invitation accepted',
+                buttonText: 'Close'
+            });
+        }).catch(() => Toast.show({
+            text: 'An error occurred',
+            buttonText: 'Close'
+        }));
+    }
+
+    declineInvitation(inviterId) {
+        ContactsApi.declineInvitation(this.props.user.data.token, this.props.user.data.userId, inviterId)
+        .then(() => {
+            this.getInvitations();
+            Toast.show({
+                text: 'Invitation declined',
+                buttonText: 'Close'
+            });
+        }).catch(() => Toast.show({
+            text: 'An error occurred',
+            buttonText: 'Close'
+        }));
     }
 
     render() {
         const render = this.state.render;
+        const invitationsCount = this.state.invitationsCount;
         return (
-            <ScrollView style={styles.contacts}>
+            <ScrollView style={styles.contacts} refreshControl={
+                <RefreshControl refreshing={this.state.refreshing} onRefresh={() => this.getInvitations()} />
+            }>
                 { render ? (
                     <View style={styles.container}>
                         <SectionList
@@ -74,19 +105,27 @@ class Contacts extends React.PureComponent {
                             ]}
                             renderItem={({item}) => (
                                 <View style={styles.invitationView}>
-                                    <Text style={styles.item}>{item}</Text>
+                                    <Text style={styles.item}>{item.fullName}</Text>
                                     <View style={styles.invitationViewIcons}>
-                                        <Icon family="MaterialIcons" name="check" style={styles.invitationViewIcon} />
-                                        <Icon family="FontAwesome" name="remove" style={styles.invitationViewIcon} />
+                                        <TouchableHighlight onPress={() => this.acceptInvitation(item._id)}>
+                                            <Icon family="MaterialIcons" name="check" style={styles.invitationViewIcon} />
+                                        </TouchableHighlight>
+                                        <TouchableHighlight onPress={() => this.declineInvitation(item._id)}>
+                                            <Icon family="FontAwesome" name="remove" style={styles.invitationViewIcon} />
+                                        </TouchableHighlight>
                                     </View>
                                 </View>
                             )}
                             renderSectionHeader={({section}) => (
                                 <View style={styles.invitationsView}>
-                                    <Text style={styles.sectionInvitationsHeader}>{section.title}</Text>
-                                    <Badge style={styles.invitationsViewBadge}>
-                                        <Text>2</Text>
-                                    </Badge>
+                                    { (invitationsCount !== 0) ? (
+                                        <React.Fragment>
+                                            <Text style={styles.sectionInvitationsHeader}>{section.title}</Text>
+                                            <Badge style={styles.invitationsViewBadge}>
+                                                <Text>{invitationsCount}</Text>
+                                            </Badge>
+                                        </React.Fragment>
+                                    ) : null}
                                 </View>
                             )}
                             keyExtractor={(item, index) => index}

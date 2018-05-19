@@ -36,6 +36,23 @@ class AddContact extends React.Component {
         }));
     }
 
+    sendInvitation(userId) {
+        ContactsApi.sendInvitation(this.props.user.data.token, this.props.user.data.userId, userId)
+        .then((result) => {
+            if (result.success) {
+                Toast.show({
+                    text: 'Invitation has been sent',
+                    buttonText: 'Close'
+                });
+            } else {
+                Toast.show({
+                    text: 'An error occurred',
+                    buttonText: 'Close'
+                });
+            }
+        });
+    }
+
     render() {
         const render = this.state.render;
         let contacts = this.state.contacts;
@@ -48,7 +65,7 @@ class AddContact extends React.Component {
                     <Text>{contact.fullName}</Text>
                     <Text note>{contact.username}</Text>
                 </Body>
-                <Button transparent success>
+                <Button transparent success onPress={() => this.sendInvitation(contact._id)}>
                     <Text>Invite</Text>
                 </Button>
             </ListItem>

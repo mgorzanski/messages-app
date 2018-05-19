@@ -27,4 +27,39 @@ export default class ContactsApi {
         const json = await response.json();
         return json;
     }
+
+    static async sendInvitation(token, userId, userToInviteId) {
+        const response = await fetch(`${serverUrl}/users/${userId}/contacts/invitations`, {
+            method: 'put',
+            headers: new Headers({
+                'Content-Type': 'application/json',
+                'x-access-token': token
+            }),
+            body: JSON.stringify({
+                userToInviteId
+            })
+        });
+        const json = await response.json();
+        return json;
+    }
+
+    static async acceptInvitation(token, userId, inviterId) {
+        await fetch(`${serverUrl}/users/${userId}/contacts/invitations/${inviterId}`, {
+            method: 'put',
+            headers: new Headers({
+                'Content-Type': 'application/json',
+                'x-access-token': token
+            })
+        });
+    }
+
+    static async declineInvitation(token, userId, inviterId) {
+        await fetch(`${serverUrl}/users/${userId}/contacts/invitations/${inviterId}`, {
+            method: 'delete',
+            headers: new Headers({
+                'Content-Type': 'application/json',
+                'x-access-token': token
+            })
+        });
+    }
 }
