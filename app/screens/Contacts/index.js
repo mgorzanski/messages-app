@@ -105,7 +105,10 @@ class Contacts extends React.PureComponent {
         const invitationsCount = this.state.invitationsCount;
         return (
             <ScrollView style={styles.contacts} refreshControl={
-                <RefreshControl refreshing={this.state.refreshing} onRefresh={() => this.getInvitations()} />
+                <RefreshControl refreshing={this.state.refreshing} onRefresh={() => {
+                    this.getInvitations();
+                    this.getContacts();
+                }} />
             }>
                 { render ? (
                     <View style={styles.container}>
