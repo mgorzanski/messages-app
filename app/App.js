@@ -96,7 +96,7 @@ class App extends React.PureComponent {
         }, appRouterConfig);
 
         if (isStoreLoading) {
-            return null;
+            return (<Root></Root>);
         } else {
             return (
                 <Root>
