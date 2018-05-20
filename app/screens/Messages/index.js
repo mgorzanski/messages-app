@@ -36,7 +36,7 @@ class Messages extends React.PureComponent {
                 text: 'Cannot get any threads',
                 buttonText: 'Close'
             }))
-            .then(() => this.setState({ threadsList: this.state.threads.map((thread) => <Message key={thread._id} navigation={this.props.navigation} name={thread.name} message="Testowa wiadomość..." date="13:39" threadId={thread._id} userId={thread.userId} />)}));
+            .then(() => this.setState({ threadsList: this.state.threads.map((thread) => <Message key={thread._id} navigation={this.props.navigation} name={thread.name} message={thread.lastMessageText} date={thread.lastMessageDate} threadId={thread._id} userId={thread.userId} />)}));
     }
 
     static navigationOptions = ({ navigation }) => ({

@@ -38,11 +38,11 @@ module.exports = {
 	      				for (const user of thread.users) {
 	      					if (user.toString() !== req.params.userId.toString()) {
 	      						const findUser = await db.collection('users').find({ _id: ObjectId(user) }).limit(1).toArray();
-	      						threads.push({ _id: thread._id, name: findUser[0].fullName, userId: findUser[0]._id });
+	      						threads.push({ _id: thread._id, name: findUser[0].fullName, userId: findUser[0]._id, lastMessageText: thread.messages.length ? thread.messages[thread.messages.length - 1].message : '', lastMessageDate: thread.messages.length ? thread.messages[thread.messages.length - 1].date : '' });
 	      					}
 	      				}
 	      			} else {
-	      				threads.push({ _id: thread._id, name: thread.name, userId: null });
+	      				threads.push({ _id: thread._id, name: thread.name, userId: null, lastMessageText: thread.messages.length ? thread.messages[thread.messages.length - 1].message : '', lastMessageDate: thread.messages.length ? thread.messages[thread.messages.length - 1].date : '' });
 	      			}
 	      		}
 	      		return threads;

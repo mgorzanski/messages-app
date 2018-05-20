@@ -18,6 +18,9 @@ export default class Message extends React.PureComponent {
 
     render() {
         const render = this.state.render;
+        const time = new Date(this.props.date);
+        const hours = time.getHours();
+        const minutes = time.getMinutes();
 
         if (render) {
         return (
@@ -30,16 +33,14 @@ export default class Message extends React.PureComponent {
                     {/*
                         If this.props.message was passed, render the text. Otherwise don't render anything here (null).
                     */}
-                    { this.props.message ? (
-                        <Text style={styles.message} note>{this.props.message}</Text>
-                    ) : null}
+                    <Text style={styles.message} note>{this.props.message && this.props.message !== '' ? this.props.message : 'No messages'}</Text>
                 </Body>
                 <Right>
                     {/*
                         If this.props.date was passed, render the text. Otherwise don't render anything here (null).
                     */}
                     { this.props.date ? (
-                        <Text style={styles.timestamp} note>{this.props.date}</Text>
+                        <Text style={styles.timestamp} note>{hours}:{minutes}</Text>
                     ) : null}
                 </Right>
             </ListItem>
