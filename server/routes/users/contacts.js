@@ -57,7 +57,7 @@ module.exports = {
 				db.collection('users').update(
 					{ _id: ObjectId(req.params.userId) },
 					{ $pull:
-						{ "invitations":
+						{ 'invitations':
 							ObjectId(req.params.inviterId)
 						}
 					}, (error) => {
@@ -65,7 +65,7 @@ module.exports = {
 						db.collection('users').update(
 							{ _id: ObjectId(req.params.userId) },
 							{ $push:
-								{ "contacts":
+								{ 'contacts':
 									ObjectId(req.params.inviterId)
 								}
 							}, (error) => {
@@ -73,7 +73,7 @@ module.exports = {
 								db.collection('users').update(
 									{ _id: ObjectId(req.params.inviterId) },
 									{ $push:
-										{ "contacts":
+										{ 'contacts':
 											ObjectId(req.params.userId)
 										}
 									}, (error) => {
@@ -98,7 +98,7 @@ module.exports = {
 				db.collection('users').update(
 					{ _id: ObjectId(req.params.userId) },
 					{ $pull:
-						{ "invitations":
+						{ 'invitations':
 							ObjectId(req.params.inviterId)
 						}
 					}, (error) => {
@@ -125,11 +125,11 @@ module.exports = {
 						}
 					}, (error) => {
 						if (error) res.sendStatus(500);
-						res.status(200).send({message: 'Invitation has been sent', success: true});
+						res.status(200).send({ message: 'Invitation has been sent', success: true });
 					}
 				);
 			} else {
-				res.sendStatus(403);
+				res.status(200).send({ message: 'Invitation already sent', success: false });
 			}
 		});
 	}

@@ -44,6 +44,11 @@ class AddContact extends React.Component {
                     text: 'Invitation has been sent',
                     buttonText: 'Close'
                 });
+            } else if (result.message === 'Invitation already sent') {
+                Toast.show({
+                    text: result.message,
+                    buttonText: 'Close'
+                });
             } else {
                 Toast.show({
                     text: 'An error occurred',
