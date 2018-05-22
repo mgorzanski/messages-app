@@ -26,7 +26,9 @@ module.exports = (io, db) => {
                 }
             );
 
-            io.emit('new-message-added');
+            db.collection('users').findOne({ _id: ObjectId(data.userId) }, (error, user) => {
+                io.emit(`new-message-threadId-${data.threadId}`, { userId: user._id, fullname: user.fullname, message: data.message });
+            });
         });
     });
 };

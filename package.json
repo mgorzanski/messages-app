@@ -30,6 +30,7 @@
     "native-base": "^2.4.1",
     "react": "16.2.0",
     "react-native": "0.52.0",
+    "react-native-push-notification": "^3.0.2",
     "react-navigation": "^1.5.8",
     "react-navigation-slide-from-right-transition": "^1.0.4",
     "react-redux": "^5.0.7",

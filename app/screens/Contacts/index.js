@@ -45,7 +45,9 @@ class Contacts extends React.PureComponent {
             invitationsCount: 0,
             contactsList: [],
             refreshing: false,
-            showToast: false
+            showToast: false,
+            invitationsLoaded: false,
+            contactsLoaded: false
         }
     }
 
@@ -60,7 +62,7 @@ class Contacts extends React.PureComponent {
         ContactsApi.getInvitations(this.props.user.data.token, this.props.user.data.userId)
         .then((results) => {
             let invitations = results.invitations.filter((invitation) => invitation.fullName);
-            this.setState({ invitations, invitationsCount: invitations.length });
+            this.setState({ invitations, invitationsCount: invitations.length, invitationsLoaded: true });
         });
     }
 
@@ -68,7 +70,7 @@ class Contacts extends React.PureComponent {
         ContactsApi.getContacts(this.props.user.data.token, this.props.user.data.userId)
         .then((contacts) => {
             contacts = ContactsApi.spreadContacts(contacts);
-            this.setState({ contacts });
+            this.setState({ contacts, contactsLoaded: true });
         });
     }
 
@@ -76,6 +78,7 @@ class Contacts extends React.PureComponent {
         ContactsApi.acceptInvitation(this.props.user.data.token, this.props.user.data.userId, inviterId)
         .then(() => {
             this.getInvitations();
+            this.getContacts();
             Toast.show({
                 text: 'Invitation accepted',
                 buttonText: 'Close'
@@ -103,6 +106,9 @@ class Contacts extends React.PureComponent {
     render() {
         const render = this.state.render;
         const invitationsCount = this.state.invitationsCount;
+        const invitationsLoaded = this.state.invitationsLoaded;
+        const contactsLoaded = this.state.contactsLoaded;
+
         return (
             <ScrollView style={styles.contacts} refreshControl={
                 <RefreshControl refreshing={this.state.refreshing} onRefresh={() => {
@@ -112,43 +118,47 @@ class Contacts extends React.PureComponent {
             }>
                 { render ? (
                     <View style={styles.container}>
-                        <SectionList
-                            sections={[
-                                {title: 'Invitations', data: this.state.invitations}
-                            ]}
-                            renderItem={({item}) => (
-                                <View style={styles.invitationView}>
-                                    <Text style={styles.item}>{item.fullName}</Text>
-                                    <View style={styles.invitationViewIcons}>
-                                        <TouchableHighlight onPress={() => this.acceptInvitation(item._id)}>
-                                            <Icon family="MaterialIcons" name="check" style={styles.invitationViewIcon} />
-                                        </TouchableHighlight>
-                                        <TouchableHighlight onPress={() => this.declineInvitation(item._id)}>
-                                            <Icon family="FontAwesome" name="remove" style={styles.invitationViewIcon} />
-                                        </TouchableHighlight>
+                        { invitationsLoaded ? (
+                            <SectionList
+                                sections={[
+                                    {title: 'Invitations', data: this.state.invitations}
+                                ]}
+                                renderItem={({item}) => (
+                                    <View style={styles.invitationView}>
+                                        <Text style={styles.item}>{item.fullName}</Text>
+                                        <View style={styles.invitationViewIcons}>
+                                            <TouchableHighlight onPress={() => this.acceptInvitation(item._id)}>
+                                                <Icon family="MaterialIcons" name="check" style={styles.invitationViewIcon} />
+                                            </TouchableHighlight>
+                                            <TouchableHighlight onPress={() => this.declineInvitation(item._id)}>
+                                                <Icon family="FontAwesome" name="remove" style={styles.invitationViewIcon} />
+                                            </TouchableHighlight>
+                                        </View>
                                     </View>
-                                </View>
-                            )}
-                            renderSectionHeader={({section}) => (
-                                <View style={styles.invitationsView}>
-                                    { (invitationsCount !== 0) ? (
-                                        <React.Fragment>
-                                            <Text style={styles.sectionInvitationsHeader}>{section.title}</Text>
-                                            <Badge style={styles.invitationsViewBadge}>
-                                                <Text>{invitationsCount}</Text>
-                                            </Badge>
-                                        </React.Fragment>
-                                    ) : null}
-                                </View>
-                            )}
-                            keyExtractor={(item, index) => index}
-                        />
-                        <SectionList
-                            sections={this.state.contacts}
-                            renderItem={({item}) => <Text style={styles.item}>{item.fullName}</Text>}
-                            renderSectionHeader={({section}) => <Text style={styles.sectionHeader}>{section.title}</Text>}
-                            keyExtractor={(item, index) => index}
-                        />
+                                )}
+                                renderSectionHeader={({section}) => (
+                                    <View style={styles.invitationsView}>
+                                        { (invitationsCount !== 0) ? (
+                                            <React.Fragment>
+                                                <Text style={styles.sectionInvitationsHeader}>{section.title}</Text>
+                                                <Badge style={styles.invitationsViewBadge}>
+                                                    <Text>{invitationsCount}</Text>
+                                                </Badge>
+                                            </React.Fragment>
+                                        ) : null}
+                                    </View>
+                                )}
+                                keyExtractor={(item, index) => index}
+                            />
+                        ) : null }
+                        { contactsLoaded ? (
+                            <SectionList
+                                sections={this.state.contacts}
+                                renderItem={({item}) => <Text style={styles.item}>{item.fullName}</Text>}
+                                renderSectionHeader={({section}) => <Text style={styles.sectionHeader}>{section.title}</Text>}
+                                keyExtractor={(item, index) => index}
+                            />
+                        ) : null }
                     </View>
                 ) : (null) }
             </ScrollView>

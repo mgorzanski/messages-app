@@ -7,6 +7,9 @@ import * as globalStyles from './../../styles/globalStyles';
 import MessagesApi from './../../api/MessagesApi';
 import AsyncImage from './../../components/AsyncImage';
 import { connect } from 'react-redux';
+import * as pushNotifications from './../../pushNotifications';
+import { socketUrl } from './../../config/socket';
+import io from 'socket.io-client';
 
 class Messages extends React.PureComponent {
     constructor(props) {
@@ -17,8 +20,11 @@ class Messages extends React.PureComponent {
             refreshing: false,
             threadsList: [],
             render: false,
-            showToast: false
+            showToast: false,
+            sockets: []
         };
+
+        this.socket = io(socketUrl);
     }
 
     componentDidMount() {
@@ -36,7 +42,21 @@ class Messages extends React.PureComponent {
                 text: 'Cannot get any threads',
                 buttonText: 'Close'
             }))
-            .then(() => this.setState({ threadsList: this.state.threads.map((thread) => <Message key={thread._id} navigation={this.props.navigation} name={thread.name} message={thread.lastMessageText} date={thread.lastMessageDate} threadId={thread._id} userId={thread.userId} />)}));
+            .then(() => this.setState({ threadsList: this.state.threads.map((thread) => <Message key={thread._id} navigation={this.props.navigation} name={thread.name} message={thread.lastMessageText} date={thread.lastMessageDate} threadId={thread._id} userId={thread.userId} />)}))
+            .then(() => {
+                const sockets = this.state.sockets.slice();
+                this.state.threads.forEach((thread) => {
+                    if (sockets[thread._id] === undefined) {
+                        sockets[thread._id] = this.socket.on(`new-message-threadId-${thread._id}`, (data) => {
+                            if (data.userId !== this.props.user.data.userId) {
+                                pushNotifications.newMessageNotification(data);
+                                this.getThreads();
+                            }
+                        });
+                        this.setState({ sockets });
+                    }
+                });
+            });
     }
 
     static navigationOptions = ({ navigation }) => ({
@@ -75,6 +95,7 @@ class Messages extends React.PureComponent {
 
     render() {
         const render = this.state.render;
+
         return (
             <Container style={styles.home}>
                 { render ? (

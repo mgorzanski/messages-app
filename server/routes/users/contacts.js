@@ -6,9 +6,11 @@ module.exports = {
 			if (error) res.sendStatus(500);
 			const contactsDetails = new Array();
 			(async function() {
-				for (let contact of results[0].contacts) {
-					const details = await db.collection('users').findOne({ _id: ObjectId(contact)});
-					contactsDetails.push(details);
+				if (results[0].contacts.length) {
+					for (let contact of results[0].contacts) {
+						const details = await db.collection('users').findOne({ _id: ObjectId(contact)});
+						contactsDetails.push(details);
+					}
 				}
 			})().then(() => res.status(200).send(contactsDetails));
 		});
@@ -43,6 +45,9 @@ module.exports = {
 			Promise.all(users)
 					.then((users) => {
 						res.status(200).send({ invitations: users });
+					})
+					.catch(() => {
+						res.status(200).send({ invitations: [] });
 					})
 					.catch((error) => {
 						res.status(500).send(error);
