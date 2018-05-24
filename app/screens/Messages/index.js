@@ -25,6 +25,7 @@ class Messages extends React.PureComponent {
         };
 
         this.socket = io(socketUrl);
+        this.allSockets = [];
     }
 
     componentDidMount() {
@@ -44,16 +45,14 @@ class Messages extends React.PureComponent {
             }))
             .then(() => this.setState({ threadsList: this.state.threads.map((thread) => <Message key={thread._id} navigation={this.props.navigation} name={thread.name} message={thread.lastMessageText} date={thread.lastMessageDate} threadId={thread._id} userId={thread.userId} />)}))
             .then(() => {
-                const sockets = this.state.sockets.slice();
                 this.state.threads.forEach((thread) => {
-                    if (sockets[thread._id] === undefined) {
-                        sockets[thread._id] = this.socket.on(`new-message-threadId-${thread._id}`, (data) => {
+                    if (this.allSockets[thread._id] === undefined) {
+                        this.allSockets[thread._id] = this.socket.on(`new-message-threadId-${thread._id}`, (data) => {
                             if (data.userId !== this.props.user.data.userId) {
                                 pushNotifications.newMessageNotification(data);
                                 this.getThreads();
                             }
                         });
-                        this.setState({ sockets });
                     }
                 });
             });
