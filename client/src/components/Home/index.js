@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import './index.css';
 import HeaderBar from './HeaderBar';
-import HeaderNav from './HeaderNav';
 import BottomBar from './BottomBar';
-import BottomNav from './BottomNav';
 import UserInfo from './UserInfo';
-import Nav from './Nav';
 import Thread from './Thread';
+import Sidebar from './../Sidebar';
 
 class Home extends Component {
     render() {
@@ -20,11 +18,7 @@ class Home extends Component {
                     </section>
                     <BottomBar />
                 </main>
-                <aside className="sidebar">
-                    <HeaderNav />
-                    <Nav />
-                    <BottomNav />
-                </aside>
+                <Sidebar />
             </React.Fragment>
         );
     }
