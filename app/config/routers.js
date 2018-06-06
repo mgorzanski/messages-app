@@ -50,12 +50,5 @@ export const mainRouterConfig = {
     navigationOptions: {
       headerStyle: globalStyles.headerStyle,
       headerTitleStyle: globalStyles.headerTitleStyle
-    },
-    // transitionConfig: () => ({
-    //   transitionSpec: {
-    //     duration: 0,
-    //     timing: Animated.timing,
-    //     easing: Easing.step0
-    //   }
-    // })
+    }
   }

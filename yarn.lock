@@ -1337,7 +1337,7 @@ collection-visit@^1.0.0:
     map-visit "^1.0.0"
     object-visit "^1.0.0"
 
-color-convert@^1.8.2, color-convert@^1.9.0, color-convert@^1.9.1:
+color-convert@^1.8.2, color-convert@^1.9.0:
   version "1.9.1"
   resolved "https://registry.yarnpkg.com/color-convert/-/color-convert-1.9.1.tgz#c1261107aeb2f294ebffec9ed9ecad529a6097ed"
   dependencies:
@@ -1347,7 +1347,7 @@ color-name@^1.0.0, color-name@^1.1.1:
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/color-name/-/color-name-1.1.3.tgz#a7d0558bd89c42f795dd42328f740831ca53bc25"
 
-color-string@^1.4.0, color-string@^1.5.2:
+color-string@^1.4.0:
   version "1.5.2"
   resolved "https://registry.yarnpkg.com/color-string/-/color-string-1.5.2.tgz#26e45814bc3c9a7cbd6751648a41434514a773a9"
   dependencies:
@@ -1357,13 +1357,6 @@ color-string@^1.4.0, color-string@^1.5.2:
 color-support@^1.1.3:
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/color-support/-/color-support-1.1.3.tgz#93834379a1cc9a0c61f82f52f0d04322251bd5a2"
-
-color@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/color/-/color-2.0.1.tgz#e4ed78a3c4603d0891eba5430b04b86314f4c839"
-  dependencies:
-    color-convert "^1.9.1"
-    color-string "^1.5.2"
 
 color@~1.0.3:
   version "1.0.3"
@@ -1537,7 +1530,7 @@ create-react-class@^15.5.2:
     loose-envify "^1.3.1"
     object-assign "^4.1.1"
 
-create-react-context@^0.2.1, create-react-context@^0.2.2:
+create-react-context@^0.2.1:
   version "0.2.2"
   resolved "https://registry.yarnpkg.com/create-react-context/-/create-react-context-0.2.2.tgz#9836542f9aaa22868cd7d4a6f82667df38019dca"
   dependencies:
@@ -1607,10 +1600,6 @@ decode-uri-component@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/decode-uri-component/-/decode-uri-component-0.2.0.tgz#eb3913333458775cb84cd1a1fae062106bb87545"
 
-deep-diff@^0.3.5:
-  version "0.3.8"
-  resolved "https://registry.yarnpkg.com/deep-diff/-/deep-diff-0.3.8.tgz#c01de63efb0eec9798801d40c7e0dae25b582c84"
-
 deep-extend@^0.5.1:
   version "0.5.1"
   resolved "https://registry.yarnpkg.com/deep-extend/-/deep-extend-0.5.1.tgz#b894a9dd90d3023fbf1c55a394fb858eb2066f1f"
@@ -1618,10 +1607,6 @@ deep-extend@^0.5.1:
 deep-is@~0.1.3:
   version "0.1.3"
   resolved "https://registry.yarnpkg.com/deep-is/-/deep-is-0.1.3.tgz#b369d6fb5dbc13eecf524f91b070feedc357cf34"
-
-deepmerge@^2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/deepmerge/-/deepmerge-2.1.0.tgz#511a54fff405fc346f0240bb270a3e9533a31102"
 
 define-properties@^1.1.2:
   version "1.1.2"
@@ -2481,11 +2466,17 @@ iconv-lite@0.4.13:
   version "0.4.13"
   resolved "https://registry.yarnpkg.com/iconv-lite/-/iconv-lite-0.4.13.tgz#1f88aba4ab0b1508e8312acc39345f36e992e2f2"
 
-iconv-lite@^0.4.17, iconv-lite@^0.4.4, iconv-lite@~0.4.13:
+iconv-lite@^0.4.17, iconv-lite@^0.4.4:
   version "0.4.21"
   resolved "https://registry.yarnpkg.com/iconv-lite/-/iconv-lite-0.4.21.tgz#c47f8733d02171189ebc4a400f3218d348094798"
   dependencies:
     safer-buffer "^2.1.0"
+
+iconv-lite@~0.4.13:
+  version "0.4.23"
+  resolved "https://registry.yarnpkg.com/iconv-lite/-/iconv-lite-0.4.23.tgz#297871f63be507adcfbfca715d0cd0eed84e9a63"
+  dependencies:
+    safer-buffer ">= 2.1.2 < 3"
 
 ignore-walk@^3.0.1:
   version "3.0.1"
@@ -3838,13 +3829,9 @@ react-devtools-core@3.0.0:
     shell-quote "^1.6.1"
     ws "^2.0.3"
 
-react-lifecycles-compat@^1.0.2:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-1.1.0.tgz#6641d0709bd5505329b5c90322147ef2d343485c"
-
-react-lifecycles-compat@^3.0.2:
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.2.tgz#7279047275bd727a912e25f734c0559527e84eff"
+react-lifecycles-compat@^3, react-lifecycles-compat@^3.0.4:
+  version "3.0.4"
+  resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
 
 react-native-dismiss-keyboard@1.0.0:
   version "1.0.0"
@@ -3886,15 +3873,9 @@ react-native-keyboard-aware-scroll-view@0.5.0:
     prop-types "^15.6.0"
     react-native-iphone-x-helper "^1.0.1"
 
-react-native-paper@^1.2.5:
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/react-native-paper/-/react-native-paper-1.5.0.tgz#36bf1b9e6aeb86b208f52c85312bfd41834963ca"
-  dependencies:
-    color "^2.0.1"
-    create-react-context "^0.2.2"
-    deepmerge "^2.1.0"
-    hoist-non-react-statics "^2.5.0"
-    react-lifecycles-compat "^3.0.2"
+react-native-push-notification@^3.0.2:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/react-native-push-notification/-/react-native-push-notification-3.0.2.tgz#3fa7d654cfd915436597b0dd5ba8b0f898c4b0f5"
 
 react-native-safe-area-view@^0.7.0:
   version "0.7.0"
@@ -3902,17 +3883,23 @@ react-native-safe-area-view@^0.7.0:
   dependencies:
     hoist-non-react-statics "^2.3.1"
 
-react-native-tab-view@react-navigation/react-native-tab-view:
-  version "0.0.74"
-  resolved "https://codeload.github.com/react-navigation/react-native-tab-view/tar.gz/36ebd834d78b841fc19778c966465d02fd1213bb"
+react-native-safe-area-view@^0.8.0:
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/react-native-safe-area-view/-/react-native-safe-area-view-0.8.0.tgz#22d78cb8e8658d04a10cd53c1546e0bc86cb7aea"
   dependencies:
-    prop-types "^15.6.0"
+    hoist-non-react-statics "^2.3.1"
 
-react-native-tab-view@~0.0.77:
+react-native-tab-view@^0.0.77:
   version "0.0.77"
   resolved "https://registry.yarnpkg.com/react-native-tab-view/-/react-native-tab-view-0.0.77.tgz#11ceb8e7c23100d07e628dc151b57797524d00d4"
   dependencies:
     prop-types "^15.6.0"
+
+react-native-tab-view@^1.0.0:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/react-native-tab-view/-/react-native-tab-view-1.0.2.tgz#66e0bc6d38a227ed2b212e3a256b7902f6ce02ed"
+  dependencies:
+    prop-types "^15.6.1"
 
 react-native-vector-icons@~4.5.0:
   version "4.5.0"
@@ -3981,41 +3968,40 @@ react-native@0.52.0:
     xmldoc "^0.4.0"
     yargs "^9.0.0"
 
-react-navigation-deprecated-tab-navigator@1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/react-navigation-deprecated-tab-navigator/-/react-navigation-deprecated-tab-navigator-1.0.1.tgz#a869d749d16116630411d6c7761c51484ba90175"
+react-navigation-deprecated-tab-navigator@1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/react-navigation-deprecated-tab-navigator/-/react-navigation-deprecated-tab-navigator-1.3.0.tgz#015dcae1e977b984ca7e99245261c15439026bb7"
   dependencies:
-    react-native-tab-view react-navigation/react-native-tab-view
+    react-native-tab-view "^0.0.77"
 
 react-navigation-slide-from-right-transition@^1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/react-navigation-slide-from-right-transition/-/react-navigation-slide-from-right-transition-1.0.4.tgz#e189b1e6e7d107cf32f6d5c07271a415646abc68"
 
-react-navigation-tabs@0.1.0-alpha.6:
-  version "0.1.0-alpha.6"
-  resolved "https://registry.yarnpkg.com/react-navigation-tabs/-/react-navigation-tabs-0.1.0-alpha.6.tgz#2d10b41f8406e4be7b48f53df60c8f78fdd0c8fb"
+react-navigation-tabs@0.5.0:
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/react-navigation-tabs/-/react-navigation-tabs-0.5.0.tgz#74d5511270742a0b67c46fe65a1b19e553763819"
   dependencies:
     hoist-non-react-statics "^2.5.0"
-    prop-types "^15.6.0"
-    react-lifecycles-compat "^1.0.2"
-    react-native-paper "^1.2.5"
+    prop-types "^15.6.1"
+    react-lifecycles-compat "^3.0.4"
     react-native-safe-area-view "^0.7.0"
-    react-native-tab-view "~0.0.77"
+    react-native-tab-view "^1.0.0"
 
-react-navigation@2.0.0-rc.1:
-  version "2.0.0-rc.1"
-  resolved "https://registry.yarnpkg.com/react-navigation/-/react-navigation-2.0.0-rc.1.tgz#6ac73e3596979b19a6122927ebc29635ed9b3403"
+react-navigation@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/react-navigation/-/react-navigation-2.2.0.tgz#d220ba1d1168252809c72d6d849ef4ac901773a3"
   dependencies:
     clamp "^1.0.1"
     create-react-context "^0.2.1"
     hoist-non-react-statics "^2.2.0"
     path-to-regexp "^1.7.0"
     prop-types "^15.5.10"
-    react-lifecycles-compat "^1.0.2"
+    react-lifecycles-compat "^3"
     react-native-drawer-layout-polyfill "^1.3.2"
-    react-native-safe-area-view "^0.7.0"
-    react-navigation-deprecated-tab-navigator "1.0.1"
-    react-navigation-tabs "0.1.0-alpha.6"
+    react-native-safe-area-view "^0.8.0"
+    react-navigation-deprecated-tab-navigator "1.3.0"
+    react-navigation-tabs "0.5.0"
 
 react-proxy@^1.1.7:
   version "1.1.8"
@@ -4105,12 +4091,6 @@ readable-stream@~1.1.8, readable-stream@~1.1.9:
     inherits "~2.0.1"
     isarray "0.0.1"
     string_decoder "~0.10.x"
-
-redux-logger@^3.0.6:
-  version "3.0.6"
-  resolved "https://registry.yarnpkg.com/redux-logger/-/redux-logger-3.0.6.tgz#f7555966f3098f3c88604c449cf0baf5778274bf"
-  dependencies:
-    deep-diff "^0.3.5"
 
 redux@^3.7.2:
   version "3.7.2"
@@ -4302,7 +4282,7 @@ safe-regex@^1.1.0:
   dependencies:
     ret "~0.1.10"
 
-safer-buffer@^2.1.0:
+"safer-buffer@>= 2.1.2 < 3", safer-buffer@^2.1.0:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/safer-buffer/-/safer-buffer-2.1.2.tgz#44fa161b0187b9549dd84bb91802f9bd8385cd6a"
 
