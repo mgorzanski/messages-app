@@ -86,6 +86,15 @@ class App extends React.PureComponent {
               More: { screen: Menu }
         }, mainRouterConfig);
 
+        MainRouter.navigationOptions = ({ navigation }) => {
+            let { routeName } = navigation.state.routes[navigation.state.index];
+            let headerTitle = routeName;
+
+            return {
+                headerTitle
+            };
+        };
+
         const AppRouter = createStackNavigator({
             MainRouter: { screen: MainRouter },
             MessageThread: { screen: MessageThread },
