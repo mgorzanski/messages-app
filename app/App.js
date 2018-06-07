@@ -1,5 +1,5 @@
 import React from 'react';
-import { StatusBar, AsyncStorage, AppState, TouchableHighlight, View } from 'react-native';
+import { StatusBar, AsyncStorage, AppState } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
 //import AuthLocal from './utils/AuthLocal';
@@ -21,9 +21,6 @@ import AddContact from './screens/Contacts/AddContact';
 import Informations from './screens/Menu/Informations';
 import SearchMessages from './screens/Messages/SearchMessages';
 import NewMessage from './screens/Messages/NewMessage';
-
-import * as globalStyles from './styles/globalStyles';
-import AsyncImage from './components/AsyncImage';
 
 class App extends React.PureComponent {
     constructor(props) {
@@ -110,17 +107,17 @@ class App extends React.PureComponent {
                 <Root>
                     <Provider store={store}>
                         {renderView && userLogged ? (
-                            <React.Fragment>
+                            <Root>
                                 <StatusBar
                                     backgroundColor="#1e1e1e"
                                     barStyle="light-content"
                                 />
                                 <AppRouter />
-                            </React.Fragment>
+                            </Root>
                         ) : (
-                            <React.Fragment>
+                            <Root>
                                 <Login onUserLogin={this.handleLogin.bind(this)} />
-                            </React.Fragment>
+                            </Root>
                         )}
                     </Provider>
                 </Root>
