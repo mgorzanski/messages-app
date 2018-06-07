@@ -1,8 +1,7 @@
 import React from 'react';
-import { View, StyleSheet, TouchableHighlight } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { Text, Badge, Container, Content, List, ListItem, Left, Body, Right } from 'native-base';
 import * as globalStyles from './../../styles/globalStyles';
-import Icon from './../../utils/Icon';
 import AsyncImage from './../../components/AsyncImage';
 
 export default class Groups extends React.PureComponent {
@@ -20,18 +19,7 @@ export default class Groups extends React.PureComponent {
                 </Badge>
             </View>
         ),
-
-        title: "Groups",
-        headerStyle: globalStyles.headerStyle,
-        headerTitleStyle: globalStyles.headerTitleStyle,
-        headerRight: (
-            <View style={globalStyles.iconSpacingRight}>
-                <TouchableHighlight onPress={() =>
-                    this.props.navigation.navigate('AddGroup')
-                }>
-                    <Icon family="MaterialIcons" name="group-add" style={globalStyles.vectorIcon} />
-                </TouchableHighlight>
-            </View>)
+        title: "Groups"
     };
 
     constructor(props) {

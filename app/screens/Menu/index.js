@@ -14,8 +14,7 @@ export default class Menu extends React.PureComponent {
                 placeholderColor='#1e1e1e'
             />
         ),
-
-        title: "More",
+        title: "More"
     };
 
     constructor(props) {

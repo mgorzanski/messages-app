@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, TouchableHighlight, RefreshControl } from 'react-native';
+import { StyleSheet, TouchableHighlight, RefreshControl } from 'react-native';
 import { Container, Content, List, Toast } from 'native-base';
 import Message from './Message';
 import UserPanel from './UserPanel';
@@ -58,7 +58,7 @@ class Messages extends React.PureComponent {
             });
     }
 
-    static navigationOptions = ({ navigation }) => ({
+    static navigationOptions = () => ({
         tabBarLabel: '',
         tabBarIcon: () => (
             <AsyncImage
@@ -67,29 +67,7 @@ class Messages extends React.PureComponent {
                 placeholderColor='#1e1e1e'
             />
         ),
-        title: "Messages",
-        headerRight: (
-            <View style={globalStyles.headerMultipleIcons}>
-                <TouchableHighlight onPress={() =>
-                    navigation.navigate('SearchMessages')
-                } style={globalStyles.headerIcon}>
-                    <AsyncImage 
-                        source={require('./../../img/icons/search.png')}
-                        style={globalStyles.icon}
-                        placeholderColor={globalStyles.$headerBackgroundColor}
-                    />
-                </TouchableHighlight>
-                <TouchableHighlight onPress={() =>
-                    navigation.navigate('NewMessage')
-                } style={globalStyles.headerIcon}>
-                    <AsyncImage 
-                        source={require('./../../img/icons/add.png')}
-                        style={globalStyles.icon}
-                        placeholderColor={globalStyles.$headerBackgroundColor}
-                    />
-                </TouchableHighlight>
-            </View>
-        )
+        title: "Messages"
     });
 
     render() {

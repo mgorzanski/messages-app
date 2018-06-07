@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import ContactsApi from './../../api/ContactsApi';
 
 class Contacts extends React.PureComponent {
-    static navigationOptions = ({ navigation }) => ({
+    static navigationOptions = () => ({
         tabBarLabel: '',
         tabBarIcon: () => (
             <View>
@@ -22,19 +22,7 @@ class Contacts extends React.PureComponent {
                 </Badge>
             </View>
         ),
-        title: "Contacts",
-        headerRight: (
-            <View style={globalStyles.iconSpacingRight}>
-                <TouchableHighlight onPress={() =>
-                    navigation.navigate('AddContact')
-                }>
-                    <AsyncImage 
-                        source={require('./../../img/icons/add-user.png')}
-                        style={globalStyles.icon}
-                        placeholderColor={globalStyles.$headerBackgroundColor}
-                    />
-                </TouchableHighlight>
-            </View>)
+        title: "Contacts"
     });
 
     constructor(props) {
