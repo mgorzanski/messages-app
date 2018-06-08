@@ -137,5 +137,27 @@ module.exports = {
 				res.status(200).send({ message: 'Invitation already sent', success: false });
 			}
 		});
+	},
+
+	deleteContact(req, res, db) {
+		const sendNotification = (error) => {
+			if (error) res.send(500);
+			res.status(200).send('Contact has been successfully deleted');
+		};
+
+		const deleteContactById = () => {
+			db.collection('users').update(
+				{ _id: ObjectId(req.params.userId) },
+				{ $pull:
+					{ 'contacts':
+						ObjectId(req.params.contactId)
+					}
+				}, (error) => sendNotification(error)
+			);
+		};
+
+		if(db.collection('users').findOne({ _id: ObjectId(req.params.userId), contacts: { $elemMatch: { $in: [ObjectId(req.params.contactId)]}}})) {
+			deleteContactById();
+		}
 	}
 };

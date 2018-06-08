@@ -94,12 +94,22 @@ class Contacts extends React.PureComponent {
             positiveText: '',
             items: [
                 { label: 'Edit', id: 'edit' },
-                { label: 'Delete', id: 'detele '}
+                { label: 'Delete', id: 'delete' }
             ]
         });
 
-        if (selectedItem) {
-            console.log('a');
+        if (selectedItem && selectedItem.id === 'delete') {
+            ContactsApi.deleteContact(this.props.user.data.token, this.props.user.data.userId, contactId)
+                .then(() => {
+                    this.getContacts();
+                    Toast.show({
+                        text: 'Contact has been successfully deleted',
+                        buttonText: 'Close'
+                    });
+                }).catch(() => Toast.show({
+                    text: 'An error occurred',
+                    buttonText: 'Close'
+                }));
         }
     }
 

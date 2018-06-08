@@ -42,6 +42,7 @@ MongoClient.connect(config.mongodb, (err, db) => {
 
     //User data routes
     app.get('/users/:userId/contacts', verifyToken, (req, res) => routes.users.contacts.getContacts(req, res, db));
+    app.delete('/users/:userId/contacts/:contactId', verifyToken, (req, res) => routes.users.contacts.deleteContact(req,res, db));
     app.get('/users/:userId/contacts/invitations', verifyToken, (req, res) => routes.users.contacts.getInvitations(req, res, db));
     app.put('/users/:userId/contacts/invitations/:inviterId', verifyToken, (req, res) => routes.users.contacts.acceptInvitation(req, res, db));
     app.put('/users/:userId/contacts/invitations', verifyToken, (req, res) => routes.users.contacts.sendInvitation(req, res, db));

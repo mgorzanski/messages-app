@@ -93,4 +93,14 @@ export default class ContactsApi {
         });
         return list;
     }
+
+    static async deleteContact(token, userId, contactId) {
+        await fetch(`${serverUrl}/users/${userId}/contacts/${contactId}`, {
+            method: 'delete',
+            headers: new Headers({
+                'Content-Type': 'application/json',
+                'x-access-token': token
+            })
+        });
+    }
 }
