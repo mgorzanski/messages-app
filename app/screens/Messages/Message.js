@@ -8,7 +8,7 @@ export default class Message extends React.PureComponent {
     constructor(props) {
         super(props);
         this.state = {
-            render: false
+            render: true
         }
     }
 

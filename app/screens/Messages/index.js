@@ -19,7 +19,7 @@ class Messages extends React.PureComponent {
             threads: [],
             refreshing: false,
             threadsList: [],
-            render: false,
+            render: true,
             showToast: false,
             sockets: []
         };

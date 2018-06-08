@@ -30,13 +30,14 @@ class App extends React.PureComponent {
         userLogged: true,
         renderView: false,
         isStoreLoading: false,
-        store: store()
+        store: store(),
+        appState: AppState.currentState
       }
 
       this.socket = io(socketUrl);
     }
 
-    componentWillMount() {
+    componentDidMount() {
       const self = this;
       this.setState({ isStoreLoading: true });
       AsyncStorage.getItem('completeStore').then((value) => {
@@ -65,8 +66,8 @@ class App extends React.PureComponent {
         AppState.removeEventListener('change', this._handleAppStateChange.bind(this));
     }
 
-    _handleAppStateChange(currentAppState) {
-        if (currentAppState === 'background') {
+    _handleAppStateChange(nextAppState) {
+        if (this.state.appState === 'active' && nextAppState === 'background') {
             let storingValue = JSON.stringify(this.state.store.getState());
             AsyncStorage.setItem('completeStore', storingValue);
         }
@@ -101,7 +102,7 @@ class App extends React.PureComponent {
         }, appRouterConfig);
 
         if (isStoreLoading) {
-            return (<Root></Root>);
+            return null;
         } else {
             return (
                 <Root>
