@@ -8,26 +8,11 @@ export default class Profile extends React.PureComponent {
         headerTintColor: globalStyles.$white
     });
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            render: false
-        }
-    }
-
-    componentDidMount() {
-        setTimeout(() => {this.setState({render: true})}, 200);
-    }
-
     render() {
-        const render = this.state.render;
-        if (render) {
-            return (
-                <ScrollView>
-                    <Text>Test</Text>
-                </ScrollView>
-            );
-        }
-        return (null);
+        return (
+            <ScrollView>
+                <Text>Test</Text>
+            </ScrollView>
+        );
     }
 }

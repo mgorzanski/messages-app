@@ -81,10 +81,10 @@ class App extends React.PureComponent {
         const { userLogged, renderView, isStoreLoading, store } = this.state;
 
         const MainRouter = createMaterialBottomTabNavigator({
-              Messages: { screen: Messages },
-              Contacts: { screen: Contacts },
-              Groups: { screen: Groups },
-              More: { screen: Menu }
+              Messages: Messages,
+              Contacts: Contacts,
+              Groups: Groups,
+              More: Menu
         }, mainRouterConfig);
 
         MainRouter.navigationOptions = ({ navigation }) => {
@@ -92,13 +92,13 @@ class App extends React.PureComponent {
         };
 
         const AppRouter = createStackNavigator({
-            MainRouter: { screen: MainRouter },
-            MessageThread: { screen: MessageThread },
-            Profile: { screen: Profile },
-            AddContact: { screen: AddContact },
-            Informations: { screen: Informations },
-            SearchMessages: { screen: SearchMessages },
-            NewMessage: { screen: NewMessage }
+            MainRouter: MainRouter ,
+            MessageThread: MessageThread,
+            Profile: Profile,
+            AddContact: AddContact,
+            Informations: Informations,
+            SearchMessages: SearchMessages,
+            NewMessage: NewMessage
         }, appRouterConfig);
 
         if (isStoreLoading) {

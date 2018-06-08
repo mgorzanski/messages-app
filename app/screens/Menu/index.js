@@ -17,46 +17,32 @@ export default class Menu extends React.PureComponent {
         title: "More"
     };
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            render: false
-        }
-    }
-
-    componentDidMount() {
-        setTimeout(() => {this.setState({render: true})}, 50);
-    }
-
     render() {
-        const render = this.state.render;
         return (
             <ScrollView style={styles.settings}>
-                { render ? (
-                    <View style={styles.container}>
-                        <SectionList
-                            sections={[
-                                {title: 'My account', data: [{title: 'My profile', screen: 'Profile'}, {title: 'Logout', action: () => AuthLocal.deauthenticate}]},
-                                {title: 'Settings', data: [{title: 'Notifications settings', screen: ''}]},
-                                {title: 'About app', data: [{title: 'Informations', screen: 'Informations'}]}
-                            ]}
-                            renderItem={({item}) => (
-                                <TouchableHighlight onPress={() => {
-                                        if (item.screen) {
-                                            this.props.navigation.navigate(item.screen)
-                                        } else {
-                                            item.action();
-                                        }
+                <View style={styles.container}>
+                    <SectionList
+                        sections={[
+                            {title: 'My account', data: [{title: 'My profile', screen: 'Profile'}, {title: 'Logout', action: () => AuthLocal.deauthenticate}]},
+                            {title: 'Settings', data: [{title: 'Notifications settings', screen: ''}]},
+                            {title: 'About app', data: [{title: 'Informations', screen: 'Informations'}]}
+                        ]}
+                        renderItem={({item}) => (
+                            <TouchableHighlight onPress={() => {
+                                    if (item.screen) {
+                                        this.props.navigation.navigate(item.screen)
+                                    } else {
+                                        item.action();
                                     }
-                                } underlayColor="#414141">
-                                    <Text style={styles.item}>{item.title}</Text>
-                                </TouchableHighlight>
-                            )}
-                            renderSectionHeader={({section}) => <Text style={styles.sectionHeader}>{section.title}</Text>}
-                            keyExtractor={(item, index) => index}
-                        />
-                    </View>
-                ) : null }
+                                }
+                            } underlayColor="#414141">
+                                <Text style={styles.item}>{item.title}</Text>
+                            </TouchableHighlight>
+                        )}
+                        renderSectionHeader={({section}) => <Text style={styles.sectionHeader}>{section.title}</Text>}
+                        keyExtractor={(item, index) => index}
+                    />
+                </View>
             </ScrollView>
         );
     }

@@ -5,24 +5,11 @@ import { ListItem, Text, Body, Left, Right } from 'native-base';
 import AsyncImage from './../../components/AsyncImage';
 
 export default class Message extends React.PureComponent {
-    constructor(props) {
-        super(props);
-        this.state = {
-            render: true
-        }
-    }
-
-    componentDidMount() {
-        setTimeout(() => {this.setState({render: true})}, 100);
-    }
-
     render() {
-        const render = this.state.render;
         const time = new Date(this.props.date);
         const hours = time.getHours();
         const minutes = time.getMinutes();
 
-        if (render) {
         return (
             <ListItem avatar onPress={() => this.props.navigation.navigate('MessageThread', {name: this.props.name, threadId: this.props.threadId, userId: this.props.userId})}>
                 <Left>
@@ -45,8 +32,6 @@ export default class Message extends React.PureComponent {
                 </Right>
             </ListItem>
         );
-        }
-        return (null);
     }
 }
 

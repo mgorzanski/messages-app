@@ -9,37 +9,22 @@ export default class SearchMessages extends React.Component {
         header:  null
     };
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            render: false
-        }
-    }
-
-    componentDidMount() {
-        setTimeout(() => {this.setState({render: true})}, 50);
-    }
-
     render() {
-        const render = this.state.render;
-        if (render) {
-            return (
-                <Container>
-                    <Header searchBar rounded style={styles.header} androidStatusBarColor={globalStyles.$headerBackgroundColor}>
-                        <Item>
-                            <Icon family="MaterialIcons" name="search" />
-                            <Input placeholder="Search messages" />
-                        </Item>
-                    </Header>
-                    <Content style={styles.content}>
-                        <Button full dark onPress={() => this.props.navigation.goBack()}>
-                            <Text>Back</Text>
-                        </Button>
-                    </Content>
-                </Container>
-            );
-        }
-        return (null);
+        return (
+            <Container>
+                <Header searchBar rounded style={styles.header} androidStatusBarColor={globalStyles.$headerBackgroundColor}>
+                    <Item>
+                        <Icon family="MaterialIcons" name="search" />
+                        <Input placeholder="Search messages" />
+                    </Item>
+                </Header>
+                <Content style={styles.content}>
+                    <Button full dark onPress={() => this.props.navigation.goBack()}>
+                        <Text>Back</Text>
+                    </Button>
+                </Content>
+            </Container>
+        );
     }
 }
 

@@ -19,7 +19,6 @@ class MessageThread extends React.PureComponent {
     constructor(props) {
         super(props);
         this.state = {
-            render: false,
             data: { threadId: this.props.navigation.state.params.threadId, userId: this.props.user.data.userId, message: '' },
             showToast: false,
             messages: [],
@@ -54,12 +53,7 @@ class MessageThread extends React.PureComponent {
         .then(() => this.setState({ messagesLoaded: true }));
     }
 
-    componentDidMount() {
-        setTimeout(() => {this.setState({render: true})}, 500);
-    }
-
     render() {
-        const render = this.state.render;
         const messagesList = this.state.messagesList;
         const messagesLoaded = this.state.messagesLoaded;
 
@@ -69,8 +63,7 @@ class MessageThread extends React.PureComponent {
 
         return (
             <Container style={styles.container}>
-                { render ? (
-                    <React.Fragment>
+                <React.Fragment>
                     <Content
                         style={styles.thread}
                         ref={c => this.component = c}>
@@ -101,7 +94,6 @@ class MessageThread extends React.PureComponent {
                         }}><Text>Send</Text></Button>
                     </Form>
                 </React.Fragment>
-                ) : null }
             </Container>
         );
     }

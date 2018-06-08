@@ -4,28 +4,13 @@ import * as globalStyles from './../../styles/globalStyles';
 import { connect } from 'react-redux';
 
 class UserPanel extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            render: true
-        }
-    }
-
-    componentDidMount() {
-        setTimeout(() => {this.setState({render: true})}, 100);
-    }
-
     render() {
-        const render = this.state.render;
-        if (render) {
-            return (
-                <View style={styles.panel}>
-                    <Text style={styles.userName}>{this.props.user.data.fullName.toUpperCase()}</Text>
-                    <Image source={require('./../../img/icons/arrow.png')} style={styles.shortcut} placeholderColor={globalStyles.$userPanelBackgroundColor} />
-                </View>
-            );
-        }
-        return (null);
+        return (
+            <View style={styles.panel}>
+                <Text style={styles.userName}>{this.props.user.data.fullName.toUpperCase()}</Text>
+                <Image source={require('./../../img/icons/arrow.png')} style={styles.shortcut} placeholderColor={globalStyles.$userPanelBackgroundColor} />
+            </View>
+        );
     }
 }
 

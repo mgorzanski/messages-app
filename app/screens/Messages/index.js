@@ -19,17 +19,12 @@ class Messages extends React.PureComponent {
             threads: [],
             refreshing: false,
             threadsList: [],
-            render: true,
             showToast: false,
             sockets: []
         };
 
         this.socket = io(socketUrl);
         this.allSockets = [];
-    }
-
-    componentDidMount() {
-        setTimeout(() => {this.setState({render: true})}, 100);
     }
 
     componentWillMount() {
@@ -71,24 +66,20 @@ class Messages extends React.PureComponent {
     });
 
     render() {
-        const render = this.state.render;
-
         return (
             <Container style={styles.home}>
-                { render ? (
-                    <Content refreshControl={
-                        <RefreshControl refreshing={this.state.refreshing} onRefresh={() => this.getThreads()} />
+                <Content refreshControl={
+                    <RefreshControl refreshing={this.state.refreshing} onRefresh={() => this.getThreads()} />
+                }>
+                    <TouchableHighlight onPress={() => 
+                        this.props.navigation.navigate('Profile')
                     }>
-                        <TouchableHighlight onPress={() => 
-                            this.props.navigation.navigate('Profile')
-                        }>
-                            <UserPanel />
-                        </TouchableHighlight>
-                        <List>
-                            {this.state.threadsList}
-                        </List>
-                    </Content>
-                ) : (null) }
+                        <UserPanel />
+                    </TouchableHighlight>
+                    <List>
+                        {this.state.threadsList}
+                    </List>
+                </Content>
             </Container>
         );
     }

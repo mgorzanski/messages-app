@@ -16,15 +16,10 @@ class AddContact extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            render: false,
             contacts: [],
             searchPerformed: false,
             showToast: false
         }
-    }
-
-    componentDidMount() {
-        setTimeout(() => {this.setState({render: true})}, 50);
     }
 
     searchUsers(searchQuery) {
@@ -59,7 +54,6 @@ class AddContact extends React.Component {
     }
 
     render() {
-        const render = this.state.render;
         let contacts = this.state.contacts;
         const searchPerformed = this.state.searchPerformed;
 
@@ -76,26 +70,23 @@ class AddContact extends React.Component {
             </ListItem>
         );
 
-        if (render) {
-            return (
-                <Container>
-                    <Header searchBar rounded style={styles.header} androidStatusBarColor={globalStyles.$headerBackgroundColor}>
-                        <Item>
-                            <Icon family="MaterialIcons" name="search" />
-                            <Input placeholder="Search users" onSubmitEditing={(event) => {
-                                this.searchUsers(event.nativeEvent.text);
-                            }} />
-                        </Item>
-                    </Header>
-                    <Content>
-                        <List>
-                            { searchPerformed ? contacts : null }
-                        </List>
-                    </Content>
-                </Container>
-            );
-        }
-        return (null);
+        return (
+            <Container>
+                <Header searchBar rounded style={styles.header} androidStatusBarColor={globalStyles.$headerBackgroundColor}>
+                    <Item>
+                        <Icon family="MaterialIcons" name="search" />
+                        <Input placeholder="Search users" onSubmitEditing={(event) => {
+                            this.searchUsers(event.nativeEvent.text);
+                        }} />
+                    </Item>
+                </Header>
+                <Content>
+                    <List>
+                        { searchPerformed ? contacts : null }
+                    </List>
+                </Content>
+            </Container>
+        );
     }
 }
 
