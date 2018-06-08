@@ -21,8 +21,7 @@ export const $sendButtonBackgroundColor = '#333';
 export const $formBackgroundColor = '#212121';
 
 export const headerStyle = {
-    backgroundColor: $headerBackgroundColor,
-    height: 64
+    backgroundColor: $headerBackgroundColor
 }
 
 export const headerTitleStyle = {

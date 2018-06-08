@@ -9,7 +9,6 @@ export const mainRouterConfig = {
     shifting: false,
     labeled: true,
     barStyle: {
-        height: 65,
         backgroundColor: '#1e1e1e',
     }
     // tabBarOptions: {
