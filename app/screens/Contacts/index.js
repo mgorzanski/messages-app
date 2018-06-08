@@ -6,6 +6,7 @@ import Icon from './../../utils/Icon';
 import AsyncImage from './../../components/AsyncImage';
 import { connect } from 'react-redux';
 import ContactsApi from './../../api/ContactsApi';
+import DialogAndroid from 'react-native-dialogs';
 
 class Contacts extends React.PureComponent {
     static navigationOptions = () => ({
@@ -88,6 +89,20 @@ class Contacts extends React.PureComponent {
         }));
     }
 
+    showContactDialog = async (contactId) => {
+        const { selectedItem } = await DialogAndroid.showPicker(null, null, {
+            positiveText: '',
+            items: [
+                { label: 'Edit', id: 'edit' },
+                { label: 'Delete', id: 'detele '}
+            ]
+        });
+
+        if (selectedItem) {
+            console.log('a');
+        }
+    }
+
     render() {
         const invitationsCount = this.state.invitationsCount;
         const invitationsLoaded = this.state.invitationsLoaded;
@@ -137,7 +152,7 @@ class Contacts extends React.PureComponent {
                     { contactsLoaded ? (
                         <SectionList
                             sections={this.state.contacts}
-                            renderItem={({item}) => <Text style={styles.item}>{item.fullName}</Text>}
+                            renderItem={({item}) => <Text onLongPress={() => this.showContactDialog(item._id)} style={styles.item}>{item.fullName}</Text>}
                             renderSectionHeader={({section}) => <Text style={styles.sectionHeader}>{section.title}</Text>}
                             keyExtractor={(item, index) => index}
                         />
