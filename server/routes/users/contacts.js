@@ -140,24 +140,21 @@ module.exports = {
 	},
 
 	deleteContact(req, res, db) {
-		const sendNotification = (error) => {
-			if (error) res.send(500);
-			res.status(200).send('Contact has been successfully deleted');
-		};
-
-		const deleteContactById = () => {
+		const deleteContactById = (userId, contactId) => {
 			db.collection('users').update(
-				{ _id: ObjectId(req.params.userId) },
+				{ _id: ObjectId(userId) },
 				{ $pull:
 					{ 'contacts':
-						ObjectId(req.params.contactId)
+						ObjectId(contactId)
 					}
-				}, (error) => sendNotification(error)
+				}
 			);
 		};
 
 		if(db.collection('users').findOne({ _id: ObjectId(req.params.userId), contacts: { $elemMatch: { $in: [ObjectId(req.params.contactId)]}}})) {
-			deleteContactById();
+			deleteContactById(req.params.userId, req.params.contactId);
+			deleteContactById(req.params.contactId, req.params.userId);
+			res.status(200).send('Contact has been successfully deleted');
 		}
 	}
 };

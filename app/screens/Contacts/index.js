@@ -162,7 +162,7 @@ class Contacts extends React.PureComponent {
                     { contactsLoaded ? (
                         <SectionList
                             sections={this.state.contacts}
-                            renderItem={({item}) => <Text onLongPress={() => this.showContactDialog(item._id)} style={styles.item}>{item.fullName}</Text>}
+                            renderItem={({item}) => <TouchableHighlight underlayColor={globalStyles.$touchableHighlightUnderlayColor} onLongPress={() => this.showContactDialog(item._id)}><Text style={styles.item}>{item.fullName}</Text></TouchableHighlight>}
                             renderSectionHeader={({section}) => <Text style={styles.sectionHeader}>{section.title}</Text>}
                             keyExtractor={(item, index) => index}
                         />
