@@ -28,6 +28,7 @@
   "dependencies": {
     "jwt-decode": "^2.2.0",
     "native-base": "^2.5.1",
+    "prop-types": "^15.6.1",
     "react": "16.2.0",
     "react-native": "^0.55.4",
     "react-native-dialogs": "^1.0.0-rc.1",

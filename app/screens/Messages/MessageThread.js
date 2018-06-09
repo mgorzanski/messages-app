@@ -3,18 +3,25 @@ import { Container, Content, Form, Item, Textarea, Button, Text, Toast } from 'n
 import { StyleSheet } from 'react-native';
 import SingleMessage from './SingleMessage';
 import * as globalStyles from './../../styles/globalStyles';
-import Icon from './../../utils/Icon';
+// import Icon from './../../utils/Icon';
 import { socketUrl } from './../../config/socket';
 import io from 'socket.io-client';
 import { connect } from 'react-redux';
 import MessagesApi from './../../api/MessagesApi';
+import PopupMenu from './../../components/PopupMenu';
 
 class MessageThread extends React.PureComponent {
     static navigationOptions = ({ navigation }) => ({
             title: navigation.state.params.name,
-            headerRight: (<Icon family="MaterialIcons" name="more-vert" style={globalStyles.stackNavIcon} />),
+            headerRight: (<PopupMenu actions={['Notifications', 'Shared', 'Block']} onPress={() => this.onPopupEvent} />),
             headerTintColor: globalStyles.$white
     });
+
+    onPopupEvent(eventName, index) {
+        if (eventName !== 'itemSelected') return;
+        // if (index === 0)
+        // else
+    }
 
     constructor(props) {
         super(props);
