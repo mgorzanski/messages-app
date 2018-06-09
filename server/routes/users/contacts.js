@@ -16,6 +16,21 @@ module.exports = {
 		});
 	},
 
+	getThreadIdByContactId(req, res, db) {
+		db.collection('threads').findOne(
+			{ users: { $size: 2, $all: 
+    			[
+	    			ObjectId(req.params.userId),
+	    			ObjectId(req.params.contactId)
+	    		]
+	    	}}, (error, thread) => {
+                if (error) res.sendStatus(500);
+                if (thread) res.status(200).send({ thread });
+                else res.sendStatus(204);
+            }
+        );
+	},
+
 	searchUsers(req, res, db) {
 		if (req.body.searchQuery === '') res.sendStatus(200);
 		else {

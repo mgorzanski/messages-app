@@ -24,4 +24,20 @@ export default class MessagesApi {
         const json = await response.json();
         return json;
     }
+
+    static async createThread(token, firstUserId, secondUserId) {
+        const response = await fetch(`${serverUrl}/users/${firstUserId}/messages/threads`, {
+            method: 'post',
+            headers: new Headers({
+                'Content-Type': 'application/json',
+                'x-access-token': token
+            }),
+            body: JSON.stringify({
+                firstUserId,
+                secondUserId
+            })
+        });
+        const json = await response.json();
+        return json.thread;
+    }
 }

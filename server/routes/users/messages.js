@@ -58,12 +58,12 @@ module.exports = {
 
     createThread(req, res, db) {
     	db.collection('threads').find(
-    		{ users: { $elemMatch: { $in:
+    		{ users: { $size: 2, $all:
     			[
 	    			ObjectId(req.body.firstUserId),
 	    			ObjectId(req.body.secondUserId)
 	    		]
-	    	}}}
+			}}
 	    ).limit(1).toArray((error, result) => {
 			if (error) res.sendStatus(500);
 			if (!result.length) {
@@ -76,7 +76,7 @@ module.exports = {
 		    			ObjectId(req.body.secondUserId)
 		    		],
 		    		messages: []
-		    	}
+		    	};
 
 		    	db.collection('threads').insertOne(thread, (error, result) => {
 		    		if (error) res.send(500);
@@ -94,7 +94,7 @@ module.exports = {
 			    				{ _id: ObjectId(req.body.secondUserId)},
 			    				attachThread, (error) => {
 			    					if (error) res.send(500);
-			    					res.status(201).send('Thread created');
+			    					res.status(201).send({ thread: thread });
 			    				}
 			    			);
 			    		}

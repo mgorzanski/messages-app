@@ -103,4 +103,16 @@ export default class ContactsApi {
             })
         });
     }
+
+    static async getThreadIdByContactId(token, userId, contactId) {
+        const response = await fetch(`${serverUrl}/users/${userId}/contacts/${contactId}`, {
+            method: 'get',
+            headers: new Headers({
+                'Content-Type': 'application/json',
+                'x-access-token': token
+            })
+        });
+        const json = await response.json();
+        return json.thread;
+    }
 }
