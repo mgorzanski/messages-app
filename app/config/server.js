@@ -1,1 +1,1 @@
-export const serverUrl = 'http://192.168.100.4:3000';
+export const serverUrl = 'http://sharkuchat2.ct8.pl';

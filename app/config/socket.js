@@ -1,1 +1,1 @@
-export const socketUrl = 'http://192.168.100.4:3000';
+export const socketUrl = 'http://sharkuchat2.ct8.pl';

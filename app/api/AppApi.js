@@ -1,6 +1,8 @@
+import { serverUrl } from './../config/server';
+
 export default class AppApi {
     static async getAppInformations() {
-        const response = await fetch('http://192.168.100.4:3000/app/informations', {
+        const response = await fetch(`${serverUrl}/app/informations`, {
             method: 'get',
             headers: new Headers({
                 'Content-Type': 'application/json'

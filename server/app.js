@@ -19,7 +19,7 @@ MongoClient.connect(config.mongodb, (err, db) => {
     if (err) return process.exit(1);
     console.log('Connected successfully to MongoDB');
 
-    db = db.db('messages-app');
+    db = db.db('mo7406_ma');
 
     app.get('/', (req, res) => {
         res.sendStatus(200);
