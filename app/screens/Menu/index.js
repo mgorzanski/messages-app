@@ -1,52 +1,10 @@
 import React from 'react';
 import { View, StyleSheet, SectionList, Text, ScrollView, TouchableHighlight } from 'react-native';
 import * as globalStyles from './../../styles/globalStyles';
-import AuthLocal from './../../utils/AuthLocal';
+//import AuthLocal from './../../utils/AuthLocal';
 import AsyncImage from './../../components/AsyncImage';
-
-export default class Menu extends React.PureComponent {
-    static navigationOptions = {
-        tabBarLabel: '',
-        tabBarIcon: () => (
-            <AsyncImage
-                source={require('./../../img/icons/menu.png')}
-                style={globalStyles.tabBarIcon}
-                placeholderColor='#1e1e1e'
-            />
-        ),
-        title: "More"
-    };
-
-    render() {
-        return (
-            <ScrollView style={styles.settings}>
-                <View style={styles.container}>
-                    <SectionList
-                        sections={[
-                            {title: 'My account', data: [{title: 'My profile', screen: 'Profile'}, {title: 'Logout', action: () => AuthLocal.deauthenticate}]},
-                            {title: 'Settings', data: [{title: 'Notifications settings', screen: ''}]},
-                            {title: 'About app', data: [{title: 'Informations', screen: 'Informations'}]}
-                        ]}
-                        renderItem={({item}) => (
-                            <TouchableHighlight onPress={() => {
-                                    if (item.screen) {
-                                        this.props.navigation.navigate(item.screen)
-                                    } else {
-                                        item.action();
-                                    }
-                                }
-                            } underlayColor="#414141">
-                                <Text style={styles.item}>{item.title}</Text>
-                            </TouchableHighlight>
-                        )}
-                        renderSectionHeader={({section}) => <Text style={styles.sectionHeader}>{section.title}</Text>}
-                        keyExtractor={(item, index) => index}
-                    />
-                </View>
-            </ScrollView>
-        );
-    }
-}
+import { connect } from 'react-redux';
+import { logout } from './../../actions';
 
 const styles = StyleSheet.create({
     settings: {
@@ -77,3 +35,55 @@ const styles = StyleSheet.create({
         color: globalStyles.$white
     }
 });
+
+class Menu extends React.PureComponent {
+    static navigationOptions = {
+        tabBarLabel: '',
+        tabBarIcon: () => (
+            <AsyncImage
+                source={require('./../../img/icons/menu.png')}
+                style={globalStyles.tabBarIcon}
+                placeholderColor='#1e1e1e'
+            />
+        ),
+        title: "More"
+    };
+
+    render() {
+        return (
+            <ScrollView style={styles.settings}>
+                <View style={styles.container}>
+                    <SectionList
+                        sections={[
+                            {title: 'My account', data: [{title: 'My profile', screen: 'Profile'}, {title: 'Logout', action: () => this.props.logout()}]},
+                            {title: 'Settings', data: [{title: 'Notifications settings', screen: ''}]},
+                            {title: 'About app', data: [{title: 'Informations', screen: 'Informations'}]}
+                        ]}
+                        renderItem={({item}) => (
+                            <TouchableHighlight onPress={() => {
+                                    if (item.screen) {
+                                        this.props.navigation.navigate(item.screen)
+                                    } else {
+                                        item.action();
+                                    }
+                                }
+                            } underlayColor="#414141">
+                                <Text style={styles.item}>{item.title}</Text>
+                            </TouchableHighlight>
+                        )}
+                        renderSectionHeader={({section}) => <Text style={styles.sectionHeader}>{section.title}</Text>}
+                        keyExtractor={(item, index) => index}
+                    />
+                </View>
+            </ScrollView>
+        );
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        logout: () => dispatch(logout())
+    };
+};
+
+export default connect(null, mapDispatchToProps)(Menu);

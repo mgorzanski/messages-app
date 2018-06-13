@@ -62,6 +62,13 @@ class App extends React.PureComponent {
       });
     }
 
+    componentWillUpdate() {
+        const state = this.state.store.getState();
+        if (state.user.data === null) {
+            this.setState({ userLogged: false, renderView: false });
+        }
+    }
+
     componentWillUnmount() {
         AppState.removeEventListener('change', this._handleAppStateChange.bind(this));
     }

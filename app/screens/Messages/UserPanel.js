@@ -7,7 +7,7 @@ class UserPanel extends React.Component {
     render() {
         return (
             <View style={styles.panel}>
-                <Text style={styles.userName}>{this.props.user.data.fullName.toUpperCase()}</Text>
+                <Text style={styles.userName}>{(this.props.user.data !== null ? this.props.user.data.fullName.toUpperCase() : '')}</Text>
                 <Image source={require('./../../img/icons/arrow.png')} style={styles.shortcut} placeholderColor={globalStyles.$userPanelBackgroundColor} />
             </View>
         );
