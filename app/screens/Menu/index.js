@@ -55,7 +55,10 @@ class Menu extends React.PureComponent {
                 <View style={styles.container}>
                     <SectionList
                         sections={[
-                            {title: 'My account', data: [{title: 'My profile', screen: 'Profile'}, {title: 'Logout', action: () => this.props.logout()}]},
+                            {title: 'My account', data: [{title: 'My profile', screen: 'Profile'}, {title: 'Logout', action: () => {
+                                this.props.logout();
+                                this.props.onUserLogout();
+                            }}]},
                             {title: 'Settings', data: [{title: 'Notifications settings', screen: ''}]},
                             {title: 'About app', data: [{title: 'Informations', screen: 'Informations'}]}
                         ]}
@@ -86,4 +89,11 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(null, mapDispatchToProps)(Menu);
+const mapStateToProps = (state, ownProps) => {
+    return {
+        state,
+        ownProps
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Menu);

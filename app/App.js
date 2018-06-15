@@ -84,14 +84,18 @@ class App extends React.PureComponent {
         this.setState({ userLogged: true, renderView: true });
     }
 
+    handleLogout() {
+        this.setState({ userLogged: false, renderView: false });
+    }
+
     render() {
         const { userLogged, renderView, isStoreLoading, store } = this.state;
 
         const MainRouter = createMaterialBottomTabNavigator({
-              Messages: Messages,
-              Contacts: Contacts,
-              Groups: Groups,
-              More: Menu
+            Messages: Messages,
+            Contacts: Contacts,
+            Groups: Groups,
+            More: { screen: (props) => <Menu onUserLogout={this.handleLogout.bind(this)} {...props} />, navigationOptions: () => Menu.navigationOptions }
         }, mainRouterConfig);
 
         MainRouter.navigationOptions = ({ navigation }) => {
@@ -99,7 +103,7 @@ class App extends React.PureComponent {
         };
 
         const AppRouter = createStackNavigator({
-            MainRouter: MainRouter ,
+            MainRouter: MainRouter,
             MessageThread: MessageThread,
             Profile: Profile,
             AddContact: AddContact,
