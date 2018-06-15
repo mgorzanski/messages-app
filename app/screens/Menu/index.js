@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, SectionList, Text, ScrollView, TouchableHighlight } from 'react-native';
+import { View, StyleSheet, SectionList, Text, ScrollView, TouchableHighlight, Alert } from 'react-native';
 import * as globalStyles from './../../styles/globalStyles';
 //import AuthLocal from './../../utils/AuthLocal';
 import AsyncImage from './../../components/AsyncImage';
@@ -56,8 +56,17 @@ class Menu extends React.PureComponent {
                     <SectionList
                         sections={[
                             {title: 'My account', data: [{title: 'My profile', screen: 'Profile'}, {title: 'Logout', action: () => {
-                                this.props.logout();
-                                this.props.onUserLogout();
+                                Alert.alert(
+                                    'Confirm',
+                                    'Are you sure you want to logout?',
+                                    [
+                                        {text: 'Cancel' },
+                                        {text: 'Logout', onPress: () => {
+                                            this.props.logout();
+                                            this.props.onUserLogout();
+                                        }}
+                                    ]
+                                );
                             }}]},
                             {title: 'Settings', data: [{title: 'Notifications settings', screen: ''}]},
                             {title: 'About app', data: [{title: 'Informations', screen: 'Informations'}]}
