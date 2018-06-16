@@ -10,6 +10,13 @@ import { connect } from 'react-redux';
 import * as pushNotifications from './../../pushNotifications';
 import { socketUrl } from './../../config/socket';
 import io from 'socket.io-client';
+import PropTypes from 'prop-types';
+
+const styles = StyleSheet.create({
+    home: {
+        backgroundColor: globalStyles.$appBackgroundColor
+    }
+});
 
 class Messages extends React.PureComponent {
     constructor(props) {
@@ -85,11 +92,10 @@ class Messages extends React.PureComponent {
     }
 }
 
-const styles = StyleSheet.create({
-    home: {
-        backgroundColor: globalStyles.$appBackgroundColor
-    }
-});
+Messages.propTypes = {
+    user: PropTypes.object,
+    navigation: PropTypes.object
+};
 
 const mapStateToProps = state => {
     return state;
