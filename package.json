@@ -4,25 +4,29 @@
   "private": true,
   "devDependencies": {
     "babel-eslint": "^8.2.2",
-    "babel-preset-react-native-stage-0": "^1.0.1",
+    "babel-jest": "^23.0.1",
+    "babel-preset-react-native": "^4.0.0",
+    "enzyme": "^3.3.0",
     "eslint": "^4.19.1",
     "eslint-plugin-jest": "^21.15.0",
     "eslint-plugin-react": "^7.7.0",
     "eslint-plugin-react-native": "^3.2.1",
-    "jest-react-native": "^18.0.0",
     "react-test-renderer": "16.2.0"
   },
   "scripts": {
     "start": "react-native start",
     "android": "react-native run-android",
     "ios": "react-native run-ios",
-    "test": "node node_modules/jest/bin/jest.js"
+    "test": "node_modules/.bin/jest"
   },
   "jest": {
     "moduleNameMapper": {
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/assetsTransformer.js",
       "\\.(css|less)$": "<rootDir>/assetsTransformer.js"
     },
+    "transformIgnorePatterns": [
+      "/node_modules/(?!native-base)/"
+    ],
     "preset": "react-native"
   },
   "dependencies": {
