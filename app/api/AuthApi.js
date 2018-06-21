@@ -9,12 +9,29 @@ export default class AuthApi {
                 'Content-Type': 'application/json'
             }),
             body: JSON.stringify({
-                email: email,
-                password: password
+                email,
+                password
             })
         });
         const json = await response.json();
         //if (json.auth) await AuthLocal.authenticate(json.token);
+        return json;
+    }
+
+    static async register(username, fullName, email, password) {
+        const response = await fetch(`${serverUrl}/auth/register`, {
+            method: 'post',
+            headers: new Headers({
+                'Content-Type': 'application/json'
+            }),
+            body: JSON.stringify({
+                username,
+                fullName,
+                email,
+                password
+            })
+        });
+        const json = await response.json();
         return json;
     }
 }

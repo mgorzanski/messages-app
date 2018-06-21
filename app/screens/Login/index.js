@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
         fontSize: 16
     },
     button: {
-        width: 90,
+        width: 290,
         borderWidth: 1,
         borderColor: globalStyles.$buttonBorderColor,
         padding: 12,
@@ -50,8 +50,8 @@ const styles = StyleSheet.create({
     },
     buttonsRow: {
         display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'center'
+        flexDirection: 'column',
+        alignItems: 'center'
     }
 });
 
@@ -104,8 +104,7 @@ class Login extends React.Component {
                                             buttonText: 'Close'
                                         });
                                     }
-                                }).catch((error) => {
-                                    console.log(error);
+                                }).catch(() => {
                                     Toast.show({
                                         text: 'An error occurred',
                                         buttonText: 'Close'
@@ -117,6 +116,7 @@ class Login extends React.Component {
                         </TouchableHighlight>
                         <TouchableHighlight
                             style={styles.button}
+                            onPress={() => this.props.navigation.navigate('SignUp')}
                         >
                             <Text style={styles.buttonText}>Sign up</Text>
                         </TouchableHighlight>
