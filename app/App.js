@@ -114,7 +114,7 @@ class App extends React.PureComponent {
 
         const LoginRouter = createStackNavigator({
             Login: { screen: (props) => <Login onUserLogin={this.handleLogin.bind(this)} {...props} /> },
-            SignUp: SignUp
+            SignUp: { screen: (props) => <SignUp onUserLogin={this.handleLogin.bind(this)} {...props} /> }
         }, loginRouterConfig);
 
         if (isStoreLoading) {
