@@ -2,10 +2,9 @@ import React from 'react';
 import { StatusBar, AsyncStorage, AppState } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
-//import AuthLocal from './utils/AuthLocal';
 import { Provider } from 'react-redux';
 import { store } from './config/store';
-import { mainRouterConfig, appRouterConfig, getStackNavigatorHeader } from './config/routers';
+import { mainRouterConfig, appRouterConfig, loginRouterConfig, getStackNavigatorHeader } from './config/routers';
 import { Root } from 'native-base';
 import { socketUrl } from './config/socket';
 import io from 'socket.io-client';
@@ -15,6 +14,7 @@ import Contacts from './screens/Contacts';
 import Menu from './screens/Menu';
 import Groups from './screens/Groups';
 import Login from './screens/Login';
+import SignUp from './screens/Login/SignUp';
 import MessageThread from './screens/Messages/MessageThread';
 import Profile from './screens/Profile';
 import AddContact from './screens/Contacts/AddContact';
@@ -112,25 +112,28 @@ class App extends React.PureComponent {
             NewMessage: NewMessage
         }, appRouterConfig);
 
+        const LoginRouter = createStackNavigator({
+            Login: { screen: (props) => <Login onUserLogin={this.handleLogin.bind(this)} {...props} /> },
+            SignUp: SignUp
+        }, loginRouterConfig);
+
         if (isStoreLoading) {
             return null;
         } else {
             return (
                 <Root>
                     <Provider store={store}>
-                        {renderView && userLogged ? (
-                            <Root>
-                                <StatusBar
-                                    backgroundColor="#1e1e1e"
-                                    barStyle="light-content"
-                                />
+                        <Root>
+                            <StatusBar
+                                backgroundColor="#1e1e1e"
+                                barStyle="light-content"
+                            />
+                            {renderView && userLogged ? (
                                 <AppRouter />
-                            </Root>
-                        ) : (
-                            <Root>
-                                <Login onUserLogin={this.handleLogin.bind(this)} />
-                            </Root>
-                        )}
+                            ) : (
+                                <LoginRouter />
+                            )}
+                        </Root>
                     </Provider>
                 </Root>
             );

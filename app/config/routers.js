@@ -61,6 +61,13 @@ export const appRouterConfig = {
     }
 }
 
+export const loginRouterConfig = {
+    ...appRouterConfig,
+    navigationOptions: {
+        header: null
+    }
+}
+
 export function getStackNavigatorHeader (navigation) {
     let { routeName } = navigation.state.routes[navigation.state.index];
     let title = routeName;
