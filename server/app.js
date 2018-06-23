@@ -51,7 +51,7 @@ MongoClient.connect(config.mongodb, (err, db) => {
     app.post('/users/:userId/contacts/search', verifyToken, (req, res) => routes.users.contacts.searchUsers(req, res, db));
 
     //User profile routes
-    // app.get('/users/:userId/profile', verifyToken, (req, res) => routes.users.profile.getProfile(req, res, db));
+    app.get('/users/:userId/profile', verifyToken, (req, res) => routes.users.profile.getProfile(req, res, db));
     // app.put('/users/:userId/profile', verifyToken, routes.users.profile.updateProfileValidations, (req, res) => routes.users.profile.updateProfile(req, res, db));
 
     //Additional
