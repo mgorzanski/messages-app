@@ -1,7 +1,6 @@
 import React from 'react';
 import { StatusBar, AsyncStorage, AppState } from 'react-native';
-import { createStackNavigator } from 'react-navigation';
-import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
+import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 import { Provider } from 'react-redux';
 import { store } from './config/store';
 import { mainRouterConfig, appRouterConfig, loginRouterConfig, getStackNavigatorHeader } from './config/routers';
@@ -91,7 +90,7 @@ class App extends React.PureComponent {
     render() {
         const { userLogged, renderView, isStoreLoading, store } = this.state;
 
-        const MainRouter = createMaterialBottomTabNavigator({
+        const MainRouter = createBottomTabNavigator({
             Messages: Messages,
             Contacts: Contacts,
             Groups: Groups,

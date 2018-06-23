@@ -59,8 +59,8 @@ export const vectorIcon = {
 }
 
 export const tabBarIcon = {
-    width: 24, //original 35
-    height: 24
+    width: 35, //original 35
+    height: 35
 }
 
 export const tabBarBadge = {
