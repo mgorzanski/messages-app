@@ -68,7 +68,7 @@ class Menu extends React.PureComponent {
                                     ]
                                 );
                             }}]},
-                            {title: 'Settings', data: [{title: 'Notifications settings', screen: ''}]},
+                            {title: 'Settings', data: [{title: 'Notifications', screen: ''}, {title: 'Groups', screen: 'GroupsSettings'}]},
                             {title: 'About app', data: [{title: 'Informations', screen: 'Informations'}]}
                         ]}
                         renderItem={({item}) => (

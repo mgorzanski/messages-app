@@ -1,7 +1,7 @@
 import React from 'react';
 import { StatusBar, AsyncStorage, AppState } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
-import { Provider } from 'react-redux';
+import { Provider, connect } from 'react-redux';
 import { store } from './config/store';
 import { mainRouterConfig, appRouterConfig, loginRouterConfig, getStackNavigatorHeader } from './config/routers';
 import { Root } from 'native-base';
@@ -12,6 +12,7 @@ import Messages from './screens/Messages';
 import Contacts from './screens/Contacts';
 import Menu from './screens/Menu';
 import Groups from './screens/Groups';
+import GroupsSettings from './screens/Menu/GroupsSettings';
 import Login from './screens/Login';
 import SignUp from './screens/Login/SignUp';
 import MessageThread from './screens/Messages/MessageThread';
@@ -78,9 +79,15 @@ class App extends React.PureComponent {
     }
 
     render() {
-        const { userLogged, renderView, store } = this.state;
+        const { userLogged, renderView, store } = this.state;   
 
         const MainRouter = createBottomTabNavigator({
+            MessagesWithGroups: Messages,
+            Contacts: Contacts,
+            More: { screen: (props) => <Menu onUserLogout={this.handleLogout.bind(this)} {...props} />, navigationOptions: () => Menu.navigationOptions }
+        }, mainRouterConfig);
+        
+        const MainRouterWithGroups = createBottomTabNavigator({
             Messages: Messages,
             Contacts: Contacts,
             Groups: Groups,
@@ -91,15 +98,33 @@ class App extends React.PureComponent {
             return getStackNavigatorHeader(navigation);
         };
 
-        const AppRouter = createStackNavigator({
-            MainRouter: MainRouter,
-            MessageThread: MessageThread,
-            Profile: Profile,
-            AddContact: AddContact,
-            Informations: Informations,
-            SearchMessages: SearchMessages,
-            NewMessage: NewMessage
-        }, appRouterConfig);
+        MainRouterWithGroups.navigationOptions = ({ navigation }) => {
+            return getStackNavigatorHeader(navigation);
+        };
+
+        const mapStateToProps = state => {
+            return state;
+        }
+
+        const AppRouterRedux = (props) => {
+            let displayGroupsInTabNavigator = true;
+            if (this.state.store.getState().settings !== undefined) {
+                displayGroupsInTabNavigator = props.settings.displayGroupsInTabNavigator;
+            }
+            const AppRouter = createStackNavigator({
+                MainRouter: displayGroupsInTabNavigator ? MainRouterWithGroups : MainRouter,
+                MessageThread: MessageThread,
+                Profile: Profile,
+                AddContact: AddContact,
+                Informations: Informations,
+                GroupsSettings: GroupsSettings,
+                SearchMessages: SearchMessages,
+                NewMessage: NewMessage
+            }, appRouterConfig);
+            return <AppRouter />;
+        };
+
+        const AppRouter = connect(mapStateToProps)(AppRouterRedux);
 
         const LoginRouter = createStackNavigator({
             Login: { screen: (props) => <Login onUserLogin={this.handleLogin.bind(this)} {...props} /> },

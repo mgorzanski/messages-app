@@ -75,6 +75,38 @@ export function getStackNavigatorHeader (navigation) {
                 </View>);
             break;
 
+        case 'MessagesWithGroups':
+            title = 'Messages',
+            headerRight = (
+                <View style={globalStyles.headerMultipleIcons}>
+                    <View style={globalStyles.iconSpacingRight}>
+                    <TouchableHighlight onPress={() =>
+                        this.props.navigation.navigate('AddGroup')
+                    }>
+                        <Icon family="MaterialIcons" name="group-add" style={globalStyles.vectorIcon} />
+                    </TouchableHighlight>
+                    </View>
+                    <TouchableHighlight onPress={() =>
+                        navigation.navigate('SearchMessages')
+                    } style={globalStyles.headerIcon}>
+                        <AsyncImage 
+                            source={require('./../img/icons/search.png')}
+                            style={globalStyles.icon}
+                            placeholderColor={globalStyles.$headerBackgroundColor}
+                        />
+                    </TouchableHighlight>
+                    <TouchableHighlight onPress={() =>
+                        navigation.navigate('NewMessage')
+                    } style={globalStyles.headerIcon}>
+                        <AsyncImage 
+                            source={require('./../img/icons/add.png')}
+                            style={globalStyles.icon}
+                            placeholderColor={globalStyles.$headerBackgroundColor}
+                        />
+                    </TouchableHighlight>
+                </View>);
+            break;
+
         case 'Contacts':
             headerRight = (
                 <View style={globalStyles.iconSpacingRight}>
