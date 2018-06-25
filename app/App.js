@@ -28,7 +28,6 @@ class App extends React.PureComponent {
       this.state = {
         userLogged: true,
         renderView: false,
-        isStoreLoading: false,
         store: store(),
         appState: AppState.currentState
       }
@@ -36,9 +35,8 @@ class App extends React.PureComponent {
       this.socket = io(socketUrl);
     }
 
-    componentDidMount() {
+    componentWillMount() {
       const self = this;
-      this.setState({ isStoreLoading: true });
       AsyncStorage.getItem('completeStore').then((value) => {
           if (value && value.length) {
               let initialStore = JSON.parse(value);
@@ -46,26 +44,18 @@ class App extends React.PureComponent {
           } else {
               self.setState({ store: store() });
           }
-          self.setState({ isStoreLoading: false });
       }).catch(() => {
-          self.setState({ store: store(), isStoreLoading: false });
+          self.setState({ store: store() });
       }).then(() => {
           const state = this.state.store.getState();
           if (state.user.data && state.user.data.token && state.user.data.token.length) {
               this.setState({ userLogged: true, renderView: true });
           } else {
-              this.setState({ userLogged: false, renderView: false });
+              this.setState({ userLogged: false, renderView: true });
           }
       }).then(() => {
           AppState.addEventListener('change', this._handleAppStateChange.bind(this));
       });
-    }
-
-    componentWillUpdate() {
-        const state = this.state.store.getState();
-        if (state.user.data === null) {
-            this.setState({ userLogged: false, renderView: false });
-        }
     }
 
     componentWillUnmount() {
@@ -84,11 +74,11 @@ class App extends React.PureComponent {
     }
 
     handleLogout() {
-        this.setState({ userLogged: false, renderView: false });
+        this.setState({ userLogged: false, renderView: true });
     }
 
     render() {
-        const { userLogged, renderView, isStoreLoading, store } = this.state;
+        const { userLogged, renderView, store } = this.state;
 
         const MainRouter = createBottomTabNavigator({
             Messages: Messages,
@@ -116,25 +106,23 @@ class App extends React.PureComponent {
             SignUp: { screen: (props) => <SignUp onUserLogin={this.handleLogin.bind(this)} {...props} /> }
         }, loginRouterConfig);
 
-        if (isStoreLoading) {
+        if (!renderView) {
             return null;
         } else {
             return (
-                <Root>
-                    <Provider store={store}>
-                        <Root>
-                            <StatusBar
-                                backgroundColor="#1e1e1e"
-                                barStyle="light-content"
-                            />
-                            {renderView && userLogged ? (
-                                <AppRouter />
-                            ) : (
-                                <LoginRouter />
-                            )}
-                        </Root>
-                    </Provider>
-                </Root>
+                <Provider store={store}>
+                    <Root>
+                        <StatusBar
+                            backgroundColor="#1e1e1e"
+                            barStyle="light-content"
+                        />
+                        {userLogged ? (
+                            <AppRouter />
+                        ) : (
+                            <LoginRouter />
+                        )}
+                    </Root>
+                </Provider>
             );
         }
     }
