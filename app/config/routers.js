@@ -1,6 +1,6 @@
 import getSlideFromRightTransition from 'react-navigation-slide-from-right-transition';
 import * as globalStyles from './../styles/globalStyles';
-import { View, TouchableHighlight } from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
 import AsyncImage from './../components/AsyncImage';
 import React from 'react';
 import Icon from './../utils/Icon';
@@ -54,24 +54,16 @@ export function getStackNavigatorHeader (navigation) {
         case 'Messages':
             headerRight = (
                 <View style={globalStyles.headerMultipleIcons}>
-                    <TouchableHighlight onPress={() =>
+                    <TouchableOpacity onPress={() =>
                         navigation.navigate('SearchMessages')
                     } style={globalStyles.headerIcon}>
-                        <AsyncImage 
-                            source={require('./../img/icons/search.png')}
-                            style={globalStyles.icon}
-                            placeholderColor={globalStyles.$headerBackgroundColor}
-                        />
-                    </TouchableHighlight>
-                    <TouchableHighlight onPress={() =>
+                        <Icon family="MaterialIcons" name="search" style={globalStyles.vectorIcon} />
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() =>
                         navigation.navigate('NewMessage')
                     } style={globalStyles.headerIcon}>
-                        <AsyncImage 
-                            source={require('./../img/icons/add.png')}
-                            style={globalStyles.icon}
-                            placeholderColor={globalStyles.$headerBackgroundColor}
-                        />
-                    </TouchableHighlight>
+                        <Icon family="MaterialIcons" name="add-circle-outline" style={globalStyles.vectorIcon} />
+                    </TouchableOpacity>
                 </View>);
             break;
 
@@ -79,57 +71,43 @@ export function getStackNavigatorHeader (navigation) {
             title = 'Messages',
             headerRight = (
                 <View style={globalStyles.headerMultipleIcons}>
-                    <View style={globalStyles.iconSpacingRight}>
-                    <TouchableHighlight onPress={() =>
+                    <TouchableOpacity onPress={() =>
                         this.props.navigation.navigate('AddGroup')
-                    }>
+                    } style={globalStyles.headerIcon}>
                         <Icon family="MaterialIcons" name="group-add" style={globalStyles.vectorIcon} />
-                    </TouchableHighlight>
-                    </View>
-                    <TouchableHighlight onPress={() =>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() =>
                         navigation.navigate('SearchMessages')
                     } style={globalStyles.headerIcon}>
-                        <AsyncImage 
-                            source={require('./../img/icons/search.png')}
-                            style={globalStyles.icon}
-                            placeholderColor={globalStyles.$headerBackgroundColor}
-                        />
-                    </TouchableHighlight>
-                    <TouchableHighlight onPress={() =>
+                        <Icon family="MaterialIcons" name="search" style={globalStyles.vectorIcon} />
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() =>
                         navigation.navigate('NewMessage')
                     } style={globalStyles.headerIcon}>
-                        <AsyncImage 
-                            source={require('./../img/icons/add.png')}
-                            style={globalStyles.icon}
-                            placeholderColor={globalStyles.$headerBackgroundColor}
-                        />
-                    </TouchableHighlight>
+                        <Icon family="MaterialIcons" name="add-circle-outline" style={globalStyles.vectorIcon} />
+                    </TouchableOpacity>
                 </View>);
             break;
 
         case 'Contacts':
             headerRight = (
                 <View style={globalStyles.iconSpacingRight}>
-                    <TouchableHighlight onPress={() =>
+                    <TouchableOpacity onPress={() =>
                         navigation.navigate('AddContact')
                     }>
-                        <AsyncImage 
-                            source={require('./../img/icons/add-user.png')}
-                            style={globalStyles.icon}
-                            placeholderColor={globalStyles.$headerBackgroundColor}
-                        />
-                    </TouchableHighlight>
+                        <Icon family="MaterialIcons" name="person-add" style={globalStyles.vectorIcon} />
+                    </TouchableOpacity>
                 </View>);
             break;
 
         case 'Groups':
             headerRight = (
                 <View style={globalStyles.iconSpacingRight}>
-                    <TouchableHighlight onPress={() =>
+                    <TouchableOpacity onPress={() =>
                         this.props.navigation.navigate('AddGroup')
                     }>
                         <Icon family="MaterialIcons" name="group-add" style={globalStyles.vectorIcon} />
-                    </TouchableHighlight>
+                    </TouchableOpacity>
                 </View>);
             break;
     }

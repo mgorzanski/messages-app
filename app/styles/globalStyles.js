@@ -35,8 +35,7 @@ export const headerMultipleIcons = {
 }
 
 export const headerIcon = {
-    marginLeft:4,
-    marginRight:12,
+    marginRight:10,
     alignSelf: 'center'
 }
 
