@@ -34,7 +34,7 @@ module.exports = {
 	searchUsers(req, res, db) {
 		if (req.body.searchQuery === '') res.sendStatus(200);
 		else {
-			db.collection('users').find({ $or: [ { username: { $regex: req.body.searchQuery, $options: 'i' } }, { fullName: { $regex: req.body.searchQuery, $options: 'i' } } ] }).toArray((error, results) => {
+			db.collection('users').find({ username: req.body.searchQuery }).toArray((error, results) => {
 				if (error) res.sendStatus(500);
 				res.status(200).send(results);
 			});
