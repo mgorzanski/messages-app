@@ -52,7 +52,7 @@ MongoClient.connect(config.mongodb, (err, db) => {
 
     //User profile routes
     app.get('/users/:userId/profile', verifyToken, (req, res) => routes.users.profile.getProfile(req, res, db));
-    // app.put('/users/:userId/profile', verifyToken, routes.users.profile.updateProfileValidations, (req, res) => routes.users.profile.updateProfile(req, res, db));
+    app.put('/users/:userId/profile', verifyToken, (req, res) => routes.users.profile.updateProfile(req, res, db));
 
     //Additional
     app.get('/app/informations', (req, res) => routes.app.informations(req, res, db));
