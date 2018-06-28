@@ -50,7 +50,12 @@ class Profile extends React.PureComponent {
         this.state = {
             editMode: false,
             showToast: false,
-            profileData: {}
+            profileData: '',
+            fullName: '',
+            username: '',
+            email: '',
+            password: '',
+            repeatPassword: ''
         };
     }
 
@@ -58,16 +63,16 @@ class Profile extends React.PureComponent {
         ProfileApi.getProfile(this.props.user.data.token, this.props.user.data.userId)
             .then((profileData) => {
                 this.setState({ profileData });
+                this.setState({ fullName: profileData.fullName, username: profileData.username, email: profileData.email });
             })
             .catch(() => Toast.show({
-                text: 'Cannot get any threads',
+                text: 'Cannot get profile informations',
                 buttonText: 'Close'
             }));
     }
 
     render() {
         const editMode = this.state.editMode;
-        const profileData = this.state.profileData;
 
         return (
             <Container>
@@ -84,42 +89,57 @@ class Profile extends React.PureComponent {
                             <React.Fragment>
                                 <Item stackedLabel>
                                     <Label>Full name</Label>
-                                    <Input rounded defaultValue={profileData.fullName} />
+                                    <Input rounded defaultValue={this.state.fullName} onChangeText={(fullName) => this.setState({ fullName })} />
                                 </Item>
                                 <Item stackedLabel>
                                     <Label>Username</Label>
-                                    <Input rounded defaultValue={profileData.username} />
+                                    <Input rounded defaultValue={this.state.username} onChangeText={(username) => this.setState({ username })} />
                                 </Item>
                                 <Item stackedLabel>
                                     <Label>E-mail</Label>
-                                    <Input rounded defaultValue={profileData.email} />
+                                    <Input rounded defaultValue={this.state.email} onChangeText={(email) => this.setState({ email })} />
                                 </Item>
                                 <Item stackedLabel>
                                     <Label>Password</Label>
-                                    <Input rounded />
+                                    <Input rounded onChangeText={(password) => this.setState({ password })} />
                                 </Item>
                                 <Item stackedLabel>
                                     <Label>Repeat password</Label>
-                                    <Input rounded />
+                                    <Input rounded onChangeText={(repeatPassword) => this.setState({ repeatPassword })} />
                                 </Item>
                                 <View style={styles.formButtons}>
-                                    <Button danger style={styles.formButton}><Text>Cancel</Text></Button>
-                                    <Button light style={styles.formButton}><Text>Save</Text></Button>
+                                    <Button danger style={styles.formButton} onPress={() => this.setState({ editMode: false })}><Text>Cancel</Text></Button>
+                                    <Button light style={styles.formButton} onPress={() => {
+                                        ProfileApi.updateProfile(this.props.user.data.token, this.props.user.data.userId, this.state.fullName, this.state.username, this.state.email, this.state.password, this.state.repeatPassword)
+                                            .then((response) => {
+                                                this.setState({ editMode: false });
+                                                Toast.show({
+                                                    text: response.message,
+                                                    buttonText: 'Close'
+                                                });
+                                            })
+                                            .catch(() => Toast.show({
+                                                text: 'An error occurred',
+                                                buttonText: 'Close'
+                                            }));
+                                    }}>
+                                        <Text>Save</Text>
+                                    </Button>
                                 </View>
                             </React.Fragment>
                         ) : (
                             <React.Fragment>
                                 <Item stackedLabel>
                                     <Label>Full name</Label>
-                                    <Input disabled rounded value={profileData.fullName} />
+                                    <Input disabled rounded value={this.state.fullName} />
                                 </Item>
                                 <Item stackedLabel>
                                     <Label>Username</Label>
-                                    <Input disabled rounded value={profileData.username} />
+                                    <Input disabled rounded value={this.state.username} />
                                 </Item>
                                 <Item stackedLabel>
                                     <Label>E-mail</Label>
-                                    <Input disabled rounded value={profileData.email} />
+                                    <Input disabled rounded value={this.state.email} />
                                 </Item>
                             </React.Fragment>
                         ) }
