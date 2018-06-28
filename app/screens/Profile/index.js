@@ -5,6 +5,7 @@ import * as globalStyles from './../../styles/globalStyles';
 import Icon from './../../utils/Icon';
 import ProfileApi from './../../api/ProfileApi';
 import { connect } from 'react-redux';
+import { update } from './../../actions';
 
 const styles = StyleSheet.create({
     container: {
@@ -113,6 +114,7 @@ class Profile extends React.PureComponent {
                                         ProfileApi.updateProfile(this.props.user.data.token, this.props.user.data.userId, this.state.fullName, this.state.username, this.state.email, this.state.password, this.state.repeatPassword)
                                             .then((response) => {
                                                 this.setState({ editMode: false });
+                                                this.props.update(this.state.username, this.state.fullName, this.state.email);
                                                 Toast.show({
                                                     text: response.message,
                                                     buttonText: 'Close'
@@ -151,8 +153,14 @@ class Profile extends React.PureComponent {
     }
 }
 
+const mapDispatchToProps = dispatch => {
+    return {
+        update: (username, fullName, email) => dispatch(update(username, fullName, email))
+    };
+};
+
 const mapStateToProps = state => {
     return state;
 };
 
-export default connect(mapStateToProps)(Profile);
+export default connect(mapStateToProps, mapDispatchToProps)(Profile);
