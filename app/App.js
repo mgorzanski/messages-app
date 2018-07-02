@@ -12,6 +12,7 @@ import Messages from './screens/Messages';
 import Contacts from './screens/Contacts';
 import Menu from './screens/Menu';
 import Groups from './screens/Groups';
+import NewGroup from './screens/Groups/NewGroup';
 import GroupsSettings from './screens/Menu/GroupsSettings';
 import Login from './screens/Login';
 import SignUp from './screens/Login/SignUp';
@@ -119,7 +120,8 @@ class App extends React.PureComponent {
                 Informations: Informations,
                 GroupsSettings: GroupsSettings,
                 SearchMessages: SearchMessages,
-                NewMessage: NewMessage
+                NewMessage: NewMessage,
+                NewGroup: NewGroup
             }, appRouterConfig);
             return <AppRouter />;
         };

@@ -72,7 +72,7 @@ export function getStackNavigatorHeader (navigation) {
             headerRight = (
                 <View style={globalStyles.headerMultipleIcons}>
                     <TouchableOpacity onPress={() =>
-                        this.props.navigation.navigate('AddGroup')
+                        navigation.navigate('NewGroup')
                     } style={globalStyles.headerIcon}>
                         <Icon family="MaterialIcons" name="group-add" style={globalStyles.vectorIcon} />
                     </TouchableOpacity>
@@ -104,7 +104,7 @@ export function getStackNavigatorHeader (navigation) {
             headerRight = (
                 <View style={globalStyles.iconSpacingRight}>
                     <TouchableOpacity onPress={() =>
-                        this.props.navigation.navigate('AddGroup')
+                        navigation.navigate('NewGroup')
                     }>
                         <Icon family="MaterialIcons" name="group-add" style={globalStyles.vectorIcon} />
                     </TouchableOpacity>
