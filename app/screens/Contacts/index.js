@@ -49,15 +49,23 @@ class Contacts extends React.PureComponent {
         .then((results) => {
             let invitations = results.invitations.filter((invitation) => invitation.fullName);
             this.setState({ invitations, invitationsCount: invitations.length, invitationsLoaded: true });
-        });
+        })
+        .catch(() => Toast.show({
+            text: 'Cannot get invitations list',
+            buttonText: 'Close'
+        }));
     }
 
     getContacts() {
         ContactsApi.getContacts(this.props.user.data.token, this.props.user.data.userId)
-        .then((contacts) => {
-            contacts = ContactsApi.spreadContacts(contacts);
-            this.setState({ contacts, contactsLoaded: true });
-        });
+            .then((contacts) => {
+                contacts = ContactsApi.spreadContacts(contacts);
+                this.setState({ contacts, contactsLoaded: true });
+            })
+            .catch(() => Toast.show({
+                text: 'Cannot get contacts list',
+                buttonText: 'Close'
+            }));
     }
 
     acceptInvitation(inviterId) {
