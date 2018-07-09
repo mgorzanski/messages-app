@@ -19,11 +19,11 @@ module.exports = {
 	getThreadIdByContactId(req, res, db) {
 		db.collection('threads').findOne(
 			{ users: { $size: 2, $all: 
-    			[
-	    			ObjectId(req.params.userId),
-	    			ObjectId(req.params.contactId)
-	    		]
-	    	}}, (error, thread) => {
+				[
+					ObjectId(req.params.userId),
+					ObjectId(req.params.contactId)
+				]
+			}}, (error, thread) => {
                 if (error) res.sendStatus(500);
                 if (thread) res.status(200).send({ thread });
                 else res.sendStatus(204);
@@ -60,9 +60,6 @@ module.exports = {
 			Promise.all(users)
 					.then((users) => {
 						res.status(200).send({ invitations: users });
-					})
-					.catch(() => {
-						res.status(200).send({ invitations: [] });
 					})
 					.catch((error) => {
 						res.status(500).send(error);
