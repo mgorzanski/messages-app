@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
     }
 });
 
-class Login extends React.PureComponent {
+class SignIn extends React.PureComponent {
     constructor(props) {
         super(props);
         
@@ -140,4 +140,4 @@ const mapStateToProps = (state, ownProps) => {
     }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn);
