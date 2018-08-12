@@ -11,6 +11,8 @@ import * as pushNotifications from './../../pushNotifications';
 import { socketUrl } from './../../config/socket';
 import io from 'socket.io-client';
 import PropTypes from 'prop-types';
+import firebase from 'react-native-firebase';
+import type { RemoteMessage } from 'react-native-firebase';
 
 const styles = StyleSheet.create({
     home: {
@@ -32,10 +34,6 @@ class Messages extends React.PureComponent {
 
         this.socket = io(socketUrl);
         this.allSockets = [];
-    }
-
-    componentWillMount() {
-        this.getThreads();
     }
 
     getThreads() {
@@ -71,6 +69,56 @@ class Messages extends React.PureComponent {
         ),
         title: "Messages"
     });
+    
+    async getFcmToken() {
+        const fcmToken = await firebase.messaging().getToken();
+        if (fcmToken) {
+            // user has a device token
+            console.log(fcmToken);
+        } else {
+            // user doesn't have a device token yet   
+        }
+    }
+
+    componentDidMount() {
+        this.getFcmToken();
+        this.onTokenRefreshListener = firebase.messaging().onTokenRefresh(fcmToken => console.log(fcmToken));
+    }
+
+    componentWillUnmount() {
+        this.onTokenRefreshListener();
+        this.notificationDisplayedListener();
+        this.notificationListener();
+    }
+
+    componentWillMount() {
+        this.getThreads();
+        firebase.auth().signInAnonymously()
+            .then(() => {
+                firebase.messaging().hasPermission()
+                    .then(enabled => {
+                        if (enabled) {
+                            this.notificationDisplayedListener = firebase.notifications().onNotificationDisplayed(notification => {
+                                console.log(notification);
+                            });
+                            this.notificationListener = firebase.notifications().onNotification(notification => {
+                                //console.log(notification);
+
+                                const notification = new firebase.notifications.Notification()
+                                    .setNotificationId('notificationId')
+                                    .setTitle('My notification title')
+                                    .setBody('My notification body')
+                                    .setData({
+                                        key1: 'value1',
+                                        key2: 'value2',
+                                    });
+
+                                    firebase.notifications().displayNotification(notification);
+                            });
+                        }
+                    });
+            });
+    }
 
     render() {
         return (

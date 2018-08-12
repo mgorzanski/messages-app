@@ -32,5 +32,8 @@ if (!__DEV__) {
 
 import { AppRegistry, YellowBox } from 'react-native';
 import App from './app/App';
+import bgMessaging from './app/bgMessaging';
+
 YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader']);
 AppRegistry.registerComponent('messagesapp', () => App);
+AppRegistry.registerHeadlessTask('RNFirebaseBackgroundMessage', () => bgMessaging);

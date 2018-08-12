@@ -10,10 +10,18 @@ const verifyToken = require('./verifyToken');
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
 const socket = require('./socket');
+const admin = require('firebase-admin');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(logger('dev'));
+
+const serviceAccount = require('./messages-app-b795a-firebase-adminsdk-2ppb7-0a734365bb.json');
+
+admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+    databaseURL: 'https://messages-app-b795a.firebaseio.com'
+});
 
 MongoClient.connect(config.mongodb, (err, db) => {
     if (err) return process.exit(1);
