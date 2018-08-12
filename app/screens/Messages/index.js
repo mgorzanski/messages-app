@@ -101,7 +101,7 @@ class Messages extends React.PureComponent {
                             this.notificationDisplayedListener = firebase.notifications().onNotificationDisplayed(notification => {
                                 console.log(notification);
                             });
-                            this.notificationListener = firebase.notifications().onNotification(notification => {
+                            this.notificationListener = firebase.notifications().onNotification(() => {
                                 //console.log(notification);
 
                                 const notification = new firebase.notifications.Notification()
