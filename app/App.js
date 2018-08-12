@@ -30,7 +30,7 @@ import Informations from "./screens/Menu/Informations";
 import SearchMessages from "./screens/Messages/SearchMessages";
 import NewMessage from "./screens/Messages/NewMessage";
 
-class App extends React.PureComponent {
+export default class App extends React.PureComponent {
   constructor(props) {
     super(props);
 
@@ -42,7 +42,7 @@ class App extends React.PureComponent {
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     AsyncStorage.getItem("completeStore")
       .then(value => {
         if (value && value.length) {
@@ -100,86 +100,6 @@ class App extends React.PureComponent {
   render() {
     const { userLogged, renderView, store } = this.state;
 
-    const TabsRouter = createBottomTabNavigator(
-      {
-        MessagesWithGroups: Messages,
-        Contacts: Contacts,
-        More: {
-          screen: props => (
-            <Menu onUserLogout={this.handleLogout.bind(this)} {...props} />
-          ),
-          navigationOptions: () => Menu.navigationOptions
-        }
-      },
-      tabsRouterConfig
-    );
-
-    const TabsRouterWithGroups = createBottomTabNavigator(
-      {
-        Messages: Messages,
-        Contacts: Contacts,
-        Groups: Groups,
-        More: {
-          screen: props => (
-            <Menu onUserLogout={this.handleLogout.bind(this)} {...props} />
-          ),
-          navigationOptions: () => Menu.navigationOptions
-        }
-      },
-      tabsRouterConfig
-    );
-
-    TabsRouter.navigationOptions = ({ navigation }) => {
-      return getStackNavigatorHeader(navigation);
-    };
-
-    TabsRouterWithGroups.navigationOptions = ({ navigation }) => {
-      return getStackNavigatorHeader(navigation);
-    };
-
-    const MainRouter = connect(state => state)(props => {
-      let displayGroupsInTabNavigator = true;
-      if (this.state.store.getState().settings !== undefined) {
-        displayGroupsInTabNavigator =
-          props.settings.displayGroupsInTabNavigator;
-      }
-
-      const Navigator = createStackNavigator(
-        {
-          TabsRouter: displayGroupsInTabNavigator
-            ? TabsRouterWithGroups
-            : TabsRouter,
-          MessageThread: MessageThread,
-          Profile: Profile,
-          AddContact: AddContact,
-          Informations: Informations,
-          GroupsSettings: GroupsSettings,
-          SearchMessages: SearchMessages,
-          NewMessage: NewMessage,
-          NewGroup: NewGroup
-        },
-        mainRouterConfig
-      );
-
-      return <Navigator />;
-    });
-
-    const AuthRouter = createStackNavigator(
-      {
-        SignIn: {
-          screen: props => (
-            <SignIn onUserLogin={this.handleLogin.bind(this)} {...props} />
-          )
-        },
-        SignUp: {
-          screen: props => (
-            <SignUp onUserLogin={this.handleLogin.bind(this)} {...props} />
-          )
-        }
-      },
-      authRouterConfig
-    );
-
     if (!renderView) {
       return null;
     } else {
@@ -198,4 +118,75 @@ class App extends React.PureComponent {
   }
 }
 
-export default App;
+const TabsRouter = function(displayGroupsInTabNavigator) {
+  const router = (function() {
+    const tabs = {};
+
+    if (displayGroupsInTabNavigator) {
+      tabs.Messages = Messages;
+    } else {
+      tabs.MessagesWithGroups = Messages;
+    }
+
+    tabs.Contacts = Contacts;
+
+    if (displayGroupsInTabNavigator) {
+      tabs.Groups = Groups;
+    }
+
+    tabs.More = {
+      screen: function More(props) {
+        return <Menu onUserLogout={this.handleLogout.bind(this)} {...props} />;
+      },
+      navigationOptions: () => Menu.navigationOptions
+    };
+
+    return createBottomTabNavigator(tabs, tabsRouterConfig);
+  })();
+
+  router.navigationOptions = ({ navigation }) => {
+    return getStackNavigatorHeader(navigation);
+  };
+
+  return router;
+};
+
+const MainRouter = connect(state => state)(props => {
+  let displayGroupsInTabNavigator = true;
+  if (props.settings !== undefined) {
+    displayGroupsInTabNavigator = props.settings.displayGroupsInTabNavigator;
+  }
+
+  const Navigator = createStackNavigator(
+    {
+      TabsRouter: TabsRouter(displayGroupsInTabNavigator),
+      MessageThread: MessageThread,
+      Profile: Profile,
+      AddContact: AddContact,
+      Informations: Informations,
+      GroupsSettings: GroupsSettings,
+      SearchMessages: SearchMessages,
+      NewMessage: NewMessage,
+      NewGroup: NewGroup
+    },
+    mainRouterConfig
+  );
+
+  return <Navigator />;
+});
+
+const AuthRouter = createStackNavigator(
+  {
+    SignIn: {
+      screen: function SignInScreen(props) {
+        return <SignIn onUserLogin={this.handleLogin.bind(this)} {...props} />;
+      }
+    },
+    SignUp: {
+      screen: function SignUpScreen(props) {
+        return <SignUp onUserLogin={this.handleLogin.bind(this)} {...props} />;
+      }
+    }
+  },
+  authRouterConfig
+);
