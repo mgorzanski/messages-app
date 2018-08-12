@@ -5,7 +5,7 @@ import AsyncImage from './../components/AsyncImage';
 import React from 'react';
 import Icon from './../utils/Icon';
 
-export const mainRouterConfig = {
+export const tabsRouterConfig = {
     tabBarOptions: {
       showIcon: true,
       showLabel: true,
@@ -27,7 +27,7 @@ export const mainRouterConfig = {
     }
   };
 
-export const appRouterConfig = {
+export const mainRouterConfig = {
     cardStyle: {
       opacity: 1
     },
@@ -38,8 +38,8 @@ export const appRouterConfig = {
     }
 }
 
-export const loginRouterConfig = {
-    ...appRouterConfig,
+export const authRouterConfig = {
+    ...mainRouterConfig,
     navigationOptions: {
         header: null
     }
