@@ -14,6 +14,7 @@ import {
 } from "./config/routers";
 import { Root } from "native-base";
 import * as globalStyles from "./styles/globalStyles";
+import firebase from "./firebase";
 
 import Messages from "./screens/Messages";
 import Contacts from "./screens/Contacts";
@@ -73,6 +74,8 @@ export default class App extends React.PureComponent {
           this._handleAppStateChange.bind(this)
         );
       });
+
+    firebase();
   }
 
   componentWillUnmount() {
@@ -179,12 +182,12 @@ const AuthRouter = createStackNavigator(
   {
     SignIn: {
       screen: function SignInScreen(props) {
-        return <SignIn onUserLogin={this.handleLogin.bind(this)} {...props} />;
+        return <SignIn onUserLogin={App.handleLogin} {...props} />;
       }
     },
     SignUp: {
       screen: function SignUpScreen(props) {
-        return <SignUp onUserLogin={this.handleLogin.bind(this)} {...props} />;
+        return <SignUp onUserLogin={App.handleLogin} {...props} />;
       }
     }
   },

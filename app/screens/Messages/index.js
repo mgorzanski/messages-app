@@ -12,7 +12,6 @@ import * as globalStyles from "./../../styles/globalStyles";
 import MessagesApi from "./../../api/MessagesApi";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import firebase from "react-native-firebase";
 import MessagesIcon from "./../../img/icons/messages.png";
 
 class Messages extends React.PureComponent {
@@ -66,45 +65,45 @@ class Messages extends React.PureComponent {
   });
 
   componentWillUnmount() {
-    this.notificationDisplayedListener();
-    this.notificationListener();
+    // this.notificationDisplayedListener();
+    // this.notificationListener();
   }
 
   componentDidMount() {
     this.getThreads();
-    firebase
-      .auth()
-      .signInAnonymously()
-      .then(() => {
-        firebase
-          .messaging()
-          .hasPermission()
-          .then(enabled => {
-            if (enabled) {
-              this.notificationDisplayedListener = firebase
-                .notifications()
-                .onNotificationDisplayed(notification => {
-                  console.log(notification);
-                });
-              this.notificationListener = firebase
-                .notifications()
-                .onNotification(() => {
-                  //console.log(notification);
+    // firebase
+    //   .auth()
+    //   .signInAnonymously()
+    //   .then(() => {
+    //     firebase
+    //       .messaging()
+    //       .hasPermission()
+    //       .then(enabled => {
+    //         if (enabled) {
+    //           this.notificationDisplayedListener = firebase
+    //             .notifications()
+    //             .onNotificationDisplayed(notification => {
+    //               console.log(notification);
+    //             });
+    //           this.notificationListener = firebase
+    //             .notifications()
+    //             .onNotification(() => {
+    //               //console.log(notification);
 
-                  const notification = new firebase.notifications.Notification()
-                    .setNotificationId("notificationId")
-                    .setTitle("My notification title")
-                    .setBody("My notification body")
-                    .setData({
-                      key1: "value1",
-                      key2: "value2"
-                    });
+    //               const notification = new firebase.notifications.Notification()
+    //                 .setNotificationId("notificationId")
+    //                 .setTitle("My notification title")
+    //                 .setBody("My notification body")
+    //                 .setData({
+    //                   key1: "value1",
+    //                   key2: "value2"
+    //                 });
 
-                  firebase.notifications().displayNotification(notification);
-                });
-            }
-          });
-      });
+    //               firebase.notifications().displayNotification(notification);
+    //             });
+    //         }
+    //       });
+    //   });
   }
 
   render() {
