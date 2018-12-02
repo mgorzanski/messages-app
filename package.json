@@ -14,7 +14,7 @@
     "eslint-plugin-react-native": "^3.2.1",
     "jsdom": "11.11.0",
     "jsdom-global": "3.0.2",
-    "metro-react-native-babel-preset": "^0.45.0",
+    "metro-react-native-babel-preset": "^0.47.1",
     "react-test-renderer": "16.2.0",
     "schedule": "^0.4.0"
   },
@@ -36,10 +36,10 @@
   },
   "dependencies": {
     "jwt-decode": "^2.2.0",
-    "native-base": "^2.7.2",
+    "native-base": "^2.8.1",
     "prop-types": "^15.6.2",
     "react": "^16.5",
-    "react-native": "^0.57.0",
+    "react-native": "^0.57.2",
     "react-native-check-box": "^2.1.0",
     "react-native-circular-action-menu": "^0.5.0",
     "react-native-dialogs": "^1.0.1",
