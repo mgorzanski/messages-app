@@ -1,1 +1,1 @@
-export const serverUrl = 'http://sharkuchat2.ct8.pl';
+export const serverUrl = 'http://localhost:3000';

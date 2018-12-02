@@ -21,6 +21,7 @@ export const $sendButtonBackgroundColor = "#333";
 export const $formBackgroundColor = "#212121";
 export const $touchableHighlightUnderlayColor = "#565656";
 export const statusBarBackgroundColor = "#1e1e1e";
+export const $formInputTransparentBackgroundColor = "rgba(255, 255, 255, 0.6)";
 
 export const headerStyle = {
   backgroundColor: $headerBackgroundColor

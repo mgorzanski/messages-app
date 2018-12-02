@@ -14,7 +14,6 @@ import {
 } from "./config/routers";
 import { Root } from "native-base";
 import * as globalStyles from "./styles/globalStyles";
-import firebase from "./firebase";
 
 import Messages from "./screens/Messages";
 import Contacts from "./screens/Contacts";
@@ -23,6 +22,7 @@ import Groups from "./screens/Groups";
 import NewGroup from "./screens/Groups/NewGroup";
 import GroupsSettings from "./screens/Menu/GroupsSettings";
 import SignIn from "./screens/Auth/SignIn";
+import SignInNew from "./screens/Auth/SignInNew";
 import SignUp from "./screens/Auth/SignUp";
 import MessageThread from "./screens/Messages/MessageThread";
 import Profile from "./screens/Profile";
@@ -75,7 +75,7 @@ export default class App extends React.PureComponent {
         );
       });
 
-    firebase();
+    // firebase();
   }
 
   componentWillUnmount() {
@@ -97,7 +97,7 @@ export default class App extends React.PureComponent {
   }
 
   handleLogout() {
-    this.setState({ userLogged: false, renderView: true });
+    this.setState({ renderView: false, userLogged: false }).then(() => this.setState({ userLogged: false, renderView: true }));
   }
 
   render() {
@@ -139,7 +139,7 @@ const TabsRouter = function(displayGroupsInTabNavigator) {
 
     tabs.More = {
       screen: function More(props) {
-        return <Menu onUserLogout={this.handleLogout.bind(this)} {...props} />;
+        return <Menu onUserLogout={App.handleLogout} {...props} />;
       },
       navigationOptions: () => Menu.navigationOptions
     };
@@ -182,7 +182,7 @@ const AuthRouter = createStackNavigator(
   {
     SignIn: {
       screen: function SignInScreen(props) {
-        return <SignIn onUserLogin={App.handleLogin} {...props} />;
+        return <SignInNew onUserLogin={App.handleLogin} {...props} />;
       }
     },
     SignUp: {
