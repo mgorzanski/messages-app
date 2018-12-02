@@ -22,7 +22,6 @@ import Groups from "./screens/Groups";
 import NewGroup from "./screens/Groups/NewGroup";
 import GroupsSettings from "./screens/Menu/GroupsSettings";
 import SignIn from "./screens/Auth/SignIn";
-import SignInNew from "./screens/Auth/SignInNew";
 import SignUp from "./screens/Auth/SignUp";
 import MessageThread from "./screens/Messages/MessageThread";
 import Profile from "./screens/Profile";
@@ -40,7 +39,7 @@ export default class App extends React.PureComponent {
       renderView: false,
       store: store(),
       appState: AppState.currentState
-    };
+    };  
   }
 
   componentDidMount() {
@@ -102,6 +101,22 @@ export default class App extends React.PureComponent {
 
   render() {
     const { userLogged, renderView, store } = this.state;
+
+    const AuthRouter = createStackNavigator(
+      {
+        SignIn: {
+          screen: (props) => {
+            return <SignIn onUserLogin={this.handleLogin.bind(this)} {...props} />;
+          }
+        },
+        SignUp: {
+          screen: function SignUpScreen(props) {
+            return <SignUp onUserLogin={App.handleLogin} {...props} />;
+          }
+        }
+      },
+      authRouterConfig
+    );
 
     if (!renderView) {
       return null;
@@ -177,19 +192,3 @@ const MainRouter = connect(state => state)(props => {
 
   return <Navigator />;
 });
-
-const AuthRouter = createStackNavigator(
-  {
-    SignIn: {
-      screen: function SignInScreen(props) {
-        return <SignInNew onUserLogin={App.handleLogin} {...props} />;
-      }
-    },
-    SignUp: {
-      screen: function SignUpScreen(props) {
-        return <SignUp onUserLogin={App.handleLogin} {...props} />;
-      }
-    }
-  },
-  authRouterConfig
-);
